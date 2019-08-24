@@ -1,0 +1,10 @@
+//CURRENTLY FOR DESKTOP QUERY
+@mixin gridspan($col_start, $col_end, $row_start, $row_end) {
+  grid-column: $col_start / $col_end;
+  grid-row: $row_start / $row_end;
+}
+
+// 1024 PCS & latops
+
+
+// MOBILE < 1024
