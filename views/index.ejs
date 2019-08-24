@@ -30,13 +30,20 @@
 
     <section>
 
-      <aside class="text-center">
+      <aside class="register">
         <div>
-          <form class="form-inline" style= "margin: 0px;" action="/register" method="POST">
 
-            <input type="text" name="fname"><br>
-            <input type="text" name="lname"><br>
-            <input type="text" name="email"><br>
+          <header>
+            <h3>Create <br> Account
+            </h3>
+          </header>
+
+          <form class="form-inline" style= "margin: 0px;" action="/register" method="POST">
+            <input type="text" name="fname" placeholder="First Name"><br>
+            <input type="text" name="lname" placeholder="Last Name"><br>
+            <input type="text" name="email" placeholder="Email"><br>
+            <input type="text" name="phonenumber" placeholder="Mobile Number"><br>
+            <input type="text" name="password" placeholder="Password"><br>
 
             <button type="submit" class="btn btn-outline-dark">Register</button>
           </form>
