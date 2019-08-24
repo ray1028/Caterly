@@ -12,7 +12,7 @@ create table customers(
   last_name varchar(255) not null,
   email varchar(255) not null,
   phone varchar(50) not null,
-  current_localtion varchar(255) not null,
+  current_location varchar(255) not null,
   password varchar(255) not null
 );
 
