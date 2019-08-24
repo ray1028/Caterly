@@ -1,36 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
 
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Meta Information -->
+    <title>Home Page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+
+    <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
+    <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+
+    <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
+
   </head>
 
   <body>
 
     <nav>
-
+      <a>Navbar</a>
     </nav>
 
     <section>
 
-      <aside>
+      <aside class="text-center">
+        <div>
+          <form class="form-inline" style= "margin: 0px;" action="/register" method="POST">
 
+            <input type="text" name="fname"><br>
+            <input type="text" name="lname"><br>
+            <input type="text" name="email"><br>
+
+            <button type="submit" class="btn btn-outline-dark">Register</button>
+          </form>
+
+          <div>
+            <p>login<a href="login"> here</a></p>
+          </div>
+
+        </div>
       </aside>
 
     </section>
 
-    <h1>Hello World!</h1>
-
     <article>
+      <div id='para1'>
 
+      </div>
+      <div id='para2'>
+
+      </div>
+      <div id='para3'>
+
+      </div>
     </article>
 
-
   </body>
+
 </html>
