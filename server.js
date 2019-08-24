@@ -10,6 +10,12 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 
+// added session cookie
+const cookieSession = require("cookie-session");
+// Not sure if we will use it but add for now - Ray
+// const bcrypt = require("bcrypt");
+const methodOverride = require("method-override");
+
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -31,6 +37,15 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
+
+// add session cookie to website visitors - Ray
+cookieSession({
+  name: "session",
+  keys: ["mid term project"]
+});
+
+// added method override to support restful route - Ray
+app.use(methodOverride("_method"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -59,7 +74,7 @@ app.use("/login", loginRoutes(db));
 app.use("/register", registerRoutes(db));
 app.use("/categories", categoriesRoutes(db));
 app.use("/restaurants", restaurantsRoutes(db));
-app.use("/cart", cartRoutes());
+app.use("/cart", cartRoutes(db));
 app.use("/checkout", checkoutRoutes(db));
 
 
