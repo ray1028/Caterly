@@ -22,6 +22,7 @@ db.connect();
 app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -33,22 +34,34 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+const rootRoutes = require("./routes/00_root");
+const homeRoutes = require("./routes/01_home");
+const loginRoutes = require("./routes/02_login");
+const registerRoutes = require("./routes/03_register");
+const categoriesRoutes = require("./routes/04_categories");
+const restaurantsRoutes = require("./routes/05_restaurants");
+const cartRoutes = require("./routes/06_cart");
+const checkoutRoutes = require("./routes/07_checkout");
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+// app.use("/api/users", usersRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
-  res.render("index");
-});
+app.use("/", rootRoutes(db));
+app.use("/home", homeRoutes(db));
+app.use("/login", loginRoutes(db));
+app.use("/register", registerRoutes(db));
+app.use("/categories", categoriesRoutes(db));
+app.use("/restaurants", restaurantsRoutes(db));
+app.use("/cart", cartRoutes());
+app.use("/checkout", checkoutRoutes(db));
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
