@@ -25,7 +25,7 @@ create table categories(
 create table restaurants(
   id serial primary key not null,
   name varchar(255) not null,
-  location varchar(255) not null,
+  location varchar(255),
   address varchar(255) not null,
   phone varchar(50) not null,
   email varchar(255) not null,
@@ -38,9 +38,9 @@ create table orders(
   id serial primary key not null,
   customer_id integer references customers(id) on delete cascade,
   restaurant_id integer references restaurants(id) on delete cascade,
-  created_at integer not null default 0,
-  pickup_time integer not null default 0,
-  order_total integer not null default 0
+  created_at bigint not null default 0,
+  pickup_time bigint not null default 0,
+  order_total int not null default 0
 );
 
 create table items(
@@ -63,7 +63,7 @@ create table ratings(
   id serial primary key not null,
   customer_id integer references customers(id) on delete cascade,
   restaurant_id integer references restaurants(id) on delete cascade,
-  rating integer not null default 0
+  rating smallint not null default 0
 );
 
 
