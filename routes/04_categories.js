@@ -1,14 +1,24 @@
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 
-module.exports = (db) => {
-
+module.exports = db => {
   router.get("/:id", (req, res) => {
-    //sql query to assign template vars with data
-    //PLACEHOLDER BELOW
-    const templateVars = res;
-
-    res.render("categories", templateVars);
+    console.log(req.params.id);
+    db.query(
+      `SELECT * FROM restaurants JOIN categories ON category_id = categories.id WHERE categories.name = '${req.params.id}';`
+    )
+      .then(data => {
+        if (data.rowCount === 0) {
+          res.send("error");
+          console.log("DNE");
+        } else {
+          const restaurants = data.rows;
+          res.json({ restaurants });
+        }
+      })
+      .catch(err => {
+        res.status(500).json({ error: err.message });
+      });
   });
 
   return router;
