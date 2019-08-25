@@ -87,7 +87,12 @@ body {
     grid-template-columns: 5% 26.667% 5% 26.667% 5% 26.667% 5%;
 
     #para1, #para2, #para3 {
+      padding: 2em;
       background-color: #fff;
+      border-radius: 25px;
+      div {
+        min-height: 15em;
+      }
     }
 
     #para1 {

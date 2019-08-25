@@ -1,0 +1,15 @@
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn {
+  border: none;
+}
+.btn:hover {
+  background-color: #ffb84d;
+}
+
+.form-inline label {
+  margin: 0px;
+  margin-right: 20px;
+}
