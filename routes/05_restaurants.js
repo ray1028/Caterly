@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = db => {
-  router.get("/:id", (req, res) => {
+  router.get("/", (req, res) => {
     console.log(req.params.id);
     db.query(`SELECT * FROM restaurants WHERE name LIKE '%${req.params.id}%';`)
       .then(data => {

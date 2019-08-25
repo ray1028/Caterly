@@ -6,10 +6,10 @@ module.exports = db => {
     res.render("login", { error: false });
   });
 
-  router.post("/", async (req, res) => {
+  router.post("/", async(req, res) => {
     //DO SOMETHING WITH DATA
     let userId = "";
-    const email = req.body.mail;
+    const email = req.body.email;
     const password = req.body.password;
 
     let queryStr = "select * from customers where email = $1 and password = $2";
@@ -18,15 +18,15 @@ module.exports = db => {
     try {
       const customer = await db.query(queryStr, values);
       // found user in db
-      if (customer.rowCount === 1) res.redirect("/home");
+      if (customer.rowCount !== 1) throw new Error('customer not found')
       else {
-        // res.redirect('/login', {error: true});
+        req.session.user_id = customer.rows[0].id;
+        res.redirect('/home');
       }
     } catch (err) {
       console.log(`Error - ${err}`);
     }
 
-    res.redirect(303, "/home");
   });
 
   return router;

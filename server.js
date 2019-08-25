@@ -39,10 +39,11 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // add session cookie to website visitors - Ray
+app.use(
 cookieSession({
   name: "session",
   keys: ["mid term project"]
-});
+}));
 
 // added method override to support restful route - Ray
 app.use(methodOverride("_method"));
@@ -57,6 +58,8 @@ const categoriesRoutes = require("./routes/04_categories");
 const restaurantsRoutes = require("./routes/05_restaurants");
 const cartRoutes = require("./routes/06_cart");
 const checkoutRoutes = require("./routes/07_checkout");
+const logoutRoutes = require("./routes/08_logout");
+
 
 
 // Mount all resource routes
