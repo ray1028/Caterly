@@ -6,11 +6,14 @@ module.exports = db => {
     console.log(req.params.id);
     db.query(`SELECT * FROM restaurants WHERE name LIKE '%${req.params.id}%';`)
       .then(data => {
-        if (!res.rowCount) {
+        const templateVars = {
+          restaurants: data.rows
+        };
+
+        if (res.rowCount === 0) {
           console.log("DNE");
         } else {
-          const restaurants = data.rows;
-          res.json({ restaurants });
+          res.render("restaurants", templateVars);
         }
       })
       .catch(err => {

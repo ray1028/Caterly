@@ -5,7 +5,7 @@ module.exports = db => {
   router.get("/:id", (req, res) => {
     console.log(req.params.id);
     db.query(
-      `SELECT * FROM restaurants JOIN categories ON category_id = categories.id WHERE categories.name = '${req.params.id}';`
+      `SELECT restaurants.name as name  FROM restaurants JOIN categories ON category_id = categories.id WHERE categories.name = '${req.params.id}';`
     )
       .then(data => {
         if (data.rowCount === 0) {
