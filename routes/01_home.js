@@ -21,7 +21,7 @@ module.exports = db => {
         categories: categoriesRes.rows
       });
     } catch (err) {
-      console.log(`Error - ${err}`);
+      res.status(500).json({ error: err.message });
     }
   });
 
