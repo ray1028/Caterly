@@ -12,6 +12,10 @@ $(() => {
 });
 
 $(document).ready(function() {
+  $(function() {
+    $("#search-text").focus();
+  });
+
   $(".categories-button").on("click", function() {
     // Scroll to a certain element
     // event.preventDefault();
