@@ -4,6 +4,7 @@
 //   grid-row: $row_start / $row_end;
 // }
 
+// @media only screen and (max-width: 600px) {
 body {
   display: flex;
   flex-direction: column;
@@ -14,30 +15,88 @@ body {
 }
 
 #search-page {
-  background: red;
+  justify-content: center;
+  display: flex;
+  background: #eee;
   height: 100vh;
 }
 
+.wowee {
+  width: 100% !important; //To override bootsrap
+}
+
+.categories-button {
+  width: 100%;
+  align-self: center;
+}
+
 #categories-page {
-  background: blue;
+  background: #ffb84d;
   height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
 .search-bar {
   display: flex;
+  width: 50%;
   flex-direction: column;
-  justify-content: space-between;
-  background: green;
+  justify-content: center;
+  background: #eee;
 }
 
-.search-button {
-  width: 100%;
+.categories-box {
+  min-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
-.search-text {
-  width: 100%;
+.categories-box > div {
+  display: flex;
+  flex-basis: calc(50% - 40px);
+  justify-content: center;
+  flex-direction: column;
 }
+
+.categories-box > div > div {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.category {
+  margin: 20px;
+  border-radius: 25px;
+  background-color: white;
+  // width: 250px;
+}
+
+img {
+    width: 500px; /* or any custom size */
+    height: 500px; 
+    object-fit: contain;
+}
+
+// }
 
 // 1024 PCS & latops
 
 // MOBILE < 1024
+
+@media only screen and (max-width: 600px) {
+  .search-bar {
+    width: 100%;
+  }
+
+  .categories-box > div {
+    display: flex;
+    flex-basis: unset;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .category {
+    border-radius: 25px;
+    width: 100%;
+  }
+}

@@ -38,59 +38,53 @@
           action="/home/"
           method="POST"
         >
-          <input class="search-text" type="text" name="search" /><br />
-          <button type="submit" class="search-button btn btn-outline-dark">
-            Search
-          </button>
+          <div class="wowee input-group mb-3">
+            <input
+              type="text"
+              class="search-text form-control"
+              name="search"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+            />
+            <div class="input-group-append">
+              <button
+                class="search-button btn btn-outline-dark"
+                type="submit"
+              >
+                Search
+              </button>
+            </div>
+          </div>
         </form>
 
         <button type="submit" class="categories-button btn btn-outline-dark">
-          Give me a suggestion
+          Give me a suggestion!
         </button>
       </div>
     </section>
 
     <section id="categories-page">
-      <form
-        class="form-inline"
-        style="margin: 0px;"
-        action="/categories/asia"
-        method="GET"
-      >
-        <button type="submit" class="btn btn-outline-dark">
-          Asia
-        </button>
-      </form>
-      <form
-        class="form-inline"
-        style="margin: 0px;"
-        action="/categories/mexican"
-        method="GET"
-      >
-        <button type="submit" class="btn btn-outline-dark">
-          Mexican
-        </button>
-      </form>
-      <form
-        class="form-inline"
-        style="margin: 0px;"
-        action="/categories/Western"
-        method="GET"
-      >
-        <button type="submit" class="btn btn-outline-dark">
-          Western
-        </button>
-      </form>
-      <form
-        class="form-inline"
-        style="margin: 0px;"
-        action="/categories/Idk"
-        method="GET"
-      >
-        <button type="submit" class="btn btn-outline-dark">
-          Idk
-        </button>
-      </form>
+        <div class="categories-box">
+    <% for (let i = 0 ; i < 4 ; i++) { %>
+
+   
+        <div class="category" id="<%= categories[i].name%>">
+          <form
+            class="form-inline"
+            style="margin: 0px;"
+            action="/categories/<%= categories[i].name%>""
+            method="GET"
+          >
+            <button type="submit" class="category btn btn-outline-dark">
+                <%= categories[i].name%>
+            </button>
+           <img src= "<%= categories[i].thumbnail_image%>">
+            <%= categories[i].description %>
+          </form>
+        </div>
+     
+        <% } %>
+      </div>
     </section>
   </body>
 </html>

@@ -20,6 +20,7 @@ module.exports = db => {
       if (userRes.rowCount !== 1) throw new Error("User is not found");
       if (categoriesRes.rowCount < 1) throw new Error("Categories not found");
 
+      console.log(categoriesRes.rows);
       res.render("home", {
         user: userRes.rows[0].first_name,
         categories: categoriesRes.rows
