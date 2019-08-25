@@ -4,6 +4,9 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
+    // const templateVars = {
+    //   user: undefined
+    // };
     res.render("register");
   });
 

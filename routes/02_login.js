@@ -3,7 +3,11 @@ const router = express.Router();
 
 module.exports = db => {
   router.get("/", (req, res) => {
-    res.render("login", { error: false });
+    const templateVars = {
+      error: false,
+      user: undefined
+    };
+    res.render("login", templateVars);
   });
 
   router.post("/", async(req, res) => {

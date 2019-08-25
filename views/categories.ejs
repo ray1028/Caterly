@@ -1,0 +1,58 @@
+<!-- TAKE IN VARIABLES -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Meta Information -->
+    <title>Home Page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/03_categories.css" type="text/css" />
+
+    <!-- External JS -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+
+    <!-- App JS -->
+    <script type="text/javascript" src="/scripts/app.js"></script>
+
+  </head>
+
+  <body>
+
+    <nav>
+      <% include partials/_header %>
+      <!-- <a>Navbar</a> -->
+    </nav>
+
+    <div id='categories-main'>
+      <div id='categories-container-main'>
+        <header id='categories-head'>
+          <h2>Categories: <%=restaurants[0].category%></h2>
+        </header>
+        <% restaurants.forEach(restaurant => { %>
+          <a href="../restaurants/<%=restaurant.name%>">
+            <h3><%=restaurant.name%></h3>
+          </a>
+        <% }) %>
+        <a>
+          <h3>3</h3>
+        </a>
+        <a>
+          <h3>4</h3>
+        </a>
+        <a>
+          <h3>4</h3>
+        </a>
+      </div>
+    </div>
+
+  </body>
+
+</html>

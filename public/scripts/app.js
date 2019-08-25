@@ -1,3 +1,4 @@
+
 $(() => {
   $.ajax({
     method: "GET",
@@ -24,3 +25,5 @@ $(document).ready(function() {
     });
   });
 });
+
+

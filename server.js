@@ -80,7 +80,6 @@ app.use("/restaurants", restaurantsRoutes(db));
 app.use("/cart", cartRoutes(db));
 app.use("/checkout", checkoutRoutes(db));
 
-
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
