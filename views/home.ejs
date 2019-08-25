@@ -65,24 +65,23 @@
 
     <section id="categories-page">
         <div class="categories-box">
-    <% for (let i = 0 ; i < 4 ; i++) { %>
+    <% for (let category of categories) { %>
 
-   
-        <div class="category" id="<%= categories[i].name%>">
+        <div class="category" id="<%= category.name%>">
           <form
             class="form-inline"
             style="margin: 0px;"
-            action="/categories/<%= categories[i].name%>""
+            action="/categories/<%= category.name%>""
             method="GET"
           >
             <button type="submit" class="category btn btn-outline-dark">
-                <%= categories[i].name%>
+                <%= category.name%>
             </button>
-           <img src= "<%= categories[i].thumbnail_image%>">
-            <%= categories[i].description %>
+           <img src= "<%= category.thumbnail_image%>">
+            <%= category.description %>
           </form>
         </div>
-     
+
         <% } %>
       </div>
     </section>
