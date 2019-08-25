@@ -13,36 +13,68 @@ body {
   display: grid;
   grid-template-rows: 5vh 90vh 110vh;
 
+
   nav {
     @include gridspan(1, span 1, 1, span 1);
   }
 
   section {
-    background-color: blue;
+    background-image: url("../img/t1.jpg");
+    background-size: cover;
+    // background-color: blue;
     @include gridspan(1, span 1, 2, span 1);
     display: grid;
     grid-template-rows: 10vh 70vh 10vh;
     grid-template-columns: 60% 30em 10%;
 
     aside {
-      background-color: red;
+      background-color: #fff;
       @include gridspan(2, span 1, 2, span 1);
+      border-radius: 20px;
 
-      // div {
-      //   min-height: 264px;
-      // }
+      div header {
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        margin-left: 3em;
 
-      div header{
-        min-height: 244px;
+        h3 {
+          font-size: 3em;
+        }
+
       }
 
-      div .form-inline{
+      div .form-inline {
         margin: 0px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         flex-direction: column;
         min-height: 400px;
+
+        input {
+          width: 80%;
+          border: none;
+          border-bottom: ridge;
+          background-color: #fff;
+          outline: none;
+        }
+
+        button {
+          width: 80%;
+          background-color:#ffb84d;
+          border: none;
+          padding: 10px;
+          border-radius: 5px;
+        }
+        button:hover {
+          background-color:#ffad33;
+        }
+
+      }
+      footer {
+        display: flex;
+        justify-content: center;
       }
     }
   }
@@ -50,12 +82,12 @@ body {
   article {
     @include gridspan(1, span 1, 3, span 1);
     display: grid;
-    background-color: yellow;
+    background-color: #ffb84d;
     grid-template-rows: 20vh 70vh 20vh;
     grid-template-columns: 5% 26.667% 5% 26.667% 5% 26.667% 5%;
 
     #para1, #para2, #para3 {
-      background-color: orange;
+      background-color: #fff;
     }
 
     #para1 {
