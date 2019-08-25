@@ -4,7 +4,8 @@ const router = express.Router();
 module.exports = db => {
   router.get("/:id", (req, res) => {
     console.log(req.params.id);
-    db.query(`SELECT * FROM restaurants WHERE name LIKE '%${req.params.id}%';`)
+    let values = [`'%${req.params.id}%`];
+    db.query(`SELECT * FROM restaurants WHERE name LIKE $1`, values)
       .then(data => {
         const templateVars = {
           restaurants: data.rows
@@ -13,7 +14,7 @@ module.exports = db => {
         if (res.rowCount === 0) {
           console.log("DNE");
         } else {
-          res.render("restaurants", templateVars);
+          res.json(templateVars);
         }
       })
       .catch(err => {

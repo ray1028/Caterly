@@ -1,10 +1,43 @@
 //CURRENTLY FOR DESKTOP QUERY
-@mixin gridspan($col_start, $col_end, $row_start, $row_end) {
-  grid-column: $col_start / $col_end;
-  grid-row: $row_start / $row_end;
+// @mixin gridspan($col_start, $col_end, $row_start, $row_end) {
+//   grid-column: $col_start / $col_end;
+//   grid-row: $row_start / $row_end;
+// }
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#search-page {
+  background: red;
+  height: 100vh;
+}
+
+#categories-page {
+  background: blue;
+  height: 100vh;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: green;
+}
+
+.search-button {
+  width: 100%;
+}
+
+.search-text {
+  width: 100%;
 }
 
 // 1024 PCS & latops
-
 
 // MOBILE < 1024
