@@ -27,9 +27,23 @@ body {
     aside {
       background-color: red;
       @include gridspan(2, span 1, 2, span 1);
-      display: grid;
-      // grid-template-rows: ;
-      // grid-template-columns: ;
+
+      // div {
+      //   min-height: 264px;
+      // }
+
+      div header{
+        min-height: 244px;
+      }
+
+      div .form-inline{
+        margin: 0px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: column;
+        min-height: 400px;
+      }
     }
   }
 
