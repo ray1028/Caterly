@@ -1,9 +1,16 @@
-<header>
-    <nav class="navbar navbar-light bg-light">
 
-      <form class="form-inline" style= "margin: 0px;" action="/login" method="GET">
+<header>
+  <link rel="stylesheet" href="../../styles/header.css" type="text/css" />
+  <nav class="navbar navbar-light bg-light">
+    <%if (username) {%>
+      <form class="form-inline" style= "margin: 0px;" action="/logout" method="POST">
+        <label for="username"><%=username%></label>
+        <button type="submit" class="btn btn-outline-dark">Logout</button>
+      </form>
+    <% } else { %>
+      <form class="form-inline" action="/login" method="GET">
         <button type="submit" class="btn btn-outline-dark">Login</button>
       </form>
-
-    </nav>
-  </header>
+    <% } %>
+  </nav>
+</header>
