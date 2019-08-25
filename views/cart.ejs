@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table class="checkout">
+
+    <%= restaurantname %>
+
+      <thead>
+        <tr>
+          <th scope="col">Food</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% let subtotal = 0 %> <% for (let customer of customers) { %>
+        <tr>
+          <td><%= customer.name %></td>
+          <td><%= customer.quantity %></td>
+          <td>
+            <%= (customer.price * customer.quantity).toFixed(2) %> <% subtotal
+            += customer.price * customer.quantity %>
+          </td>
+        </tr>
+        <% } %>
+        <tr>
+          <td>Subtotal</td>
+          <td></td>
+          <td><%= subtotal.toFixed(2) %></td>
+        </tr>
+        <tr>
+          <td>Tax</td>
+          <td></td>
+          <td><% let tax = subtotal * 0.13 %> <%= tax.toFixed(2) %></td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td></td>
+          <td><% let total = tax + subtotal %> <%= total.toFixed(2) %></td>
+        </tr>
+      </tbody>
+    </table>
+    <form action="/restaurants/<%= restaurantname %>" method="GET">
+      <input class="btn btn-default" type="submit" value="Return to menu" />
+    </form>
+    <form action="/checkout" method="GET">
+      <input class="btn btn-default" type="submit" value="Checkout" />
+    </form>
+  </body>
+</html>

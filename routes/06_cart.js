@@ -4,13 +4,20 @@ const router = express.Router();
 module.exports = db => {
   router.get("/", (req, res) => {
     db.query(
-      `SELECT items.name, quantity, price
+      `SELECT items.name as name, quantity, price, restaurants.name as restaurantName
       FROM orders_items JOIN orders ON orders.id = order_id 
-      JOIN items ON items.id = item_id WHERE orders.id = 1 ;`
+      JOIN items ON items.id = item_id
+      JOIN restaurants on orders.restaurant_id = restaurants.id WHERE orders.id = 1 ;`
     )
       .then(data => {
-        const customers = data.rows;
-        res.json({ customers });
+        const templateVars = {
+          customers: data.rows,
+          restaurantname: data.rows[0].restaurantname
+        };
+
+        // const customers = data.rows;
+        console.log(templateVars);
+        res.render("cart", templateVars);
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
