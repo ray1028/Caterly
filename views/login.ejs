@@ -12,7 +12,7 @@
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/01_home_layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/02_login_layout.css" type="text/css" />
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -25,25 +25,26 @@
   <body>
 
     <nav>
-      <a>Navbar</a>
+      <% include partials/_header %>
+      <!-- <a>Navbar</a> -->
     </nav>
-
-    <section>
-
-      <aside class="text-center">
+    <div id=register-container>
+      <aside>
+        <header>
+          <h3>Account<br> Login
+          </h3>
+        </header>
         <div>
           <form class="form-inline" style= "margin: 0px;" action="/login" method="POST">
 
-            <input type="text" name="email"><br>
-            <input type="text" name="password"><br>
+              <input type="text" name="email" placeholder="Email"><br>
+              <input type="password" name="password" placeholder="Password"><br>
 
-            <button type="submit" class="btn btn-outline-dark">Login</button>
+              <button type="submit">LOGIN</button>
           </form>
         </div>
       </aside>
-
-    </section>
-
+    </div>
   </body>
 
 </html>
