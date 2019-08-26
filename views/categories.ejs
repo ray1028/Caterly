@@ -33,12 +33,12 @@
 
     <div id='categories-main'>
       <div id='categories-container-main'>
-        <header id='categories-head'>
+        <header id='categories-head' name='test'>
           <h2>Categories: <%=restaurants[0].category%></h2>
         </header>
         <% restaurants.forEach(restaurant => { %>
-          <a href="../restaurants/<%=restaurant.name%>">
-            <h3><%=restaurant.name%></h3>
+          <a class='a<%=restaurant.restaurant_id%>' name='a<%=restaurant.restaurant_id%>' href="../restaurants/<%=restaurant.name%>">
+            <h3><%=(restaurant.name).toUpperCase()%></h3>
           </a>
         <% }) %>
         <a>
@@ -47,17 +47,21 @@
         <a>
           <h3>4</h3>
         </a>
-        <a>
-          <h3>4</h3>
-        </a>
       </div>
-      <% restaurants.forEach((restaurant, index) => { %>
-        <div id=<%=`${restaurant.restaurant_id}${index}`%>>
-          <h2><%=restaurant.name%></h2>
-        </div>
-      <% }) %>
-    </div>
 
+    </div>
+    <% restaurants.forEach(restaurant => { %>
+      <div class="side-content">
+        <div id='a<%=restaurant.restaurant_id%>'>
+          <div id="side-content-header">
+            <h2><%=restaurant.name%></h2>
+          </div>
+          <div id="side-content-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </div>
+      </div>
+    <% }) %>
   </body>
 
 </html>
