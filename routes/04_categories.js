@@ -9,12 +9,21 @@ module.exports = db => {
     SELECT first_name, last_name FROM customers
       WHERE id = $1
     `;
+
     const values = [req.session.user_id];
     db.query(queryStrHeader, values)
       .then(data => {
         templateVars.user = `${data.rows[0].first_name}`;
         db.query(
-          `SELECT restaurants.name as name, categories.name as category, restaurants.id as restaurant_id FROM restaurants JOIN categories ON category_id = categories.id WHERE categories.name = '${req.params.id}';`
+          `SELECT restaurants.name as name, categories.name as category, restaurants.id as restaurant_id, avg(ratings.rating) as rating
+          FROM restaurants
+          JOIN categories
+          ON category_id = categories.id
+          JOIN ratings
+          ON ratings.id = restaurant_id
+          WHERE categories.name = '${req.params.id}'
+          GROUP BY restaurants.name, categories.name, restaurants.id
+          ORDER BY restaurant_id;`
         )
           .then(data => {
             if (data.rowCount === 0) {
