@@ -51,6 +51,11 @@
           <h3>4</h3>
         </a>
       </div>
+      <% restaurants.forEach((restaurant, index) => { %>
+        <div id=<%=`${restaurant.restaurant_id}${index}`%>>
+          <h2><%=restaurant.name%></h2>
+        </div>
+      <% }) %>
     </div>
 
   </body>

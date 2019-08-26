@@ -14,7 +14,7 @@ module.exports = db => {
       .then(data => {
         templateVars.user = `${data.rows[0].first_name}`;
         db.query(
-          `SELECT restaurants.name as name, categories.name as category FROM restaurants JOIN categories ON category_id = categories.id WHERE categories.name = '${req.params.id}';`
+          `SELECT restaurants.name as name, categories.name as category, restaurants.id as restaurant_id FROM restaurants JOIN categories ON category_id = categories.id WHERE categories.name = '${req.params.id}';`
         )
           .then(data => {
             if (data.rowCount === 0) {
@@ -22,6 +22,7 @@ module.exports = db => {
               console.log("DNE");
             } else {
               templateVars.restaurants = data.rows;
+              console.log(data);
               console.log(data.rows);
               // res.json({ restaurants });
               console.log(templateVars);
