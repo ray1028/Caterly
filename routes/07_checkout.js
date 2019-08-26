@@ -10,7 +10,7 @@ module.exports = () => {
     res.render("checkout", templateVars);
   });
 
-  
+
   //AJAX HERE
 
   return router;
