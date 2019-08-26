@@ -28,7 +28,6 @@
 
     <nav>
       <% include partials/_header %>
-      <!-- <a>Navbar</a> -->
     </nav>
 
     <div id='categories-main'>
@@ -37,22 +36,16 @@
           <h2>Categories: <%=restaurants[0].category%></h2>
         </header>
         <% restaurants.forEach(restaurant => { %>
-          <a class='a<%=restaurant.restaurant_id%>' name='a<%=restaurant.restaurant_id%>' href="../restaurants/<%=restaurant.name%>">
+          <a class='a<%=restaurant.restaurant_id%>' data-id='a<%=restaurant.restaurant_id%>' href="../restaurants/<%=restaurant.name%>">
             <h3><%=(restaurant.name).toUpperCase()%></h3>
           </a>
         <% }) %>
-        <a>
-          <h3>3</h3>
-        </a>
-        <a>
-          <h3>4</h3>
-        </a>
       </div>
 
     </div>
     <% restaurants.forEach(restaurant => { %>
       <div class="side-content">
-        <div id='a<%=restaurant.restaurant_id%>'>
+        <div id='a<%=restaurant.restaurant_id%>' class='side-content-container'>
           <div id="side-content-header">
             <h2><%=restaurant.name%></h2>
           </div>
@@ -60,7 +53,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           </div>
           <div id="side-content-rating">
-            <%=restaurant.rating%>
+            <%=Math.round(restaurant.rating)%>
           </div>
         </div>
       </div>
