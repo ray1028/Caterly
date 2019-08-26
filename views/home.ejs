@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap -->
     <link
       rel="stylesheet"
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
     <link rel="stylesheet" href="/styles/01_home_layout.css" type="text/css" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" ">
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -51,7 +53,7 @@
                 class="search-button btn btn-outline-dark"
                 type="submit"
               >
-                Search
+              <i class="fas fa-search"></i>
               </button>
             </div>
           </div>
@@ -82,20 +84,7 @@
           </form>
         </div>
    <div>
-      <form class="form-inline" style= "margin: 0px;" action="/restaurants" method="GET">
-        <label>search</label>
-        <input type="text" name="search"><br>
-        <button type="submit" class="btn btn-outline-dark">Search</button>
-      </form>
   </div>
-
-  <!-- <div>
-    <form class="form-inline" style= "margin: 0px;" action="/categories/asia" method="GET">
-
-      <button type="submit" class="btn btn-outline-dark">explore</button>
-    </form>
-  </div> -->
-
         <% } %>
       </div>
     </section>
