@@ -36,6 +36,9 @@
           <% include partials/_header %>
           <!-- <a>Navbar</a> -->
         </nav>
+
+        
+        <h1 class="title">Discover And Get Great Food</h1>
     <section id="search-page">
       <div class="search-bar">
         <form
@@ -70,27 +73,28 @@
       </div>
     </section>
 
+    <h2 class="top-categories">Explore Top Categories</h2>
+
     <section id="categories-page">
-
-      <div class="downward-text">Categories</div>
-
         <div class="categories-box">
     <% for (let category of categories) { %>
 
         <div class="category" id="<%= category.name%>">
           <form
-            class="form-inline"
             style="margin: 0px;"
             action="/categories/<%= category.name%>""
             method="GET"
           >
-         <img class="category-image" src= "<%= category.thumbnail_image%>"><div>
-            <button type="submit" class="category btn btn-outline-dark">
-              <%= category.name%>
+         <!-- <img class="category-image" src= "<%= category.thumbnail_image%>"> -->
+         <div>
+            <button type="submit" class="category category-btn btn btn-outline-dark">
+            
+            <img class="category-image" src= "<%= category.thumbnail_image%>">
+            <h3 class="category-name"> <%= category.name%> </h3> 
+            <div class="category-count"> <%= category.count%> Restaurants </div>
+          
             </button>
-          <div>
-            <%= category.description %>
-          </div>
+
         </div>
           </form>
         </div>

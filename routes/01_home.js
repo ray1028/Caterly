@@ -8,7 +8,12 @@ module.exports = db => {
     //   res.redirect("/login");
     // }
     let queryStrCustomer = "SELECT * FROM customers WHERE id = $1";
-    let queryStrCategories = "SELECT * FROM categories";
+    let queryStrCategories =
+      "SELECT categories.name as name, categories.thumbnail_image as thumbnail_image, count(restaurants) as count FROM categories JOIN restaurants ON categories.id = category_id GROUP BY categories.name, categories.thumbnail_image";
+
+    // SELECT categories.name as name, categories.thumbnail_image as thumbnail_image, count(restaurants) FROM categories JOIN restaurants ON categories.id = category_id
+    // GROUP BY categories.name, categories.thumbnail_image;
+
     // let values = req.session.user_id;
     let values = [1];
 
@@ -17,6 +22,7 @@ module.exports = db => {
 
       const userRes = await db.query(queryStrCustomer, values);
       const categoriesRes = await db.query(queryStrCategories);
+
       if (userRes.rowCount !== 1) throw new Error("User is not found");
       if (categoriesRes.rowCount < 1) throw new Error("Categories not found");
 
@@ -30,7 +36,6 @@ module.exports = db => {
   });
 
   router.post("/", (req, res) => {
-
     const queryRestaurantID = `
     SELECT id FROM restaurants WHERE lower(name) LIKE lower($1) LIMIT 1`;
 
