@@ -55,3 +55,6 @@ INSERT INTO ratings
     (customer_id, restaurant_id, rating)
 VALUES
     (1, 1, 4)
+    (2, 1, 5)
+    (2, 2, 3)
+    (1, 2, 1)

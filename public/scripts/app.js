@@ -37,6 +37,31 @@ $(document).ready(function() {
       behavior: "smooth"
     });
   });
+
+  $("#categories-container-main .a1").on("click", (e) => {
+    e.preventDefault();
+    const temp = $("#categories-container-main .a1").attr("name");
+    $(`#${temp}`).slideToggle();
+  });
+
+  $("#categories-container-main .a2").on("click", (e) => {
+    e.preventDefault();
+    const temp = $("#categories-container-main .a2").attr("name");
+    $(`#${temp}`).slideToggle();
+  });
+
+  $("#categories-container-main .a3").on("click", (e) => {
+    e.preventDefault();
+    const temp = $("#categories-container-main .a3").attr("name");
+    $(`#${temp}`).slideToggle();
+  });
+
+  $("#categories-container-main .a4").on("click", (e) => {
+    e.preventDefault();
+    const temp = $("#categories-container-main .a4").attr("name");
+    $(`#${temp}`).slideToggle();
+  });
+
 });
 
 
