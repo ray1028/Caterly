@@ -20,11 +20,11 @@ module.exports = (db) => {
         const newCustomerRes = await db.query(insertStr, insertValues);
         if(newCustomerRes.rowCount === 1){
           req.session.user_id =  newCustomerRes.rows[0].id;
-          res.redirect('/home');
+          res.status(302).redirect('/home');
         }
       // }
     } catch(err){
-      console.log(`Error - ${err}`);
+      res.status(500).json({ error: err.message });
     }
   });
 

@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
 
     <!-- Meta Information -->
     <title>mcdonalds</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
 
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="/styles/05_restaurants_layout.css"
+      type="text/css"
+    />
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -20,24 +31,70 @@
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
 
+    <!-- Modal -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <!--  -->
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/b9ac4525c6.js"></script>
   </head>
 
   <body>
+    <div class="restaurant-container">
+      <header><img src=<%=restaurant.image_url%> alt="resto"></header>
+      <section class="items-container">
+        <!-- for each get the items -->
+        <%for(let item of items){ %>
+        <article class="menu-item">
+          <div class="menu-item-1">
+            <%=item.name%>
+          </div>
+          <div class="menu-item-2">
+            <span>$<%=item.price%></span>
+          </div>
+          <div class="menu-item-3">
+            <%=item.description%>
+          </div>
+        </article>
+        <% }%>
+      </section>
+    </div>
 
-   <div>
-      <form class="form-inline" style= "margin: 0px;" action="/restaurants" method="GET">
-        <input type="text" name="search"><br>
-        <button type="submit" class="btn btn-outline-dark">Item 1</button>
-      </form>
-  </div>
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Order Summary</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
 
-  <div>
-    <form class="form-inline" style= "margin: 0px;" action="/categories/asia" method="GET">
+          <!-- Modal body -->
+          <div class="modal-body">
+            <ul class="list-group">
+              <li class="list-group-item">item 1</li>
 
-      <button type="submit" class="btn btn-outline-dark">Item 2</button>
-    </form>
-  </div>
+            </ul>
+          </div>
 
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <form action="POST" method="">
+              <button type="submit" class="btn btn-success">Checkout</button>
+            </form>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
-
 </html>

@@ -12,6 +12,24 @@ $(() => {
   });
 });
 
+const clickToAdd = () => {
+  $(".menu-item").click(function() {
+    let orderObj = JSON.parse(document.cookie.trim().split("=")[1].slice(2));
+    $("#myModal").modal("toggle");
+
+  });
+};
+
+// main driver function
+const mainProgram = () => {
+  clickToAdd();
+};
+
+// main
+$(document).ready(function() {
+  mainProgram();
+});
+
 $(document).ready(function() {
   $(function() {
     $("#search-text").focus();

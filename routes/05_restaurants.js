@@ -3,23 +3,33 @@ const router = express.Router();
 
 module.exports = db => {
   router.get("/", (req, res) => {
-    console.log(req.params.id);
-    let values = [`'%${req.params.id}%`];
-    db.query(`SELECT * FROM restaurants WHERE name LIKE $1`, values)
-      .then(data => {
-        const templateVars = {
-          restaurants: data.rows
-        };
-
-        if (res.rowCount === 0) {
-          console.log("DNE");
-        } else {
-          res.json(templateVars);
-        }
-      })
-      .catch(err => {
-        res.status(500).json({ error: err.message });
-      });
+    let templateVars = {};
+    if (!req.query.search) {
+      res.render("/home");
+    } else {
+      const values = [req.query.search];
+      db.query("select * from restaurants where lower(name) like $1", values)
+        .then(dataRes => {
+          if (dataRes.rowCount === 0) {
+            res.status(302).redirect('/home');
+            throw new Error("Restaurants not found");
+          } else {
+            templateVars.restaurant = dataRes.rows[0];
+            db.query("select * from items where restaurant_id = $1", [dataRes.rows[0].id])
+              .then(itemsData => {
+                if(itemsData.rowCount < 1){
+                  res.status(302).redirect('/home');
+                  throw new Error('menu item not found');
+                } else {
+                  templateVars.items = itemsData.rows;
+                  res.status(200).render("restaurants", templateVars);
+                }
+              }).catch(err => console.log(`Error occurs finding items - ${err}`))
+            // res.render("restaurants", templateVars);
+          }
+        })
+        .catch(err => console.log(`Error - ${err}`));
+    }
   });
   return router;
 };

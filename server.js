@@ -12,6 +12,7 @@ const morgan     = require('morgan');
 
 // added session cookie
 const cookieSession = require("cookie-session");
+const cookieParser = require('cookie-parser');
 // Not sure if we will use it but add for now - Ray
 // const bcrypt = require("bcrypt");
 const methodOverride = require("method-override");
@@ -20,6 +21,7 @@ const methodOverride = require("method-override");
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
+
 db.connect();
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -44,6 +46,9 @@ cookieSession({
   name: "session",
   keys: ["mid term project"]
 }));
+
+// add cookie parser - Ray
+app.use(cookieParser());
 
 // added method override to support restful route - Ray
 app.use(methodOverride("_method"));
