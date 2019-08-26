@@ -1,15 +1,15 @@
 
 <header>
   <link rel="stylesheet" href="../../styles/header.css" type="text/css" />
-  <nav class="navbar navbar-light bg-light">
+  <nav class="header-nav navbar navbar-light bg-light">
     <%if (user) {%>
       <form class="form-inline" style= "margin: 0px;" action="/logout" method="POST">
         <label for="username"><%=user%></label>
-        <button type="submit" class="btn btn-outline-dark">Logout</button>
+        <button type="submit" class="header-btn btn btn-outline-dark">Logout</button>
       </form>
     <% } else { %>
       <form class="form-inline" action="/login" method="GET">
-        <button type="submit" class="btn btn-outline-dark">Login</button>
+        <button type="submit" class="header-btn btn btn-outline-dark">Login</button>
       </form>
     <% } %>
   </nav>
