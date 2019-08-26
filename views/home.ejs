@@ -32,6 +32,12 @@
   </head>
 
   <body>
+
+      <nav>
+          <% include partials/_header %>
+          <!-- <a>Navbar</a> -->
+        </nav>
+
     <section id="search-page">
       <div class="search-bar">
         <form
@@ -47,6 +53,7 @@
               name="search"
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
+              autofocus
             />
             <div class="input-group-append">
               <button
@@ -66,6 +73,9 @@
     </section>
 
     <section id="categories-page">
+
+      <div class="downward-text">Categories</div>
+
         <div class="categories-box">
     <% for (let category of categories) { %>
 
@@ -76,15 +86,17 @@
             action="/categories/<%= category.name%>""
             method="GET"
           >
+         <img class="category-image" src= "<%= category.thumbnail_image%>"><div>
             <button type="submit" class="category btn btn-outline-dark">
-                <%= category.name%>
+              <%= category.name%>
             </button>
-           <img src= "<%= category.thumbnail_image%>">
+          <div>
             <%= category.description %>
+          </div>
+        </div>
           </form>
         </div>
-   <div>
-  </div>
+
         <% } %>
       </div>
     </section>
