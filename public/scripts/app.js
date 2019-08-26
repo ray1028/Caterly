@@ -31,13 +31,8 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $(function() {
-    $("#search-text").focus();
-  });
-
+  //Button to bring page down
   $(".categories-button").on("click", function() {
-    // Scroll to a certain element
-    // event.preventDefault();
     document.querySelector("#categories-page").scrollIntoView({
       behavior: "smooth"
     });
