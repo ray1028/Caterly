@@ -55,18 +55,42 @@
         <tr>
           <th>Customer Name</th>
           <th>Ordered at</th>
+          <th>Order </th>
           <th>Total</th>
           <th>Pickup Time</th>
-          <th>Estimated time</th>
         </tr>
       </thead>
       <tbody>
         <tr>
+
           <% for (order of orders) { %>
           <th><%= order.customers_name %></th>
-          <th class="date-value"><%= order.created_at%></th>
+          <th class="date-value"><%= formatDate(order.created_at) %></th>
+          <th> 
 
-          <th><%= order.order_total %></th>
+
+
+            <table>
+
+              
+
+
+            </table>
+
+            placeholder
+             <!-- <div id="ex2" class="modal">
+            <p>The order is :</p>
+
+            <div class="modal-flex">
+       
+              </button>
+            </div>
+          </div>
+
+          <p class = "estimated-time"><a href="#ex2" rel="modal:open">View Order</a></p>    -->
+               </th>
+
+          <th> $ <%= order.order_total.toFixed(2) %></th>
 
           <% if(order.pickup_time === "0") { %>
 
@@ -75,44 +99,28 @@
               <p>Please enter the estimated time for the order in minutes :</p>
 
               <div class="modal-flex">
-               
                 <form>
-                  <input type="text" />
+                  <input type="text" id="time" />
                 </form>
-                <button type="button" class="btn btn-outline-dark">
-                        <i class="fa fa-check-circle"></i>
-                      </button>
+                <button
+                  type="button"
+                  class="restaurant-confirm btn btn-outline-dark"
+                >
+                  <i class="fa fa-check-circle"></i>
+                </button>
               </div>
             </div>
 
-            <p><a href="#ex1" rel="modal:open">Enter time</a></p>
+            <p class = "estimated-time"><a href="#ex1" rel="modal:open">Enter time</a></p>
           </th>
           <% } else { %>
 
-          <th><%= order.pickup_time %></th>
+          <th><%= formatDate(order.pickup_time) %></th>
 
           <% } %>
         </tr>
         <% } %>
       </tbody>
     </table>
-
-    <!-- <table class="Past-orders">
-        <thead>
-        <tr>
-            <th>Customer Name</th>
-            <th>Ordered at</th>
-            <th>Toal</th>
-            <th>Pickup Time</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        </tbody>
-    </table> -->
   </body>
 </html>

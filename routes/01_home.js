@@ -1,6 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const momentFunction = require("../helperFunction");
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require("twilio")(accountSid, authToken);
+const strftime = require("strftime");
+
+const formatDate = function(epoch) {
+  return strftime("%F %T", new Date(parseInt(epoch)));
+};
 
 module.exports = db => {
   router.get("/", async (req, res) => {
@@ -36,6 +43,7 @@ module.exports = db => {
     }
   });
 
+  //Search route that displays the first restaurant LIKE the query
   router.post("/", (req, res) => {
     const queryRestaurantID = `
     SELECT id FROM restaurants WHERE lower(name) LIKE lower($1) LIMIT 1`;
@@ -52,6 +60,7 @@ module.exports = db => {
     });
   });
 
+  //The get route for the login of the restaurant, this page will show all of the current and old orders
   router.get("/restaurants/:id", (req, res) => {
     const queryOrders = `SELECT restaurant_id, pickup_time , restaurants.name as name, order_total , customers.first_name as customers_name, created_at FROM restaurants JOIN orders on restaurants.id = restaurant_id 
     JOIN customers on customers.id = customer_id WHERE
@@ -64,12 +73,36 @@ module.exports = db => {
         res.send("error");
         console.log("DNE");
       } else {
-        // console.log(momentFunction(1));
-        const templateVars = { orders: data.rows };
+        const templateVars = { orders: data.rows, formatDate: formatDate };
         res.render(`restaurants_home`, templateVars);
       }
     });
   });
+
+  //POST route to update the confirm time and send back a text message to the client
+  router.post("/restaurants/1", (req, res) => {
+    let updateQuery = `    UPDATE orders SET pickup_time = $1 WHERE orders.id = 1;`;
+    let updateQueryValue = [Date.now() + req.body.time * 60000];
+
+    db.query(updateQuery, updateQueryValue);
+    let phoneQuery = `SELECT phone from customers JOIN orders ON customers.id = customer_id WHERE orders.id = 1;`;
+    db.query(phoneQuery).then(data => {
+      sendMSG(textMSG(req.body.time), data.rows[0].phone);
+    });
+
+    res.redirect("/home/restaurants/1");
+  });
+
+  //Helper functions
+  const textMSG = function(time) {
+    return `You will recieve your order in ${time} minutes`;
+  };
+
+  const sendMSG = function(content, phone) {
+    client.messages
+      .create({ body: content, from: "+16476948610", to: phone })
+      .then(message => console.log(message.sid));
+  };
 
   return router;
 };
