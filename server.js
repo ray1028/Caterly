@@ -64,6 +64,7 @@ const restaurantsRoutes = require("./routes/05_restaurants");
 const cartRoutes = require("./routes/06_cart");
 const checkoutRoutes = require("./routes/07_checkout");
 const logoutRoutes = require("./routes/08_logout");
+const myOrdersRoutes = require("./routes/09_my_orders");
 
 
 
@@ -86,6 +87,7 @@ app.use("/restaurants", restaurantsRoutes(db));
 app.use("/cart", cartRoutes(db));
 app.use("/checkout", checkoutRoutes(db));
 app.use("/logout", logoutRoutes(db));
+app.use("/myorders", myOrdersRoutes(db));
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

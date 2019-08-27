@@ -35,10 +35,10 @@
       <nav>
         <% include partials/_header %>
       </nav>
+    <!-- <h1 class="title">Discover And Get Great Food</h1> -->
 
-        
-        <h1 class="title">Discover And Get Great Food</h1>
     <section id="search-page">
+      <h1 class="title">Discover</h1>
       <div class="search-bar">
         <form
           class="form-inline"
@@ -51,6 +51,7 @@
               type="text"
               class="search-text form-control"
               name="search"
+              placeholder="Search Restaurants"
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
               autofocus
@@ -65,6 +66,7 @@
             </div>
           </div>
         </form>
+        <!-- <img src="img/arrowdownthick.svg" width='60px' height='60px'class="button-down"> -->
 <!-- 
         <button type="submit" class="categories-button btn btn-outline-dark">
           Give me a suggestion!
@@ -89,15 +91,19 @@
             <button type="submit" class="category category-btn btn btn-outline-dark">
             
             <img class="category-image" src= "<%= category.thumbnail_image%>">
-            <h3 class="category-name"> <%= category.name%> </h3> 
-            <div class="category-count"> <%= category.count%> Restaurants </div>
-          
+            
+            <h3 class="category-name"> 
+              <%= category.name%>
+            </h3> 
+            <div class="category-count">
+              <%= category.count%> Restaurants
+            </div>
             </button>
 
-        </div>
+          </div>
           </form>
         </div>
-
+        
         <% } %>
       </div>
     </section>
