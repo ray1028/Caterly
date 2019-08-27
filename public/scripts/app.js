@@ -1,18 +1,17 @@
-$(() => {
-  $.ajax({
-    method: "GET",
-    url: "/api/users"
-  }).done(users => {
-    for (user of users) {
-      $("<div>")
-        .text(user.name)
-        .appendTo($("body"));
-    }
-  });
-});
+// $(() => {
+//   $.ajax({
+//     method: "GET",
+//     url: "/api/users"
+//   }).done(users => {
+//     for (user of users) {
+//       $("<div>")
+//         .text(user.name)
+//         .appendTo($("body"));
+//     }
+//   });
+// });
 
 const clickToAdd = () => {
-
   $(".menu-item").click(function() {
     $("#myModal").modal("toggle");
 
@@ -101,7 +100,6 @@ const addItemToCart = () => {
         localStorage.setItem("cart", JSON.stringify(cartStorage));
       }
     }
-
   });
 };
 
@@ -118,18 +116,33 @@ const mainProgram = () => {
 $(document).ready(function() {
   mainProgram();
 
-  $(".restaurant-confirm").on("click", function() {
-    alert("hi");
+  //AJAX method to update the page with the time of the order.
+  $(".restaurant-confirm").on("click", function(event) {
+    event.preventDefault;
+    $(() => {
+      $.ajax({
+        method: "POST",
+        url: "/home/restaurants/1",
+        data: { time: $("#time").val() },
+        success: function() {
+          $(".estimated-time").text(time.value);
+        },
+        error: function() {
+          alert("An AJAX error has occured");
+        }
+      });
+    });
   });
 
-  $("#categories-container-main a").on("click", (e) => {
+  // alert((new Date($(".date-value").html())));
+
+  // $(".date-value").html($(this)(new Date($(".date-value").html())));
+  $("#categories-container-main a").on("click", e => {
     e.preventDefault();
     let x = $(this.activeElement)[0];
-    let y = $(x).attr('data-id');
+    let y = $(x).attr("data-id");
 
-    $(".side-content-container")
-      .css("visibility", "hidden");
-    $(`#${y}`)
-      .css("visibility", "visible");
+    $(".side-content-container").css("visibility", "hidden");
+    $(`#${y}`).css("visibility", "visible");
   });
 });
