@@ -2,13 +2,13 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = db => {
-  router.get("/", (req, res) => {
+  router.get("/:id", (req, res) => {
     let templateVars = {};
-    if (!req.query.search) {
-      res.render("/home");
+    if (!req.params.id) {
+      res.status(302).redirect("/home");
     } else {
-      const values = [req.query.search];
-      db.query("select * from restaurants where lower(name) like $1", values)
+      const values = [req.params.id];
+      db.query("select * from restaurants where id = $1", values)
         .then(dataRes => {
           if (dataRes.rowCount === 0) {
             res.status(302).redirect('/home');
