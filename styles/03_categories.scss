@@ -7,6 +7,7 @@ body {
   display: grid;
   grid-template-rows: 5vh 95vh;
   grid-template-columns: 600px auto;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #categories-head {
@@ -73,7 +74,7 @@ body {
 
 }
 
-#a1, #a2 {
+.side-content-container {
   background-color: #fff;
   min-height: 56.1em;
   display: grid;
@@ -81,6 +82,8 @@ body {
   grid-template-rows: 33% 33% 33%;
   // display: flex;
   // flex-wrap: wrap;
+  visibility: hidden;
+
   #side-content-header {
     width: 100%;
     display: flex;
@@ -109,6 +112,10 @@ body {
 }
 
 .a1 {
-  background-image: url("../img/mand2.jpg");
+  background-image: url("https://i44.photobucket.com/albums/f6/jacksonf21/mand2_zpspkxfmum0.jpg");
   text-shadow: 1px 1px black;
+}
+
+.a2, .a3, .a4, .a5 {
+  background-color: black;
 }
