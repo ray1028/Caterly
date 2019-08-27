@@ -62,32 +62,13 @@
       </thead>
       <tbody>
         <tr>
-
           <% for (order of orders) { %>
           <th><%= order.customers_name %></th>
           <th class="date-value"><%= formatDate(order.created_at) %></th>
           <th> 
-
-
-
             <table>
-
-              
-
-
             </table>
-
             placeholder
-             <!-- <div id="ex2" class="modal">
-            <p>The order is :</p>
-
-            <div class="modal-flex">
-       
-              </button>
-            </div>
-          </div>
-
-          <p class = "estimated-time"><a href="#ex2" rel="modal:open">View Order</a></p>    -->
                </th>
 
           <th> $ <%= order.order_total.toFixed(2) %></th>

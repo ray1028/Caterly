@@ -8,10 +8,10 @@ VALUES
 INSERT INTO categories
     (name, thumbnail_image, description)
 VALUES
-    ('asian', 'http://blogs.discovermagazine.com/crux/files/2013/08/bowl-of-rice.jpg', 'The best Japanese restaurants in Toronto are where to go for food beyond sushi and ramen and dig into favourites like yakitori and donburi. Each of these spots have their own unique little twists, but there’s one thing you can count on all of them to have: sake.' ),
-    ('mexican', 'https://www.goodlifeeats.com/wp-content/uploads/2012/11/FallMexicanRiceBowl2-f.jpg', 'Authentic Mexican food is vibrant, delicious, fresh and fun. It is also colourful, spicy and uses an amazing array of chillies, both fresh and dried.'),
-    ('western', 'http://diner22.com/wp-content/uploads/2017/10/breakfast.jpg', 'With roadside diners, vintage drive-ins and out-of-the-way "dives" enjoying a resurgence of hipness among foodies, host Guy Fieri travels across America in search of some of the best "greasy spoon" eateries.'),
-    ('italian', 'https://assets3.thrillist.com/v1/image/1901599/size/tmg-article_default_mobile.jpg', 'The best Italian restaurants in Toronto are known not only for their food, but their atmosphere as well. From pizza, pasta, antipasti, seafood and good wine, these spots have all the favourites.');
+    ('Japanese', 'http://blogs.discovermagazine.com/crux/files/2013/08/bowl-of-rice.jpg', 'The best Japanese restaurants in Toronto are where to go for food beyond sushi and ramen and dig into favourites like yakitori and donburi. Each of these spots have their own unique little twists, but there’s one thing you can count on all of them to have: sake.' ),
+    ('Mexican', 'https://www.goodlifeeats.com/wp-content/uploads/2012/11/FallMexicanRiceBowl2-f.jpg', 'Authentic Mexican food is vibrant, delicious, fresh and fun. It is also colourful, spicy and uses an amazing array of chillies, both fresh and dried.'),
+    ('American', 'http://diner22.com/wp-content/uploads/2017/10/breakfast.jpg', 'With roadside diners, vintage drive-ins and out-of-the-way "dives" enjoying a resurgence of hipness among foodies, host Guy Fieri travels across America in search of some of the best "greasy spoon" eateries.'),
+    ('Italian', 'https://assets3.thrillist.com/v1/image/1901599/size/tmg-article_default_mobile.jpg', 'The best Italian restaurants in Toronto are known not only for their food, but their atmosphere as well. From pizza, pasta, antipasti, seafood and good wine, these spots have all the favourites.');
 
 
 INSERT INTO restaurants
@@ -22,13 +22,16 @@ VALUES
     ('Spring Sushi', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '1', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
     ('Dumpling House', '111,111', '123 Main', '6478888888', '123@test.com', '123', '1', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
     ('Wakame', '111,111', '123 Main', '6478888888', '123@test.com', '123', '1', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
-        ('Mucho Burrito', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '2', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
+    ('Mucho Burrito', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '2', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
     ('Big Fat Burrito', '111,111', '123 Main', '6478888888', '123@test.com', '123', '2', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
-  ('Chipotle', '111,111', '123 Main', '6478888888', '123@test.com', '123', '2', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
+    ('Chipotle', '111,111', '123 Main', '6478888888', '123@test.com', '123', '2', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
     ('Taco Bell', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '2', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
     ('McDonalds', '145,145', '123 Lighthouse', '6478988888', 'abc@test.com', '123', '3', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
-    ('Quiznos', '111,111', '123 Main', '6478888888', '123@test.com', '123', '4', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
-    ('Pizza Hut', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '4', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
+    ("Denny's", '145,145', '123 Lighthouse', '6478988888', 'abc@test.com', '123', '3', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
+    ('Montanas', '145,145', '123 Lighthouse', '6478988888', 'abc@test.com', '123', '3', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
+    ('Burger Priest', '145,145', '123 Lighthouse', '6478988888', 'abc@test.com', '123', '3', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
+    ('BUONO', '111,111', '123 Main', '6478888888', '123@test.com', '123', '4', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
+    ('Mattachioni', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '4', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
     ('Little Caesers', '111,111', '123 Main', '6478888888', '123@test.com', '123', '4', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'),
     ('Figo Toronto', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '4', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260')
 ;
