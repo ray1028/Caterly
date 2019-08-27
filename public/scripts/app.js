@@ -62,7 +62,6 @@ const cartAdd = () => {
       id: $("#cart-item").data("id"),
       quantity: currentVal
     };
-
   });
 };
 
@@ -94,7 +93,6 @@ const addItemToCart = () => {
   });
 
   $("#add-item").click(function() {
-
     let cartStorage = JSON.parse(localStorage.getItem("cart"));
 
     if (!cartStorage) {
@@ -105,10 +103,10 @@ const addItemToCart = () => {
       const found = cartStorage.find(ele => ele.id === orderObj.id);
       if (found) {
         found.quantity += orderObj.quantity;
-        localStorage.setItem('cart', JSON.stringify(cartStorage));
+        localStorage.setItem("cart", JSON.stringify(cartStorage));
       } else {
         cartStorage.push(orderObj);
-        localStorage.setItem('cart', JSON.stringify(cartStorage));
+        localStorage.setItem("cart", JSON.stringify(cartStorage));
       }
     }
 
@@ -133,20 +131,6 @@ const mainProgram = () => {
   addItemToCart();
 };
 
-const accountSid = "AC4424661674dfe2bf1d3db506ea2547f4";
-const authToken = "d177fedf74fa6765fe7f8ae1fd561ad2";
-const client = require("twilio")(accountSid, authToken);
-
-const sendText = function(body) {
-  client.messages
-    .create({
-      body: body,
-      from: "+16476948610",
-      to: "+16478785740"
-    })
-    .then(message => console.log(message.sid));
-};
-
 // main
 $(document).ready(function() {
   mainProgram();
@@ -162,24 +146,24 @@ $(document).ready(function() {
   });
 
   $("#categories-container-main .a2").on("click", e => {
-  $("#categories-container-main a").on("click", (e) => {
-    e.preventDefault();
-    let x = $(this.activeElement)[0];
-    let y = $(x).attr('data-id');
+    $("#categories-container-main a").on("click", e => {
+      e.preventDefault();
+      let x = $(this.activeElement)[0];
+      let y = $(x).attr("data-id");
 
-  $("#categories-container-main .a3").on("click", e => {
-    e.preventDefault();
-    const temp = $("#categories-container-main .a3").attr("name");
-    $(`#${temp}`).slideToggle();
-  });
+      $("#categories-container-main .a3").on("click", e => {
+        e.preventDefault();
+        const temp = $("#categories-container-main .a3").attr("name");
+        $(`#${temp}`).slideToggle();
+      });
 
-  $("#categories-container-main .a4").on("click", e => {
-    e.preventDefault();
-    const temp = $("#categories-container-main .a4").attr("name");
-    $(`#${temp}`).slideToggle();
-    $(".side-content-container")
-      .css("visibility", "hidden");
-    $(`#${y}`)
-      .css("visibility", "visible");
+      $("#categories-container-main .a4").on("click", e => {
+        e.preventDefault();
+        const temp = $("#categories-container-main .a4").attr("name");
+        $(`#${temp}`).slideToggle();
+        $(".side-content-container").css("visibility", "hidden");
+        $(`#${y}`).css("visibility", "visible");
+      });
+    });
   });
 });
