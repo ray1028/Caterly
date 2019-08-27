@@ -1,0 +1,38 @@
+nav {
+  grid-column: 1 / span 1;
+}
+
+body {
+  background-color: #EEE;
+  display: grid;
+  grid-template-rows: 5vh 95vh;
+  grid-template-columns: 1;
+  // grid-template-columns: 600px auto;
+  font-family: 'Roboto', sans-serif;
+  // font-size:42px;
+}
+
+content {
+  display: flex;
+  justify-content: center;
+  grid-row: 2 / span 1;
+  grid-column: 1 / span 1;
+  border: red solid 3px;
+}
+
+#myorder-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 80%;
+  min-width: 500px;
+  // justify-content: center;
+  border: 4px solid blue; 
+  
+  header {
+    height: 100px;
+    width: 80%;
+    text-align: center;
+  }
+}

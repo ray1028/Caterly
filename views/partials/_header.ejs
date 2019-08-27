@@ -1,20 +1,26 @@
 
 <header>
   <link rel="stylesheet" href="../../styles/header.css" type="text/css" />
-  <nav class="header-nav navbar navbar-light bg-light">
+  <nav class="header-nav navbar navbar-light">
     <%if (user) {%>
-      <form class="form-inline" style= "margin: 0px;" action="/logout" method="POST">
-        <label for="username"><%=user%></label>
-        <button type="submit" class="header-btn btn btn-outline-dark">Logout</button>
-      </form>
-    <% } else { %>
-      <form class="form-inline" action="/login" method="GET">
-        <button type="submit" class="header-btn btn btn-outline-dark">Login</button>
+      <form action="/myorders" method="GET">
+        <label class="other" for="username"><%=user%></label>
+        <button type="submit" class="other">My Orders</button>
       </form>
 
-      <form class="form-inline" action="/login/restaurant" method="GET">
-        <button type="submit" class="header-btn btn btn-outline-dark">Restaurants Login</button>
+      <form action="/logout" method="POST">
+        <button type="submit" class="other">Logout</button>
       </form>
+
+    <% } else { %>
+      <form action="/login" method="GET">
+        <button type="submit" class="other">Login</button>
+      </form>
+
+      <form action="/login/restaurant" method="GET">
+        <button type="submit" class="other">Restaurants Login</button>
+      </form>
+
     <% } %>
   </nav>
 </header>

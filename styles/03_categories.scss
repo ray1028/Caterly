@@ -3,7 +3,7 @@ nav {
 }
 
 body {
-  background-color: #EEE;
+  background-color: #fff;
   display: grid;
   grid-template-rows: 5vh 95vh;
   grid-template-columns: 600px auto;
@@ -82,12 +82,17 @@ body {
 }
 
 .side-content-container {
-  // background-color: #EEE;
+  background-color: #EEE;
   // background-color: #fff;
+  // margin: 40px;
+  filter: drop-shadow(2px 4px 6px gray);  margin-top: 40px;
+  margin-bottom: 40px; 
+  margin-left: 40px;
   min-height: 56.1em;
   display: grid;
-  grid-template-columns: 70% 30%;
-  grid-template-rows: 33% 33% 33%;
+  grid-template-columns: 5% 65% 30%;
+  grid-template-rows: 6% 21% 10% 29% 33%; 
+  // 27% 6% 33% 33%;
   // display: flex;
   // flex-wrap: wrap;
   visibility: hidden;
@@ -95,29 +100,43 @@ body {
   #side-content-header {
     width: 100%;
     display: flex;
+    grid-row: 1 / span 2;
+    grid-column: 1 / span 2;
+    background-color: #fafafa;
 
-    h2 {
-      border-radius: 5px;
-      // background-color: orange;
-      width: 100%;
-      margin-left: 40px;
-      margin-bottom: 40px;
-      margin-right: 40px;
-      margin-top: .7em;
-      padding-left: 10px;
-      height: 30%;
-      font-size: 5em;
-    }
+    // h2 {
+    //   border-radius: 5px;
+    //   // background-color: orange;
+    //   width: 100%;
+    //   margin-left: 40px;
+    //   margin-bottom: 40px;
+    //   margin-right: 40px;
+    //   margin-top: .7em;
+    //   padding-left: 10px;
+    //   height: 30%;
+    //   font-size: 5em;
+    // }
+  }
+  #side-content-title {
+    grid-row: 3 / span 1;
+    grid-column: 2 / span 1;
+    margin-top: 1em;
   }
 
   #side-content-body {
-    grid-row: 2 / span 1;
-    grid-column: 1 / span 1;
-    margin-left: 40px;
+    grid-row: 4 / span 1;
+    grid-column: 2 / span 1;
     border-radius: 20px;
     font-size: 1.5em;
   }
 
+  #side-content-rating {
+    grid-row: 2 / span 1;
+    grid-column: 3 / span 1;
+    font-size: 5em;
+    text-align: center;
+    align-self: center;
+  }
 }
 
 .a1 {
@@ -127,4 +146,8 @@ body {
 
 .a2, .a3, .a4, .a5 {
   background-color: black;
+}
+
+#a1 #side-content-header{
+  background-image: url();
 }

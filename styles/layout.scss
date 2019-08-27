@@ -22,7 +22,7 @@ body {
     background-image: url("../img/t1.jpg");
     background-size: cover;
     // background-color: blue;
-    @include gridspan(1, span 1, 2, span 1);
+    @include gridspan(1, span 1, 1, span 2);
     display: grid;
     grid-template-rows: 10vh 70vh 10vh;
     grid-template-columns: 60% 30em 10%;

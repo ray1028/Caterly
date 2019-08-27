@@ -1,15 +1,48 @@
 .header-nav {
   display: flex;
   justify-content: flex-end;
+  background-color: transparent;
 }
 .header-btn {
   border: none;
 }
 .header-btn:hover {
-  background-color: #ffb84d;
+  color: #DD614A;
+  background-color: #f8f9fa;
+  // background-color: #ffb84d;
 }
 
-.form-inline label {
-  margin: 0px;
-  margin-right: 20px;
+.header-btn:active {
+  color: #DD614A;
+  background-color: #f8f9fa;
+  border: none;
+  // background-color: #ffb84d;
 }
+
+.header-btn:focus {
+  outline: none;
+  border: none;
+  background-color: #f8f9fa;
+}
+.other {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 1rem;
+  margin: 3px;
+  margin-right: 9px;
+}
+
+.other:hover{
+  color: #DD614A;
+}
+
+.other:focus {
+  border: none;
+  outline: none;
+}
+
+// .form-inline label {
+//   margin: 0px;
+//   margin-right: 20px;
+// }
