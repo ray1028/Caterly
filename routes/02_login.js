@@ -2,6 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = db => {
+  router.get("/restaurant", (req, res) => {
+    const templateVars = {
+      error: false,
+      user: undefined
+    };
+    res.render("login-restaurant", templateVars);
+  });
+
   router.get("/", (req, res) => {
     const templateVars = {
       error: false,
