@@ -12,18 +12,10 @@ $(() => {
 });
 
 const clickToAdd = () => {
-  // currentVal = 0;
-  // currentPrice = 0;
 
   $(".menu-item").click(function() {
-    let orderObj = JSON.parse(
-      document.cookie
-        .trim()
-        .split("=")[1]
-        .slice(2)
-    );
     $("#myModal").modal("toggle");
-    $("#myModal").modal("toggle");
+
     $("#cart-item").html(
       $(this)
         .children(".menu-item-1")
@@ -44,7 +36,7 @@ const clickToAdd = () => {
     $("#cart-quantity-box").val(1);
     currentPrice = $(".menu-item-2").html();
     currentPrice = (Number(currentPrice.slice(1)) / 1000).toFixed(2);
-    $("#cart-total").html("$" + currentPrice);
+    $("#cart-total").html("$" + currentPrice);
   });
 };
 
@@ -110,15 +102,6 @@ const addItemToCart = () => {
       }
     }
 
-    console.log(cartStorage, orderObj);
-    let cookieObj = JSON.parse(
-      document.cookie
-        .trim()
-        .split("=")[1]
-        .slice(2)
-    );
-
-    let userid = cookieObj.user_id;
   });
 };
 
@@ -139,31 +122,14 @@ $(document).ready(function() {
     alert("hi");
   });
 
-  $("#categories-container-main .a1").on("click", e => {
+  $("#categories-container-main a").on("click", (e) => {
     e.preventDefault();
-    const temp = $("#categories-container-main .a1").attr("name");
-    $(`#${temp}`).slideToggle();
-  });
+    let x = $(this.activeElement)[0];
+    let y = $(x).attr('data-id');
 
-  $("#categories-container-main .a2").on("click", e => {
-    $("#categories-container-main a").on("click", e => {
-      e.preventDefault();
-      let x = $(this.activeElement)[0];
-      let y = $(x).attr("data-id");
-
-      $("#categories-container-main .a3").on("click", e => {
-        e.preventDefault();
-        const temp = $("#categories-container-main .a3").attr("name");
-        $(`#${temp}`).slideToggle();
-      });
-
-      $("#categories-container-main .a4").on("click", e => {
-        e.preventDefault();
-        const temp = $("#categories-container-main .a4").attr("name");
-        $(`#${temp}`).slideToggle();
-        $(".side-content-container").css("visibility", "hidden");
-        $(`#${y}`).css("visibility", "visible");
-      });
-    });
+    $(".side-content-container")
+      .css("visibility", "hidden");
+    $(`#${y}`)
+      .css("visibility", "visible");
   });
 });
