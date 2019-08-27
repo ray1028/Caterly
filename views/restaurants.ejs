@@ -52,7 +52,7 @@
 
         <article class="menu-item">
           <div class="menu-item-1" data-id="<%=item.id%>"><%=item.name%></div>
-          <div class="menu-item-2">$<%=item.price%></div>
+          <div class="menu-item-2" data-resto-id="<%=restaurant.id%>">$<%=item.price%></div>
           <div class="menu-item-3"><%=item.description%></div>
         </article>
         <% }%>
@@ -96,7 +96,7 @@
                   <button class="plus-btn" type="button" name="button">
                     <i class="fas fa-plus-square"></i>
                   </button>
-                  
+
                 </td>
                 <td scope="col" id="cart-total"></td>
               </tr>
@@ -110,9 +110,11 @@
                 Add To Cart
               </button>
             </form>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">
-              Close
-            </button>
+            <form id="checkout" action="/checkout" method="POST">
+              <button id="checkout-btn" type="submit" class="btn btn-primary" >
+                Checkout
+              </button>
+            </form>
           </div>
         </div>
       </div>

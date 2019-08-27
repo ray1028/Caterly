@@ -27,6 +27,12 @@ const clickToAdd = () => {
 
     $("#cart-item").data("id", id);
 
+    let restoId = $(this)
+      .children(".menu-item-2")
+      .data("resto-id");
+
+    $("#cart-item").data("restoId", restoId);
+
     $("#cart-description").html(
       $(this)
         .children(".menu-item-3")
@@ -51,7 +57,11 @@ const cartAdd = () => {
 
     orderObj = {
       id: $("#cart-item").data("id"),
-      quantity: currentVal
+      restoId: $("#cart-item").data("restoId"),
+      name: $("#cart-item").html(),
+      description: $("#cart-description").html(),
+      quantity: currentVal,
+      price: currentPrice
     };
   });
 };
@@ -65,7 +75,11 @@ const cartMinus = () => {
 
     orderObj = {
       id: $("#cart-item").data("id"),
-      quantity: currentVal
+      restoId: $("#cart-item").data("restoId"),
+      name: $("#cart-item").html(),
+      description: $("#cart-description").html(),
+      quantity: currentVal,
+      price: currentPrice
     };
   });
 };
@@ -85,13 +99,15 @@ const addItemToCart = () => {
 
   $("#add-item").click(function() {
     let cartStorage = JSON.parse(localStorage.getItem("cart"));
-
+    //  need to check orderobj if its null. not added yet
     if (!cartStorage) {
       const tempArr = [];
       tempArr.push(orderObj);
       localStorage.setItem("cart", JSON.stringify(tempArr));
     } else {
-      const found = cartStorage.find(ele => ele.id === orderObj.id);
+      const found = cartStorage.find(
+        ele => ele.id === orderObj.id && ele.restoId === orderObj.restoId
+      );
       if (found) {
         found.quantity += orderObj.quantity;
         localStorage.setItem("cart", JSON.stringify(cartStorage));
@@ -100,6 +116,37 @@ const addItemToCart = () => {
         localStorage.setItem("cart", JSON.stringify(cartStorage));
       }
     }
+    $('#myModal').modal('hide');
+  });
+};
+
+const checkOutCart = () => {
+  $("#checkout-btn").click(function() {
+    $.ajax({
+      type: "GET",
+      url: "/checkout",
+      data: JSON.parse(localStorage.getItem("cart")),
+      success: function(data) {
+        window.location.href = "/checkout";
+      }
+    });
+  });
+};
+
+const confirmCart = () => {
+  $("#confirm-order-btn").click(function() {
+    $.ajax({
+      type: "POST",
+      url: "/checkout",
+      data: { items: localStorage.getItem('cart') },
+      success: function(data) {
+        console.log("successfully posted data");
+        localStorage.removeItem('cart');
+      },
+      error: function(jqXHR, textStatus, err) {
+        console.log("text status " + textStatus + ", err " + err);
+      }
+    });
   });
 };
 
@@ -110,6 +157,8 @@ const mainProgram = () => {
   cartMinus();
   clearCartByClosingModal();
   addItemToCart();
+  checkOutCart();
+  confirmCart();
 };
 
 // main

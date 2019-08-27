@@ -7,6 +7,6 @@ module.exports = () => {
     res.clearCookie('cart');
     res.status(302).redirect("/");
   })
-  
+
   return router;
 }
