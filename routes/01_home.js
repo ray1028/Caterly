@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const momentFunction = require("../helperFunction");
 
 module.exports = db => {
   router.get("/", async (req, res) => {
@@ -50,5 +51,25 @@ module.exports = db => {
       }
     });
   });
+
+  router.get("/restaurants/:id", (req, res) => {
+    const queryOrders = `SELECT restaurant_id, pickup_time , restaurants.name as name, order_total , customers.first_name as customers_name, created_at FROM restaurants JOIN orders on restaurants.id = restaurant_id 
+    JOIN customers on customers.id = customer_id WHERE
+    restaurant_id = $1`;
+
+    const queryOrdersValue = [`${req.params.id}`];
+
+    db.query(queryOrders, queryOrdersValue).then(data => {
+      if (data.rowCount === 0) {
+        res.send("error");
+        console.log("DNE");
+      } else {
+        // console.log(momentFunction(1));
+        const templateVars = { orders: data.rows };
+        res.render(`restaurants_home`, templateVars);
+      }
+    });
+  });
+
   return router;
 };

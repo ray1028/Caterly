@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Meta Information -->
+    <title>Home Page</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
+    <link rel="stylesheet" href="/styles/01_home_layout.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="/styles/09_home_restaurant.css"
+      type="text/css"
+    />
+    <link
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    rel="stylesheet" ">
+
+    <!-- External JS -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ar-dz.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"
+    />
+
+    <!-- App JS -->
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
+
+  <body>
+    hello <%= orders[0].name %> there
+
+    <table class="current-orders">
+      <thead>
+        <tr>
+          <th>Customer Name</th>
+          <th>Ordered at</th>
+          <th>Total</th>
+          <th>Pickup Time</th>
+          <th>Estimated time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% for (order of orders) { %>
+          <th><%= order.customers_name %></th>
+          <th class="date-value"><%= order.created_at%></th>
+
+          <th><%= order.order_total %></th>
+
+          <% if(order.pickup_time === "0") { %>
+
+          <th>
+            <div id="ex1" class="modal">
+              <p>Please enter the estimated time for the order in minutes :</p>
+
+              <div class="modal-flex">
+               
+                <form>
+                  <input type="text" />
+                </form>
+                <button type="button" class="btn btn-outline-dark">
+                        <i class="fa fa-check-circle"></i>
+                      </button>
+              </div>
+            </div>
+
+            <p><a href="#ex1" rel="modal:open">Enter time</a></p>
+          </th>
+          <% } else { %>
+
+          <th><%= order.pickup_time %></th>
+
+          <% } %>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+
+    <!-- <table class="Past-orders">
+        <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Ordered at</th>
+            <th>Toal</th>
+            <th>Pickup Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </tbody>
+    </table> -->
+  </body>
+</html>

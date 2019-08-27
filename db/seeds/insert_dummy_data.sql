@@ -36,9 +36,11 @@ VALUES
 INSERT INTO orders
     (customer_id, restaurant_id, created_at, pickup_time, order_total )
 VALUES
-    (1, 1, 1566665736504, 1566665736504, 53),
-    (1, 1, 1566665736504, 1566665736504, 53),
-    (2, 2, 1566665736504, 1566665736504, 53);
+    (1, 1, 1566665736504, 0 , 53),
+    (2, 1, 1566669736504, 1566665936504, 54),
+    (2, 1, 1566669756504, 1566665936504, 54),
+    (1, 1, 1566669666504, 1566665936504, 54),
+    (2, 2, 1566665556504, 1566665736504, 53);
 
 INSERT INTO items
     (name, price, description, thumb_nail_url, restaurant_id )
@@ -54,7 +56,7 @@ VALUES
 INSERT INTO ratings
     (customer_id, restaurant_id, rating)
 VALUES
-    (1, 1, 4)
-    (2, 1, 5)
-    (2, 2, 3)
-    (1, 2, 1)
+    (1, 1, 4),
+    (2, 1, 5),
+    (2, 2, 3),
+    (1, 2, 1);

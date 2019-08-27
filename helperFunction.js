@@ -19,3 +19,11 @@
 //     })
 //     .catch(err => err);
 // };
+
+const moment = require("moment");
+
+const momentFunction = function(milliseconds) {
+  return moment(milliseconds).format();
+};
+
+module.exports = momentFunction;
