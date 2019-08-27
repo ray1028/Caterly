@@ -28,12 +28,8 @@ module.exports = db => {
           .then(data => {
             if (data.rowCount === 0) {
               res.send("error");
-              // console.log("DNE");
             } else {
               templateVars.restaurants = data.rows;
-              // console.log(data.rows);
-              // res.json({ restaurants });
-              // console.log(templateVars);
               res.render("categories", templateVars);
             }
           })

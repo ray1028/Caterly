@@ -6,13 +6,12 @@ $(() => {
     for (user of users) {
       $("<div>")
         .text(user.name)
-        .appendTo($("body"));
+        .appendTo($("bod"));
     }
   });
 });
 
 const clickToAdd = () => {
-
   $(".menu-item").click(function() {
     $("#myModal").modal("toggle");
 
@@ -27,6 +26,12 @@ const clickToAdd = () => {
       .data("id");
 
     $("#cart-item").data("id", id);
+
+    let restoId = $(this)
+      .children(".menu-item-2")
+      .data("resto-id");
+
+    $("#cart-item").data("restoId", restoId);
 
     $("#cart-description").html(
       $(this)
@@ -52,9 +57,12 @@ const cartAdd = () => {
 
     orderObj = {
       id: $("#cart-item").data("id"),
-      quantity: currentVal
+      restoId: $("#cart-item").data("restoId"),
+      name: $("#cart-item").html(),
+      description: $("#cart-description").html(),
+      quantity: currentVal,
+      price: currentPrice
     };
-
   });
 };
 
@@ -67,7 +75,11 @@ const cartMinus = () => {
 
     orderObj = {
       id: $("#cart-item").data("id"),
-      quantity: currentVal
+      restoId: $("#cart-item").data("restoId"),
+      name: $("#cart-item").html(),
+      description: $("#cart-description").html(),
+      quantity: currentVal,
+      price: currentPrice
     };
   });
 };
@@ -86,24 +98,56 @@ const addItemToCart = () => {
   });
 
   $("#add-item").click(function() {
-
     let cartStorage = JSON.parse(localStorage.getItem("cart"));
-
+    //  need to check orderobj if its null. not added yet
     if (!cartStorage) {
       const tempArr = [];
       tempArr.push(orderObj);
       localStorage.setItem("cart", JSON.stringify(tempArr));
     } else {
-      const found = cartStorage.find(ele => ele.id === orderObj.id);
+      const found = cartStorage.find(
+        ele => ele.id === orderObj.id && ele.restoId === orderObj.restoId
+      );
       if (found) {
         found.quantity += orderObj.quantity;
-        localStorage.setItem('cart', JSON.stringify(cartStorage));
+        // found.total += orderObj.total;
+        localStorage.setItem("cart", JSON.stringify(cartStorage));
       } else {
         cartStorage.push(orderObj);
-        localStorage.setItem('cart', JSON.stringify(cartStorage));
+        localStorage.setItem("cart", JSON.stringify(cartStorage));
       }
     }
+    $('#myModal').modal('hide');
+  });
+};
 
+const checkOutCart = () => {
+  $("#checkout-btn").click(function() {
+    $.ajax({
+      type: "GET",
+      url: "/checkout",
+      data: JSON.parse(localStorage.getItem("cart")),
+      success: function(data) {
+        window.location.href = "/checkout";
+      }
+    });
+  });
+};
+
+const confirmCart = () => {
+  $("#confirm-order-btn").click(function() {
+    $.ajax({
+      type: "POST",
+      url: "/checkout",
+      data: { items: localStorage.getItem('cart') },
+      success: function(data) {
+        console.log("successfully posted data");
+        localStorage.removeItem('cart');
+      },
+      error: function(jqXHR, textStatus, err) {
+        console.log("text status " + textStatus + ", err " + err);
+      }
+    });
   });
 };
 
@@ -114,6 +158,8 @@ const mainProgram = () => {
   cartMinus();
   clearCartByClosingModal();
   addItemToCart();
+  checkOutCart();
+  confirmCart();
 };
 
 // const accountSid = "AC4424661674dfe2bf1d3db506ea2547f4";
@@ -136,16 +182,17 @@ $(document).ready(function() {
 
   $(".restaurant-confirm").on("click", function() {
     alert("hi");
+    $.get("views/checkout.ejs", function(data, status) {
+      alert("**inajax");
+    });
   });
 
-  $("#categories-container-main a").on("click", (e) => {
+  $("#categories-container-main a").on("click", e => {
     e.preventDefault();
     let x = $(this.activeElement)[0];
-    let y = $(x).attr('data-id');
+    let y = $(x).attr("data-id");
 
-    $(".side-content-container")
-      .css("visibility", "hidden");
-    $(`#${y}`)
-      .css("visibility", "visible");
+    $(".side-content-container").css("visibility", "hidden");
+    $(`#${y}`).css("visibility", "visible");
   });
 });

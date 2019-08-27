@@ -1,0 +1,19 @@
+.main-container{
+  width:80%;
+  margin:auto;
+
+  .checkout-list-item{
+    padding: 10px 0;
+    letter-spacing: 1.5px;
+    display:flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  // .checkout-button{
+  //   display:flex;
+  //   flex-direction: row;
+  //   justify-content: flex-end;
+  // }
+}

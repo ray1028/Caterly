@@ -1,0 +1,79 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/scripts/data-helper.js"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Meta Information -->
+    <title>Home Page</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
+    <link
+      rel="stylesheet"
+      href="/styles/07_checkout_layout.css"
+      type="text/css"
+    />
+    <link
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    rel="stylesheet" ">
+
+    <!-- External JS -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+
+    <!-- App JS -->
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
+
+  <body>
+    <div class="main-container">
+      <header>
+        <h1>Order Summary</h1>
+      </header>
+
+      <section class="checkout-list-container"></section>
+
+      <br /><br />
+
+      <div class="table-container">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Subtotal</td>
+              <td id="checkout-total"></td>
+            </tr>
+            <tr>
+              <td>HST</td>
+              <td>13%</td>
+            </tr>
+            <tr>
+              <td>Total</td>
+              <td id="checkout-final-total"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="checkout-button">
+        <button id="confirm-order-btn" class="btn btn-success" type="submit">Confirm</button>
+      </div>
+    </div>
+  </body>
+</html>
