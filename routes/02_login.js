@@ -25,11 +25,10 @@ module.exports = db => {
       if (customer.rowCount !== 1) throw new Error('customer not found')
       else {
         req.session.user_id = customer.rows[0].id;
-        res.cookie('cart', {user_id: customer.rows[0].id} ,{
-          httpOnly: false,
-          encode: String
-        });
-
+        // res.cookie('cart', {user_id: customer.rows[0].id} ,{
+        //   httpOnly: false,
+        //   encode: String
+        // });
         res.status(302).redirect('/home');
       }
     } catch (err) {

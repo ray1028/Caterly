@@ -22,7 +22,7 @@ body{
     flex-flow: row wrap;
     justify-content: center;
 
-    article:hover{
+    article.menu-item:hover{
       color: #ffb84d;
     }
 
@@ -59,4 +59,35 @@ body{
       }
     }
   }
+
+  .modal-body
+  table
+  tr
+  th{
+    text-align: left;
+  }
+
+  .modal-body
+  table
+  tr
+  td{
+    text-align: left;
+  }
+
+  #cart-quantit{
+    width: 100%;
+    margin:auto;
+    text-align: center;
+  }
+
+  #cart-quantity-box{
+    width:20px;
+  }
+
+  .modal-footer{
+    display:flex;
+    flex-flow: row-reverse nowrap;
+    justify-content: space-between;
+  }
+
 }
