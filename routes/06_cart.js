@@ -15,8 +15,6 @@ module.exports = db => {
           restaurantname: data.rows[0].restaurantname
         };
 
-        // const customers = data.rows;
-        console.log(templateVars);
         res.render("cart", templateVars);
       })
       .catch(err => {

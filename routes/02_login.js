@@ -2,6 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = db => {
+  router.get("/restaurant", (req, res) => {
+    const templateVars = {
+      error: false,
+      user: undefined
+    };
+    res.render("login-restaurant", templateVars);
+  });
+
   router.get("/", (req, res) => {
     const templateVars = {
       error: false,
@@ -25,11 +33,10 @@ module.exports = db => {
       if (customer.rowCount !== 1) throw new Error('customer not found')
       else {
         req.session.user_id = customer.rows[0].id;
-        res.cookie('cart', {user_id: customer.rows[0].id} ,{
-          httpOnly: false,
-          encode: String
-        });
-
+        // res.cookie('cart', {user_id: customer.rows[0].id} ,{
+        //   httpOnly: false,
+        //   encode: String
+        // });
         res.status(302).redirect('/home');
       }
     } catch (err) {

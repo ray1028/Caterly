@@ -4,8 +4,8 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    //HARDCODED USERNAME FOR TESTING
-    res.render("index", {user: undefined});
+    if(req.session.user_id) res.status(302).redirect('home');
+    else res.render("index", {user: undefined});
   });
 
   return router;

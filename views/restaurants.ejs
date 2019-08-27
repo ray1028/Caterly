@@ -36,7 +36,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script> -->
     <!--  -->
 
     <!-- font awesome -->
@@ -49,16 +49,11 @@
       <section class="items-container">
         <!-- for each get the items -->
         <%for(let item of items){ %>
+
         <article class="menu-item">
-          <div class="menu-item-1">
-            <%=item.name%>
-          </div>
-          <div class="menu-item-2">
-            <span>$<%=item.price%></span>
-          </div>
-          <div class="menu-item-3">
-            <%=item.description%>
-          </div>
+          <div class="menu-item-1" data-id="<%=item.id%>"><%=item.name%></div>
+          <div class="menu-item-2">$<%=item.price%></div>
+          <div class="menu-item-3"><%=item.description%></div>
         </article>
         <% }%>
       </section>
@@ -78,16 +73,41 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <ul class="list-group">
-              <li class="list-group-item">item 1</li>
-
-            </ul>
+            <table class="table">
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Description</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+              <tr>
+                <td scope="col" id="cart-item">item</td>
+                <td scope="col" id="cart-description">description</td>
+                <td scope="col" id="cart-quantity">
+                  <button class="plus-btn" type="button" name="button">
+                    <i class="fas fa-plus-square"></i>
+                  </button>
+                  <input
+                    id="cart-quantity-box"
+                    type="text"
+                    name="name"
+                    value="1"
+                  />
+                  <button class="minus-btn" type="button" name="button">
+                    <i class="fas fa-minus-square"></i>
+                  </button>
+                </td>
+                <td scope="col" id="cart-total"></td>
+              </tr>
+            </table>
           </div>
 
           <!-- Modal footer -->
           <div class="modal-footer">
-            <form action="POST" method="">
-              <button type="submit" class="btn btn-success">Checkout</button>
+            <form id="addtocart" action="" method="">
+              <button id="add-item" type="submit" class="btn btn-success">
+                Add To Cart
+              </button>
             </form>
             <button type="button" class="btn btn-danger" data-dismiss="modal">
               Close
