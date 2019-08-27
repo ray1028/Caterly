@@ -1,15 +1,20 @@
-<!-- TAKE IN VARIABLES -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
 
     <!-- Meta Information -->
     <title>Home Page</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
 
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
@@ -18,16 +23,20 @@
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
-
   </head>
 
   <body>
-
     <nav>
       <% include partials/_header %>
     </nav>
@@ -36,19 +45,35 @@
         <header>
           <h2>MY_ORDERS</h2>
         </header>
-        <table>
-        <th>my_orders</th>
-        <tr>
-          <td>1</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>3</td>
-        </tr>
+
+        <table class="my-orders">
+          <thead>
+            <tr>
+              <th>Restaurant Name</th>
+              <th>Ordered at</th>
+              <th>Order</th>
+              <th>Total</th>
+              <th>Pickup Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <% for (order of orders) { %>
+              <th><%= order.name %></th>
+              <th class="date-value"><%= formatDate(order.created_at) %></th>
+              <th>
+                <table></table>
+                placeholder
+              </th>
+
+              <th>$ <%= order.order_total.toFixed(2) %></th>
+
+              <th><%= formatDate(order.pickup_time) %></th>
+            </tr>
+            <% } %>
+          </tbody>
         </table>
       </div>
     </content>
-
   </body>
-
 </html>
