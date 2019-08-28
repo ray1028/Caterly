@@ -66,7 +66,7 @@
             </div>
           </div>
         </form>
-        <!-- <img src="img/arrowdownthick.svg" width='60px' height='60px'class="button-down"> -->
+        <img src="img/arrowdownthin.svg" width='60px' height='60px'class="button-down">
 <!-- 
         <button type="submit" class="categories-button btn btn-outline-dark">
           Give me a suggestion!
@@ -74,10 +74,10 @@
       </div>
     </section>
 
-    <h2 class="top-categories">Explore Top Categories</h2>
+    <!-- <h2 class="top-categories">Explore Top Categories</h2> -->
 
     <section id="categories-page">
-        <div class="categories-box">
+      <div class="categories-box">
     <% for (let category of categories) { %>
 
         <div class="category" id="<%= category.name%>">
@@ -88,17 +88,15 @@
           >
          <!-- <img class="category-image" src= "<%= category.thumbnail_image%>"> -->
          <div>
-            <button type="submit" class="category category-btn btn btn-outline-dark">
-            
-            <img class="category-image" src= "<%= category.thumbnail_image%>">
-            
-            <h3 class="category-name"> 
-              <%= category.name%>
-            </h3> 
-            <div class="category-count">
-              <%= category.count%> Restaurants
+            <div class="img-wrapper">
+              <a href="/categories/<%= category.name%>">
+                <img class="category-image" src= "<%= category.thumbnail_image%>">  
+                <div id="text">
+                  <%= category.name%>
+                </div>     
+                <i class="fa fa-arrow-right" style="font-size: 30px"></i>
+              </a>
             </div>
-            </button>
 
           </div>
           </form>

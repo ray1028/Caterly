@@ -86,9 +86,9 @@ module.exports = db => {
 
     db.query(updateQuery, updateQueryValue);
     let phoneQuery = `SELECT phone from customers JOIN orders ON customers.id = customer_id WHERE orders.id = 1;`;
-    db.query(phoneQuery).then(data => {
-      sendMSG(textMSG(req.body.time), data.rows[0].phone);
-    });
+    // db.query(phoneQuery).then(data => {
+    //   sendMSG(textMSG(req.body.time), data.rows[0].phone);
+    // });
 
     res.redirect("/home/restaurants/1");
   });
