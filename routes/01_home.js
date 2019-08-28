@@ -6,7 +6,7 @@ const client = require("twilio")(accountSid, authToken);
 const strftime = require("strftime");
 
 const formatDate = function(epoch) {
-  return strftime("%F %T", new Date(parseInt(epoch)));
+  return strftime("%b %D %T", new Date(parseInt(epoch)));
 };
 
 module.exports = db => {
@@ -22,12 +22,8 @@ module.exports = db => {
     // SELECT categories.name as name, categories.thumbnail_image as thumbnail_image, count(restaurants) FROM categories JOIN restaurants ON categories.id = category_id
     // GROUP BY categories.name, categories.thumbnail_image;
 
-    // let values = req.session.user_id;
-    let values = [1];
-
     try {
-      // console.log(req, "req");
-
+      let values = [req.session.user_id];
       const userRes = await db.query(queryStrCustomer, values);
       const categoriesRes = await db.query(queryStrCategories);
 
@@ -62,42 +58,72 @@ module.exports = db => {
 
   //The get route for the login of the restaurant, this page will show all of the current and old orders
   router.get("/restaurants/:id", (req, res) => {
-    const queryOrders = `SELECT restaurant_id, pickup_time , restaurants.name as name, order_total , customers.first_name as customers_name, created_at FROM restaurants JOIN orders on restaurants.id = restaurant_id 
+    let orders = [];
+    let promqueries = [];
+    let templateVars = {};
+
+    const queryStrHeader = `
+    SELECT name FROM restaurants
+      WHERE id = $1
+    `;
+    const values = [req.session.user_id];
+
+    db.query(queryStrHeader, values).then(data => {
+      templateVars.user = `${data.rows[0].name}`;
+
+      const queryOrders = `SELECT restaurant_id, pickup_time , restaurants.name as name, order_total , customers.first_name as customers_name, orders.id as orderid, created_at FROM restaurants JOIN orders on restaurants.id = restaurant_id
     JOIN customers on customers.id = customer_id WHERE
     restaurant_id = $1`;
+      const queryOrdersValue = [`${req.params.id}`];
 
-    const queryOrdersValue = [`${req.params.id}`];
+      db.query(queryOrders, queryOrdersValue).then(data => {
+        if (data.rowCount === 0) {
+          res.send("error");
+          console.log("DNE");
+        }
 
-    db.query(queryOrders, queryOrdersValue).then(data => {
-      if (data.rowCount === 0) {
-        res.send("error");
-        console.log("DNE");
-      } else {
-        const templateVars = { orders: data.rows, formatDate: formatDate };
-        res.render(`restaurants_home`, templateVars);
-      }
+        orders = data.rows;
+        const queries = orders.map(order => {
+          const newQuery = ` SELECT * FROM orders_items WHERE order_id = ${order.orderid} `;
+          return db.query(newQuery);
+        });
+
+        Promise.all(queries).then(values => {
+          values.forEach(value => {
+            orders.forEach(order => {
+              console.log(value, order);
+            });
+            templateVars.orders = orders;
+            templateVars.formatDate = formatDate;
+            res.render(`restaurants_home`, templateVars);
+          });
+        });
+      });
     });
   });
+  // .then(res => {
+  //   orders.forEach(order => {
+  //     // if(order.orderid === )
+  //     console.log(promqueries, "hi");
+  //     // console.log(order.orderid, "end of this order");
+  //   });
+
+  //       const templateVars = { orders: orders, formatDate: formatDate };
+  //       res.render(`restaurants_home`, templateVars);
+  //     });
+  // });
 
   //POST route to update the confirm time and send back a text message to the client
   router.post("/restaurants/:id", (req, res) => {
-    let updateQuery = `    UPDATE orders SET pickup_time = $1 WHERE orders.id = $2;`;
-    let updateQueryValue = [
-      Date.now() + req.body.time * 60000,
-      req.params.id
-    ];
+    let updateQuery = `UPDATE orders SET pickup_time = $1 WHERE orders.id = $2;`;
+    let updateQueryValue = [Date.now() + req.body.time * 60000, req.params.id];
 
     db.query(updateQuery, updateQueryValue);
     let phoneQuery = `SELECT phone FROM customers JOIN orders ON customers.id = customer_id WHERE orders.id = $1;`;
 
-console.log(req.params.id);
-
-//home.js
-
     db.query(phoneQuery, [req.params.id]).then(data => {
-      // sendMSG(textMSG(req.body.time), data.rows[0].phone);
+      sendMSG(textMSG(req.body.time), data.rows[0].phone);
     });
-
 
     res.redirect(`/home/restaurants/${req.params.id}`);
   });
