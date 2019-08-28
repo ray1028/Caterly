@@ -42,6 +42,16 @@ const clickToAdd = () => {
     currentPrice = $(".menu-item-2").html();
     currentPrice = (Number(currentPrice.slice(1)) / 1000).toFixed(2);
     $("#cart-total").html("$" + currentPrice);
+
+    // initializing object for the first time when a user click on
+    orderObj = {
+      id: $("#cart-item").data("id"),
+      restoId: $("#cart-item").data("restoId"),
+      name: $("#cart-item").html(),
+      description: $("#cart-description").html(),
+      quantity: 1,
+      price: currentPrice
+    };
   });
 };
 
@@ -63,13 +73,16 @@ const cartAdd = () => {
       quantity: currentVal,
       price: currentPrice
     };
+
+    console.log(orderObj);
+
   });
 };
 
 const cartMinus = () => {
   currentVal = $("#cart-quantity-box").val();
   $(".minus-btn").click(function() {
-    if (currentVal > 0) --currentVal;
+    if (currentVal > 1) --currentVal;
     $("#cart-quantity-box").val(currentVal);
     $("#cart-total").html("$" + (currentVal * currentPrice).toFixed(2));
 
@@ -88,6 +101,7 @@ const clearCartByClosingModal = () =>
   $("#myModal").on("hidden.bs.modal", function() {
     currentVal = 0;
     currentPrice = 0;
+    orderObj = {};
     $("#cart-quantity-box").val(0);
     $("#cart-total").html("$" + 0.0);
   });
@@ -163,19 +177,6 @@ const addItemToCart = () => {
 
   });
 };
-
-// const checkOutCart = () => {
-//   $("#checkout-btn").click(function() {
-//     $.ajax({
-//       type: "GET",
-//       url: "/checkout",
-//       data: JSON.parse(localStorage.getItem("cart")),
-//       success: function(data) {
-//         window.location.href = "/checkout";
-//       }
-//     });
-//   });
-// };
 
 const confirmCart = () => {
   $("#checkout-btn").click(function(e) {
