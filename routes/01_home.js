@@ -80,17 +80,21 @@ module.exports = db => {
   });
 
   //POST route to update the confirm time and send back a text message to the client
-  router.post("/restaurants/1", (req, res) => {
-    let updateQuery = `    UPDATE orders SET pickup_time = $1 WHERE orders.id = 1;`;
-    let updateQueryValue = [Date.now() + req.body.time * 60000];
+  router.post("/restaurants/:id", (req, res) => {
+    let updateQuery = `    UPDATE orders SET pickup_time = $1 WHERE orders.id = $2;`;
+    let updateQueryValue = [
+      Date.now() + req.body.time * 60000,
+      `${req.params.id}`
+    ];
 
     db.query(updateQuery, updateQueryValue);
-    let phoneQuery = `SELECT phone from customers JOIN orders ON customers.id = customer_id WHERE orders.id = 1;`;
-    db.query(phoneQuery).then(data => {
+    let phoneQuery = `SELECT phone from customers JOIN orders ON customers.id = customer_id WHERE orders.id = $1;`;
+
+    db.query(phoneQuery, `${req.params.id}`).then(data => {
       sendMSG(textMSG(req.body.time), data.rows[0].phone);
     });
 
-    res.redirect("/home/restaurants/1");
+    res.redirect("/home/restaurants/:id");
   });
 
   //Helper functions
