@@ -4,6 +4,18 @@ const router = express.Router();
 module.exports = db => {
   router.get("/:id", (req, res) => {
     let templateVars = {};
+    let queryStrCustomer = "SELECT * FROM customers WHERE id = $1";
+    let values = [req.session.user_id];
+    db.query(queryStrCustomer, values)
+      .then(data => {
+        if (data.rowCount === 1) {
+          templateVars.user = data.rows[0].first_name;
+        }
+      })
+      .catch(err => res.send.json(err));
+
+
+    //
     if (!req.params.id) {
       res.status(302).redirect("/home");
     } else {
@@ -24,7 +36,7 @@ module.exports = db => {
                   throw new Error("menu item not found");
                 } else {
                   templateVars.items = itemsData.rows;
-                  res.status(200).render("restaurants", templateVars);
+                    res.status(200).render("restaurants", templateVars);
                 }
               })
               .catch(err => console.log(`Error occurs finding items - ${err}`));

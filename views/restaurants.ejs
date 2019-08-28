@@ -41,83 +41,123 @@
 
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/b9ac4525c6.js"></script>
+
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Single+Day&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&display=swap" rel="stylesheet">
+
+        <!-- helper function -->
+        <script type="text/javascript" src="/scripts/data-helper.js"></script>
+
   </head>
 
   <body>
+    <nav>
+      <% include partials/_header %>
+      <!-- <a>Navbar</a> -->
+    </nav>
+
     <div class="restaurant-container">
-      <header><img src=<%=restaurant.image_url%> alt="resto"></header>
-      <section class="items-container">
-        <!-- for each get the items -->
+      <div class="restaurant-menu">
+        <header class="restaurant-banner" style="background-image: url(<%=restaurant.image_url%>)">
+          <h1 class="restaurant-banner-title"><%=restaurant.name%></h1>
+        </header>
+        <br>
         <%for(let item of items){ %>
-
         <article class="menu-item">
-          <div class="menu-item-1" data-id="<%=item.id%>"><%=item.name%></div>
-          <div class="menu-item-2" data-resto-id="<%=restaurant.id%>">$<%=item.price%></div>
-          <div class="menu-item-3"><%=item.description%></div>
+            <div class="menu-item-1" data-id="<%=item.id%>"><%=item.name%></div>
+            <div class="menu-item-2" data-resto-id="<%=restaurant.id%>">$<%=item.price%></div>
+            <div class="menu-item-3"><%=item.description%></div>
         </article>
-        <% }%>
-      </section>
-    </div>
+        <hr>
+          <% }%>
+      </div>
+      <div class="restaurant-checkout">
+        <div class="restaurant-checkout-main">
+          <div class="restaurant-checkout-main-wrapper">
+            <header>
+                <div class="restaurant-checkout-title">
+                  <h4>Your Order Summary</h4>
+                  <p>Do you want some S.curvy?</p>
+                </div>
+            </header>
+            <br>
 
-    <!-- The Modal -->
-    <div class="modal" id="myModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Order Summary</h4>
-            <button type="button" class="close" data-dismiss="modal">
-              &times;
-            </button>
-          </div>
+            <article id="restaurant-checkout-items">
+            </article>
 
-          <!-- Modal body -->
-          <div class="modal-body">
-            <table class="table">
-              <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Description</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
-              </tr>
-              <tr>
-                <td scope="col" id="cart-item">item</td>
-                <td scope="col" id="cart-description">description</td>
-                <td scope="col" id="cart-quantity">
-                  <button class="minus-btn" type="button" name="button">
-                    <i class="fas fa-minus-square"></i>
-                  </button>
-                  <input
-                    id="cart-quantity-box"
-                    type="text"
-                    name="name"
-                    value="1"
-                  />
-                  <button class="plus-btn" type="button" name="button">
-                    <i class="fas fa-plus-square"></i>
-                  </button>
+            <br>
 
-                </td>
-                <td scope="col" id="cart-total"></td>
-              </tr>
-            </table>
-          </div>
-
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <form id="addtocart" action="" method="">
-              <button id="add-item" type="submit" class="btn btn-success">
-                Add To Cart
-              </button>
-            </form>
+            <div class="restaurant-checkout-cart">
+              <div class="restaurant-checkout-cart-subtotal"><p>Subtotal</p><p class="restaurant-checkout-cart-subtotal-box"></p></div>
+              <div class="restaurant-checkout-cart-tax"><p>Tax</p><p class="restaurant-checkout-cart-tax-box"></p></div>
+              <div class="restaurant-checkout-cart-total"><p>Total</p><p class="restaurant-checkout-cart-total-box"></p></div>
+            </div>
             <form id="checkout" action="/checkout" method="POST">
-              <button id="checkout-btn" type="submit" class="btn btn-primary" >
+              <button id="checkout-btn" type="submit" class="btn btn-success" >
                 Checkout
               </button>
             </form>
+
           </div>
         </div>
       </div>
     </div>
+
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Order Summary</h4>
+                  <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                  </button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <table class="table">
+                    <tr>
+                      <th scope="col">Item</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Total</th>
+                    </tr>
+                    <tr>
+                      <td scope="col" id="cart-item">item</td>
+                      <td scope="col" id="cart-description">description</td>
+                      <td scope="col" id="cart-quantity">
+                        <button class="minus-btn" type="button" name="button">
+                          <i class="fas fa-minus-square"></i>
+                        </button>
+                        <input
+                          id="cart-quantity-box"
+                          style="width:15px"
+                          type="text"
+                          name="name"
+                          value="1"
+                        />
+                        <button class="plus-btn" type="button" name="button">
+                          <i class="fas fa-plus-square"></i>
+                        </button>
+
+                      </td>
+                      <td scope="col" id="cart-total"></td>
+                    </tr>
+                  </table>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <form id="addtocart" action="" method="">
+                    <button id="add-item" type="submit" class="btn btn-primary">
+                      Add To Cart
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
   </body>
 </html>

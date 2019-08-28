@@ -92,6 +92,14 @@ const clearCartByClosingModal = () =>
     $("#cart-total").html("$" + 0.0);
   });
 
+const calculateTotal = dataObj => {
+  let total = 0;
+  dataObj.forEach(item => {
+    total+= item.quantity * Number(item.price);
+  })
+  return total;
+};
+
 const addItemToCart = () => {
   $("#addtocart").submit(e => {
     e.preventDefault();
@@ -104,6 +112,15 @@ const addItemToCart = () => {
       const tempArr = [];
       tempArr.push(orderObj);
       localStorage.setItem("cart", JSON.stringify(tempArr));
+      $("#restaurant-checkout-items").append(
+        `<article class="checkout-list">
+          <div class="checkout-list-item">
+            <div><span id="list-item-${orderObj.id}" class="checkout-list-item-quantity">${orderObj.quantity}</span> x ${orderObj.name}</div>
+            <div>$${orderObj.price}</div>
+          </div>
+          <div>${orderObj.description}</div>
+        </article>`
+      );
     } else {
       const found = cartStorage.find(
         ele => ele.id === orderObj.id && ele.restoId === orderObj.restoId
@@ -111,37 +128,66 @@ const addItemToCart = () => {
       if (found) {
         found.quantity += orderObj.quantity;
         localStorage.setItem("cart", JSON.stringify(cartStorage));
+        let updatedItemHtml = $("#list-item-" + orderObj.id);
+        let currentQuantity = updatedItemHtml.html();
+        updatedItemHtml.html(
+          Number(currentQuantity) + Number(orderObj.quantity)
+        );
       } else {
         cartStorage.push(orderObj);
         localStorage.setItem("cart", JSON.stringify(cartStorage));
+
+        $("#restaurant-checkout-items").append(
+          `<article class="checkout-list">
+            <div class="checkout-list-item">
+              <div><span id="list-item-${orderObj.id}" class="checkout-list-item-quantity">${orderObj.quantity}</span> x ${orderObj.name}</div>
+              <div>$${orderObj.price}</div>
+            </div>
+            <div>${orderObj.description}</div>
+          </article>`
+        );
       }
     }
-    $('#myModal').modal('hide');
+    let updatedCart = JSON.parse(localStorage.getItem("cart"));
+    let total = calculateTotal(updatedCart);
+    total = total.toFixed(2);
+    let tax = (total * 0.13).toFixed(2);
+    let totAfterTax = Number(total) + Number(tax);
+    totAfterTax = totAfterTax.toFixed(2);
+
+    $(".restaurant-checkout-cart-subtotal-box").html(total);
+    $(".restaurant-checkout-cart-tax-box").html(tax);
+    $(".restaurant-checkout-cart-total-box").html(totAfterTax);
+
+    $("#myModal").modal("hide");
+
   });
 };
 
-const checkOutCart = () => {
-  $("#checkout-btn").click(function() {
-    $.ajax({
-      type: "GET",
-      url: "/checkout",
-      data: JSON.parse(localStorage.getItem("cart")),
-      success: function(data) {
-        window.location.href = "/checkout";
-      }
-    });
-  });
-};
+// const checkOutCart = () => {
+//   $("#checkout-btn").click(function() {
+//     $.ajax({
+//       type: "GET",
+//       url: "/checkout",
+//       data: JSON.parse(localStorage.getItem("cart")),
+//       success: function(data) {
+//         window.location.href = "/checkout";
+//       }
+//     });
+//   });
+// };
 
 const confirmCart = () => {
-  $("#confirm-order-btn").click(function() {
+  $("#checkout-btn").click(function(e) {
+    e.preventDefault();
+    alert('im in here');
     $.ajax({
       type: "POST",
       url: "/checkout",
-      data: { items: localStorage.getItem('cart') },
+      data: { items: localStorage.getItem("cart") },
       success: function(data) {
         console.log("successfully posted data");
-        localStorage.removeItem('cart');
+        localStorage.removeItem("cart");
       },
       error: function(jqXHR, textStatus, err) {
         console.log("text status " + textStatus + ", err " + err);
@@ -157,7 +203,6 @@ const mainProgram = () => {
   cartMinus();
   clearCartByClosingModal();
   addItemToCart();
-  checkOutCart();
   confirmCart();
 };
 
@@ -169,18 +214,16 @@ $(document).ready(function() {
   $(".restaurant-confirm").on("click", function(event) {
     event.preventDefault;
 
-      $.ajax({
-        method: "POST",
-        url: "/home/restaurants/1",
-        data: { time: $("#time").val() },
-        success: function() {
-          $(".estimated-time").text(time.value);
-          // console.log('success');
-        },
-        error: function() {
-          alert("An AJAX error has occured");
-        }
-      
+    $.ajax({
+      method: "POST",
+      url: "/home/restaurants/1",
+      data: { time: $("#time").val() },
+      success: function() {
+        $(".estimated-time").text(time.value);
+      },
+      error: function() {
+        alert("An AJAX error has occured");
+      }
     });
   });
 
@@ -197,98 +240,21 @@ $(document).ready(function() {
   });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $(document).ready(() => {
   $(".img-wrapper").hover(function() {
-    $(this).find(".fa-arrow-right").css("visibility","visible");
+    $(this)
+      .find(".fa-arrow-right")
+      .css("visibility", "visible");
     // const x = $(this).find(".fa-arrow-right");
     // console.log(x);
   });
   $(".img-wrapper").mouseleave(function() {
-    $(this).find(".fa-arrow-right").css("visibility","hidden");
-    console.log("out");
+    $(this)
+      .find(".fa-arrow-right")
+      .css("visibility", "hidden");
   });
 
   $(".button-down").click(function() {
-    $('html').animate({scrollTop:$(document).height()}, 'slow');
+    $("html").animate({ scrollTop: $(document).height() }, "slow");
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
