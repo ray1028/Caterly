@@ -195,3 +195,99 @@ $(document).ready(function() {
     $(`#${y}`).css("visibility", "visible");
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(document).ready(() => {
+  $(".img-wrapper").hover(function() {
+    $(this).find(".fa-arrow-right").css("visibility","visible");
+    // const x = $(this).find(".fa-arrow-right");
+    // console.log(x);
+  });
+  $(".img-wrapper").mouseleave(function() {
+    $(this).find(".fa-arrow-right").css("visibility","hidden");
+    console.log("out");
+  });
+
+  $(".button-down").click(function() {
+    $('html').animate({scrollTop:$(document).height()}, 'slow');
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+

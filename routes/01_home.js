@@ -94,6 +94,7 @@ module.exports = db => {
       sendMSG(textMSG(req.body.time), data.rows[0].phone);
     });
 
+
     res.redirect("/home/restaurants/:id");
   });
 
