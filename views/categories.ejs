@@ -39,7 +39,8 @@
           <!-- <h2>Categories: <%=restaurants[0].category%></h2> -->
         </header>
         <% restaurants.forEach(restaurant => { %>
-          <a class='a<%=restaurant.restaurant_id%>' data-id='a<%=restaurant.restaurant_id%>' href="../restaurants/<%=restaurant.name%>">
+          <a class='a<%=restaurant.restaurant_id%>' data-id='a<%=restaurant.restaurant_id%>' href="../restaurants/<%=restaurant.name%>" id='img-container'>
+            <img src="<%=restaurant.image_url%>">
             <h3><%=(restaurant.name).toUpperCase()%></h3>
           </a>
         <% }) %>
@@ -50,7 +51,7 @@
       <div class="side-content">
         <div id='a<%=restaurant.restaurant_id%>' class='side-content-container'>
           <div id="side-content-header">
-            
+            <img src="<%=restaurant.image_url%>">
           </div>
           <div id="side-content-title">
             <h2><%=(restaurant.name).toUpperCase()%></h2>
@@ -60,6 +61,15 @@
           </div>
           <div id="side-content-rating">
             <%=Math.round(restaurant.rating)%>
+          </div>
+          <form class="side-content-to-menu" action="/restaurants/<%=restaurant.restaurant_id%>" method="GET">
+            <input type="submit" value="MENU">
+          </form>
+          <div id="borderline-top">
+            <br>
+          </div>
+          <div id="borderline-bottom">
+            <br>
           </div>
         </div>
       </div>

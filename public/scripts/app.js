@@ -266,12 +266,12 @@ $(document).ready(function() {
 
 $(document).ready(() => {
   $(".img-wrapper").hover(function() {
-    $(this).find(".fa-arrow-right").css("visibility","visible");
+    $(this).find(".arrow-right").css("visibility","visible");
     // const x = $(this).find(".fa-arrow-right");
     // console.log(x);
   });
   $(".img-wrapper").mouseleave(function() {
-    $(this).find(".fa-arrow-right").css("visibility","hidden");
+    $(this).find(".arrow-right").css("visibility","hidden");
     console.log("out");
   });
 
