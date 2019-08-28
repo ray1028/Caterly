@@ -12,6 +12,7 @@ body {
   background-color: #EEE;
   display: grid;
   grid-template-rows: 5vh 90vh 110vh;
+  font-family: 'Didact Gothic', sans-serif;
 
   nav {
     @include gridspan(1, span 1, 1, span 1);
@@ -26,7 +27,7 @@ body {
     grid-template-columns: 60% 30em 10%;
     position: relative;
     overflow: hidden;
-    
+
     #landing-page-title {
       @include gridspan(2, span 1, 2, span 1);
       font-size: 3em;
@@ -41,7 +42,7 @@ body {
       @include gridspan(2, span 1, 2, span 1);
       border-radius: 20px;
       filter: drop-shadow(8px 9px 9px #A5A5A5);
-    
+
       position: absolute;
       right: 0;
       width: 450px;
@@ -80,13 +81,15 @@ body {
 
         button {
           width: 80%;
-          background-color:#ffb84d;
+          background-color:#DD614A;
           border: none;
           padding: 10px;
           border-radius: 5px;
+          font-size: 1.2em;
+          color: white;
         }
         button:hover {
-          background-color:#ffad33;
+          background-color:#DD614A;
         }
 
       }
@@ -94,13 +97,25 @@ body {
         display: flex;
         justify-content: center;
       }
+
     }
+
+  }
+
+  #background-bar {
+    min-height: 300px;
+    background-color: #DD614A;
+    grid-row: 2 / span 1;
+    grid-column: 1 / span 7;
+    height: 30%;
+    margin-top: 25em;
+    // z-index: 1;
   }
 
   #landing-page-bot {
     @include gridspan(1, span 1, 3, span 1);
     display: grid;
-    background-color: #ffb84d;
+    background-color: #fff;
     grid-template-rows: 20vh 70vh 20vh;
     grid-template-columns: 5% 26.667% 5% 26.667% 5% 26.667% 5%;
 
@@ -114,14 +129,20 @@ body {
         min-height: 15em;
       }
     }
-
     #para1 {
       @include gridspan(2, span 1, 2, span 1);
+    }
+    #para1-img {
+      height: 110px;
     }
 
     #para2 {
       @include gridspan(4, span 1, 2, span 1);
     }
+    #para2-img {
+      height: 150px;
+    }
+
 
     #para3 {
       @include gridspan(6, span 1, 2, span 1);
