@@ -16,7 +16,15 @@ body {
   // background-size: cover;
   width: 100%;
   min-height: 140vh;
+  
+  nav {
+    position: fixed;
+    top:0;
+    z-index: 1;
+    width: 100%;
+  }
 }
+
 
 #search-page {
   position: relative;
@@ -25,7 +33,7 @@ body {
   background: #eee;
   height: 40vh;
   min-height: 95vh;
-  background-image: url("../img/home.jpg");
+  background-image: url("../img/home2_1.jpg");
   background-size: cover;
   h1 {
     position: absolute;

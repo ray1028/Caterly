@@ -278,6 +278,11 @@ $(document).ready(() => {
   $(".button-down").click(function() {
     $('html').animate({scrollTop:$(document).height()}, 'slow');
   });
+
+  $("#landing-page-title").click(function() {
+    $(".register").css("transform", "translate(-1px, 0)");
+    console.log('fire');
+  });
 });
 
 

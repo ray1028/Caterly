@@ -2,8 +2,10 @@
   display: flex;
   justify-content: flex-end;
   background-color: transparent;
+  z-index: 1;
 }
 .header-btn {
+  color: #DD614A;
   border: none;
 }
 .header-btn:hover {

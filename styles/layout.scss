@@ -13,25 +13,43 @@ body {
   display: grid;
   grid-template-rows: 5vh 90vh 110vh;
 
-
   nav {
     @include gridspan(1, span 1, 1, span 1);
   }
 
   #landing-page-top {
-    background-image: url("../img/t1.jpg");
+    background-image: url("../img/t3_1.jpg");
     background-size: cover;
     // background-color: blue;
     @include gridspan(1, span 1, 1, span 2);
     display: grid;
     grid-template-rows: 10vh 70vh 10vh;
     grid-template-columns: 60% 30em 10%;
+    position: relative;
+    overflow: hidden;
+    
+    #landing-page-title {
+      @include gridspan(2, span 1, 2, span 1);
+      font-size: 3em;
+    }
+
+    #landing-page-title:hover {
+      transform: scale(1.05);
+    }
 
     aside {
       background-color: #fff;
       @include gridspan(2, span 1, 2, span 1);
       border-radius: 20px;
       filter: drop-shadow(8px 9px 9px #A5A5A5);
+    
+      position: absolute;
+      right: 0;
+      width: 450px;
+      margin-top: 10vh;
+      margin-right: 0vh;
+      transform: translate(1000px, 0);
+      transition: 1.5s;
 
       div header {
         min-height: 200px;
