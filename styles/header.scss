@@ -2,8 +2,10 @@
   display: flex;
   justify-content: flex-end;
   background-color: transparent;
+  z-index: 1;
 }
 .header-btn {
+  color: #DD614A;
   border: none;
 }
 .header-btn:hover {
@@ -27,6 +29,7 @@
 .other {
   border: none;
   outline: none;
+  color: #DD614A;
   background-color: transparent;
   font-size: 1rem;
   margin: 3px;

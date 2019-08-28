@@ -15,7 +15,7 @@ module.exports = db => {
       .then(data => {
         templateVars.user = `${data.rows[0].first_name}`;
         db.query(
-          `SELECT restaurants.name as name, categories.name as category, restaurants.id as restaurant_id, avg(ratings.rating) as rating
+          `SELECT restaurants.name as name, categories.name as category, restaurants.id as restaurant_id, avg(ratings.rating) as rating, restaurants.image_url
           FROM restaurants
           JOIN categories
           ON category_id = categories.id
