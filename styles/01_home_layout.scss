@@ -12,11 +12,11 @@ body {
   padding: 0;
   height: 100%;
   background: #eee;
-  // background-image: url("../img/t2.jpg");
-  // background-size: cover;
   width: 100%;
   min-height: 140vh;
-  
+  font-family: 'Didact Gothic', sans-serif;
+
+
   nav {
     position: fixed;
     top:0;
@@ -34,7 +34,6 @@ body {
   height: 40vh;
   min-height: 95vh;
   background-image: url(../img/t3_1.jpg);
-  // background-image: url("../img/home2_1.jpg");
   background-size: cover;
   h1 {
     position: absolute;
@@ -108,7 +107,7 @@ body {
   flex-wrap: wrap;
   flex-direction: row;
 }
-// .category { 
+// .category {
 //   div a {
 //     overflow: hidden;
 //     width: 270px;
@@ -138,7 +137,7 @@ body {
   // border-style: solid;
   // border-width: 5px;
   margin: 10px;
-  
+
 }
 #text {
   position: absolute;
@@ -152,7 +151,7 @@ body {
 .category-image:hover{
   transform: scale(1.05);
   transition: all .3s;
-  
+
 }
 .fa-arrow-right {
   position: absolute;

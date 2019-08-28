@@ -1,7 +1,13 @@
 
 <header>
   <link rel="stylesheet" href="../../styles/header.css" type="text/css" />
+
   <nav class="header-nav navbar navbar-light">
+    <a href="/home" id="logo">
+      <img src="https://i.imgur.com/noBTXCe.png">
+      <!-- <img src="./img/logo2.png"> -->
+      <!-- <img src="./img/logo2.png"> -->
+    </a>
     <%if (user) {%>
       <form action="/myorders" method="GET">
         <label class="other" for="username"><%=user%></label>

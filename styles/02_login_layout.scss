@@ -1,4 +1,9 @@
+body {
+  background-image: url("../img/login-web.jpg");
+  background-size: cover;
+}
 #register-container {
+  font-family: 'Didact Gothic', sans-serif;
   display: flex;
   justify-content: center;
   min-height: 93vh;
@@ -42,13 +47,15 @@ aside {
 
     button {
       width: 80%;
-      background-color:#ffb84d;
+      background-color:#DD614A;
       border: none;
       padding: 10px;
       border-radius: 5px;
+      color: white;
+      font-size: 1.4em;
     }
     button:hover {
-      background-color:#ffad33;
+      background-color:#DD614A;
     }
 
   }

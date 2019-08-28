@@ -20,7 +20,7 @@ VALUES
 INSERT INTO restaurants
     (name, location, address, phone, email, password, category_id, image_url, description)
 VALUES
-    ('Aji Sai', '123,123', '123 Bay', '+16478785740', 'ajisai@test.com', '123', '1', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'Aji Sai has been offering fine Japanese dining in Ontario for more than 20  years. We offer the freshest food at a reasonable price.'),
+    ('Aji Sai', '123,123', '123 Bay', '+16478785740', 'ajisai@test.com', '123', '1', 'https://i.imgur.com/of8nmqm.jpg', 'Aji Sai has been offering fine Japanese dining in Ontario for more than 20  years. We offer the freshest food at a reasonable price.'),
     ('Juicy Dumpling', '111,111', '123 Main', '6478888888', '123@test.com', '123', '1', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'Juicy Dumpling is a takeout joint that is revolutionizing the art of quick, cheap, and delicious soup dumplings.'),
     ('Spring Sushi', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '1', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'At Spring Sushi, we thoroughly prepare basic but essential ingredient to provide you with the true Japanese taste.'),
     ('Dumpling House', '111,111', '123 Main', '6478888888', '123@test.com', '123', '1', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'placeholder'),
