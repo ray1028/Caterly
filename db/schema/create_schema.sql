@@ -42,7 +42,8 @@ create table restaurants
   email varchar(255) not null,
   password varchar(255) not null,
   category_id integer references categories(id) on delete cascade,
-  image_url varchar(255) not null
+  image_url varchar(255) not null,
+  description text not null
 );
 
 create table orders
