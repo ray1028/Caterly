@@ -1,15 +1,112 @@
 
-body{
-  width:80%;
-  background: #EEE;
-  justify-content: center;
-  border:2px solid salmon;
-  margin:auto;
-  font-size: 0.7rem;
+// body{
+//   width:75%;
+//   background: #EEE;
+//   justify-content: center;
+//   border:2px solid salmon;
+//   margin:auto;
+//   font-size: 0.7rem;
+//   height:100vh;
 
-  header{
+//   header{
+//     display: flex;
+//     justify-content: center;
+//     img{
+//       padding: 20px;
+//       width: 100%;
+//       height: 200px;
+//     }
+//   }
+
+//   section{
+//     display: flex;
+//     flex-flow: row wrap;
+//     justify-content: center;
+
+//     article.menu-item:hover{
+//       color: #ffb84d;
+//     }
+
+//     article{
+//       border: 1px solid orange;
+//       margin:15px;
+//       width: 80%;
+//       display: flex;
+//       flex-flow:row wrap;
+//       justify-content: space-between;
+//       justify-items: center;
+
+//       .menu-item-1{
+//         display:flex;
+//         flex-direction: row;
+//         justify-content: flex-start;
+//         width: 50%;
+//         flex-grow: 0.5;
+//         padding: 1rem;
+//       }
+
+//       .menu-item-2{
+//         display: flex;
+//         flex-direction: row;
+//         justify-content: flex-end;
+//         width: 50%;
+//         flex-grow:0.5;
+//         padding: 1rem;
+//       }
+
+//       .menu-item-3{
+//         display:block;
+//         padding: 0 1rem 1rem 1rem;
+//       }
+//     }
+//   }
+
+//   .modal-body
+//   table
+//   tr
+//   th{
+//     text-align: left;
+//   }
+
+//   .modal-body
+//   table
+//   tr
+//   td{
+//     text-align: left;
+//   }
+
+//   #cart-quantit{
+//     width: 100%;
+//     margin:auto;
+//     text-align: center;
+//   }
+
+//   #cart-quantity-box{
+//     width:20px;
+//   }
+
+//   .modal-footer{
+//     display:flex;
+//     flex-flow: row-reverse nowrap;
+//     justify-content: space-between;
+//   }
+
+// }
+
+.restaurant-container{
+  display:flex;
+  flex-direction: row;
+  // justify-content: center;
+
+  header.restaurant-banner{
     display: flex;
     justify-content: center;
+    color:white;
+    height:150px;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+
+
     img{
       padding: 20px;
       width: 100%;
@@ -17,23 +114,38 @@ body{
     }
   }
 
-  section{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+  .restaurant-menu{
+    display:flex;
+    flex-direction: column;
+    width:80%;
+    font-family: 'Single Day', cursive;
+    letter-spacing: 0.4px;
+
+    hr {
+      border: 0;
+      clear:both;
+      display:block;
+      width: 100%;
+      background-color:#8C8C8B;
+      opacity: 0.5;
+      height: 1px;
+  }
 
     article.menu-item:hover{
-      color: #ffb84d;
+      color:orange;
+      cursor: pointer;
     }
 
-    article{
-      border: 1px solid orange;
+    article.menu-item{
       margin:15px;
       width: 80%;
       display: flex;
       flex-flow:row wrap;
       justify-content: space-between;
       justify-items: center;
+      height: 70px;
+      padding-left: 10px;
+
 
       .menu-item-1{
         display:flex;
@@ -41,7 +153,9 @@ body{
         justify-content: flex-start;
         width: 50%;
         flex-grow: 0.5;
-        padding: 1rem;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+
       }
 
       .menu-item-2{
@@ -50,16 +164,78 @@ body{
         justify-content: flex-end;
         width: 50%;
         flex-grow:0.5;
-        padding: 1rem;
       }
-
-      .menu-item-3{
-        display:block;
-        padding: 0 1rem 1rem 1rem;
-      }
+    }
+    .menu-item-3{
+      font-family: 'Roboto', sans-serif;
     }
   }
 
+  .restaurant-menu{
+    background-color: rgb(231, 231, 226);
+    flex: 0.6;
+    height: 100vh;
+  }
+
+  .restaurant-checkout{
+    flex:0.4;
+    height: 100vh;
+    width: 100vw;
+
+    .restaurant-checkout-main{
+      position: relative;
+      margin:auto;
+      width: 80%;
+
+      .checkout-list-item{
+        padding: 10px 0;
+        letter-spacing: 1.5px;
+        display:flex;
+        flex-flow: row nowrap;
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .restaurant-checkout-main-wrapper{
+        position: absolute;
+        top:20px;
+        width:100%;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        .restaurant-checkout-title{
+          padding-top: 10px;
+          text-align: center;
+          font-family: 'Roboto', sans-serif;
+          letter-spacing: 0.3px;
+        }
+
+        .restaurant-checkout-cart{
+          width: 100%;
+          font-size: 0.8rem;
+          font-family: 'Open Sans Condensed', sans-serif;
+          font-weight: bold;
+
+          .restaurant-checkout-cart-subtotal{
+            display:flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            height: 1.5rem;
+          }
+          .restaurant-checkout-cart-tax{
+            display:flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+          }
+          .restaurant-checkout-cart-total{
+            display:flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+  }
   .modal-body
   table
   tr
@@ -75,19 +251,20 @@ body{
   }
 
   #cart-quantit{
+    display:flex;
+    flex-flow: row;
     width: 100%;
     margin:auto;
     text-align: center;
   }
 
-  #cart-quantity-box{
-    width:20px;
-  }
+  // #cart-quantity-box{
+  //   width:10px !important;
+  // }
 
   .modal-footer{
     display:flex;
     flex-flow: row-reverse nowrap;
     justify-content: space-between;
   }
-
 }

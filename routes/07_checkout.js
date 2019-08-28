@@ -56,8 +56,8 @@ module.exports = db => {
                     .then(restaurant => {
                       console.log("success");
                       console.log(restaurant.rows[0].phone);
+                      res.redirect(301,'/home');
                       sendMSG(restaurant.rows[0].phone);
-                      res.status(303).redirect("/home");
                     });
                 }
               });
