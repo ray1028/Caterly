@@ -1,5 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require("twilio")(accountSid, authToken);
+
+const sendMSG = function(phone) {
+  client.messages
+    .create({ body: "Your order has been received", from: "+16476948610", to: phone })
+    .then(message => console.log(message.sid));
+};
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -21,12 +30,22 @@ module.exports = (db) => {
           await db.query('insert into orders_items(order_id, item_id, quantity) values ($1, $2, $3)',[
             data.rows[0].id, item.id, Number(item.quantity)
           ]).then(
-            odata => {
+          async odata => {
               if(odata.rowCount !==  1){
                 throw new Error('Insertion error on orders items');
               } else {
-                console.log('successful');
-                res.redirect('/home');
+           
+                
+
+                await db.query(`SELECT * FROM restaurants WHERE id = $1`, [item.restoId]).then(restaurant => {
+
+console.log("success")
+console.log(restaurant.rows[0].phone);
+                  sendMSG(restaurant.rows[0].phone);
+                  res.redirect('/home');
+
+                })
+                
               }
             }
           )
