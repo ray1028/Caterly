@@ -243,14 +243,15 @@ $(document).ready(function() {
 $(document).ready(() => {
   $(".img-wrapper").hover(function() {
     $(this)
-      .find(".fa-arrow-right")
+      .find(".arrow-right")
       .css("visibility", "visible");
     // const x = $(this).find(".fa-arrow-right");
     // console.log(x);
+    console.log('fire');
   });
   $(".img-wrapper").mouseleave(function() {
     $(this)
-      .find(".fa-arrow-right")
+      .find(".arrow-right")
       .css("visibility", "hidden");
   });
 
