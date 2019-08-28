@@ -85,17 +85,18 @@ body {
 
 .side-content-container {
   background-color: #FFF;
-  filter: drop-shadow(2px 4px 6px gray);  
+  filter: drop-shadow(2px 4px 6px gray);
   margin-top: 40px;
-  margin-bottom: 40px; 
+  margin-bottom: 40px;
   margin-left: 40px;
   width: 660px;
   // min-height: 56.1em;
   display: grid;
-  grid-template-columns: 5% 65% 30%;
-  grid-template-rows: 260px 1px 120px 250px 5%; 
+  grid-template-columns: 5% 47.5% 47.5%;
+  // grid-template-columns: 5% 65% 30%;
+  grid-template-rows: 260px 1px 120px 250px 5%;
   // 6% 32% 10% 29% 5%;
-  // 6% 21% 10% 29% 33%; 
+  // 6% 21% 10% 29% 33%;
   visibility: hidden;
 
   // position: absolute;
@@ -133,7 +134,7 @@ body {
     grid-row: 3 / span 1;
     grid-column: 2 / span 2;
     margin-top: 1em;
-    
+
     h2 {
       // border-bottom: 1px solid gray;
       margin-right: 1.5em;
@@ -171,13 +172,13 @@ body {
       background-color: #DD614A;
       color: white;
       font-size: 2em;
-      width: 100%;
+      width: 80%;
       margin-right: .5em;
     }
   }
   #borderline-top {
     grid-row: 3 / span 1;
-    grid-column: 1 / span 3; 
+    grid-column: 1 / span 3;
     border-bottom: 1px solid lightgray;
     min-height: 5em;
   }
@@ -186,7 +187,7 @@ body {
   }
   #borderline-bottom {
     grid-row: 5 / span 1;
-    grid-column: 1 / span 3; 
+    grid-column: 1 / span 3;
     border-bottom: 1px solid lightgray;
     min-height: 5em;
     margin-bottom: 3.8em;
@@ -207,12 +208,12 @@ body {
   text-shadow: 1px 1px black;
   overflow: hidden;
   position: relative;
-  
+
   img {
     background-image: linear-gradient(black 30%);
-    // linear-gradient: 
+    // linear-gradient:
   }
-  
+
   h3 {
     position: absolute;
     z-index: 1;

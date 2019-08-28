@@ -57,14 +57,15 @@
           </div>
           <div id="side-content-title">
             <h2><%=(restaurant.name).toUpperCase()%></h2>
-          </div>  
+          </div>
           <div id="side-content-body">
             <p> <%=restaurant.description%>
             <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. -->
             </p>
           </div>
           <div id="side-content-rating">
-            <%=Math.round(restaurant.rating)%>
+            <!-- <%=Math.round(restaurant.rating)%> -->
+            <%=Number(restaurant.rating).toFixed(1)%>
           </div>
           <form class="side-content-to-menu" action="/restaurants/<%=restaurant.restaurant_id%>" method="GET">
             <input type="submit" value="MENU">

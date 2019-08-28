@@ -20,7 +20,7 @@ module.exports = db => {
           JOIN categories
           ON category_id = categories.id
           JOIN ratings
-          ON ratings.id = restaurant_id
+          ON restaurant_id = restaurants.id
           WHERE categories.name = '${req.params.id}'
           GROUP BY restaurants.name, categories.name, restaurants.id
           ORDER BY restaurant_id;`
