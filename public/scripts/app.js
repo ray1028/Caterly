@@ -168,18 +168,19 @@ $(document).ready(function() {
   //AJAX method to update the page with the time of the order.
   $(".restaurant-confirm").on("click", function(event) {
     event.preventDefault;
-    $(() => {
+
       $.ajax({
         method: "POST",
         url: "/home/restaurants/1",
         data: { time: $("#time").val() },
         success: function() {
           $(".estimated-time").text(time.value);
+          // console.log('success');
         },
         error: function() {
           alert("An AJAX error has occured");
         }
-      });
+      
     });
   });
 
