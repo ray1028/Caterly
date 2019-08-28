@@ -11,11 +11,9 @@ $(document).ready(function() {
             <div class="checkout-list-item">
               <div><span>${ele.quantity}</span> x ${ele.name}</div>
               <div>$${ele.price}</div>
-              <br>
             </div>
             <div>${ele.description}</div>
-          </article>
-          </br>`
+          </article>`
         )
       }
 
