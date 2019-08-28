@@ -84,18 +84,22 @@ module.exports = db => {
     let updateQuery = `    UPDATE orders SET pickup_time = $1 WHERE orders.id = $2;`;
     let updateQueryValue = [
       Date.now() + req.body.time * 60000,
-      `${req.params.id}`
+      req.params.id
     ];
 
     db.query(updateQuery, updateQueryValue);
-    let phoneQuery = `SELECT phone from customers JOIN orders ON customers.id = customer_id WHERE orders.id = $1;`;
+    let phoneQuery = `SELECT phone FROM customers JOIN orders ON customers.id = customer_id WHERE orders.id = $1;`;
 
-    db.query(phoneQuery, `${req.params.id}`).then(data => {
-      sendMSG(textMSG(req.body.time), data.rows[0].phone);
+console.log(req.params.id);
+
+//home.js
+
+    db.query(phoneQuery, [req.params.id]).then(data => {
+      // sendMSG(textMSG(req.body.time), data.rows[0].phone);
     });
 
 
-    res.redirect("/home/restaurants/:id");
+    res.redirect(`/home/restaurants/${req.params.id}`);
   });
 
   //Helper functions
