@@ -23,8 +23,8 @@
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
-    <link rel="stylesheet" href="/styles/01_home_layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/06_my_orders.css" type="text/css" />
+    <!-- <link rel="stylesheet" href="/styles/01_home_layout.css" type="text/css" /> -->
     <link
       rel="stylesheet"
       href="/styles/09_home_restaurant.css"
@@ -48,60 +48,88 @@
   </head>
 
   <body>
-    hello <%= orders[0].name %> there
+    <nav>
+        <% include partials/_header %>
+    </nav>
+    <content>
+      <div id="myorder-container">
+        <header>
+          <h2>My Orders</h2>
+        </header>
 
-    <table class="current-orders">
-      <thead>
-        <tr>
-          <th>Customer Name</th>
-          <th>Ordered at</th>
-          <th>Order </th>
-          <th>Total</th>
-          <th>Pickup Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <% for (order of orders) { %>
-          <th><%= order.customers_name %></th>
-          <th class="date-value"><%= formatDate(order.created_at) %></th>
-          <th> 
-            <table>
-            </table>
-            placeholder
-               </th>
+        <table class="my-orders table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Customer Name</th>
+              <th>Ordered at</th>
+              <th>Order</th>
+              <th>Total</th>
+              <th>Pickup Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <% for (order of orders) { %>
+              <th><%= order.customers_name %></th>
+              <th class="date-value"><%= formatDate(order.created_at) %></th>
+              <th>
+                <table>
+                  <tr>
+                    <td>
+                      First row of Inner Table
+                    </td>
+                    <td>
+                      quantity
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Second row of Inner Table
+                    </td>
+                    <td>
+                      quantity
+                    </td>
+                  </tr>
+                </table>
+              </th>
 
-          <th> $ <%= order.order_total.toFixed(2) %></th>
+              <th>$ <%= (order.order_total/1000).toFixed(2) %></th>
 
-          <% if(order.pickup_time === "0") { %>
+              <% if(order.pickup_time === "0") { %>
 
-          <th>
-            <div id="ex1" class="modal">
-              <p>Please enter the estimated time for the order in minutes :</p>
+              <th>
+                <div id="ex1" class="modal">
+                  <p>
+                    Please enter the estimated time for the order in minutes :
+                  </p>
 
-              <div class="modal-flex">
-                <form>
-                  <input type="text" id="time" />
-                </form>
-                <button
-                  type="button"
-                  class="restaurant-confirm btn btn-outline-dark"
-                >
-                  <i class="fa fa-check-circle"></i>
-                </button>
-              </div>
-            </div>
+                  <div class="modal-flex">
+                    <form>
+                      <input type="text" id="time" />
+                    </form>
+                    <button
+                      type="button"
+                      class="restaurant-confirm btn btn-outline-dark"
+                    >
+                      <i class="fa fa-check-circle"></i>
+                    </button>
+                  </div>
+                </div>
 
-            <p class = "estimated-time"><a href="#ex1" rel="modal:open">Enter time</a></p>
-          </th>
-          <% } else { %>
+                <p class="estimated-time">
+                  <a href="#ex1" rel="modal:open">Enter time</a>
+                </p>
+              </th>
+              <% } else { %>
 
-          <th><%= formatDate(order.pickup_time) %></th>
+              <th><%= formatDate(order.pickup_time) %></th>
 
-          <% } %>
-        </tr>
-        <% } %>
-      </tbody>
-    </table>
+              <% } %>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </content>
   </body>
 </html>

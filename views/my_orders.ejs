@@ -43,11 +43,11 @@
     <content>
       <div id="myorder-container">
         <header>
-          <h2>MY_ORDERS</h2>
+          <h2>My Orders</h2>
         </header>
 
-        <table class="my-orders">
-          <thead>
+        <table class="my-orders table">
+          <thead class="thead-dark">
             <tr>
               <th>Restaurant Name</th>
               <th>Ordered at</th>
@@ -62,14 +62,38 @@
               <th><%= order.name %></th>
               <th class="date-value"><%= formatDate(order.created_at) %></th>
               <th>
-                <table></table>
-                placeholder
+                  <table>
+                      <tr>
+                        <td>
+                          First row of Inner Table
+                        </td>
+                        <td>
+                          quantity
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Second row of Inner Table
+                        </td>
+                        <td>
+                          quantity
+                        </td>
+                      </tr>
+                    </table>
               </th>
 
-              <th>$ <%= order.order_total.toFixed(2) %></th>
+              <th>$ <%= (order.order_total/1000).toFixed(2) %></th>
+
+              <% if (order.pickup_time === "0") { %>
+
+              <th>Waiting on confirmation from restaurant</th>
+
+              <% } else { %>
 
               <th><%= formatDate(order.pickup_time) %></th>
+              <% } %>
             </tr>
+
             <% } %>
           </tbody>
         </table>
