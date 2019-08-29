@@ -66,8 +66,9 @@
         <%for(let item of items){ %>
         <article class="menu-item">
             <div class="menu-item-1" data-id="<%=item.id%>"><%=item.name%></div>
-            <div class="menu-item-2" data-resto-id="<%=restaurant.id%>">$<%=item.price%></div>
+            <div class="menu-item-2" data-resto-id="<%=restaurant.id%>">$<%=(item.price / 1000).toFixed(2)%></div>
             <div class="menu-item-3"><%=item.description%></div>
+            <button class="menu-item-addcart btn btn-primary" style="background-color:#DD614A">add to cart</button>
         </article>
         <hr>
           <% }%>
@@ -94,7 +95,7 @@
               <div class="restaurant-checkout-cart-total"><p>Total</p><p class="restaurant-checkout-cart-total-box"></p></div>
             </div>
             <form id="checkout" action="/checkout" method="POST">
-              <button id="checkout-btn" style="background-color:#DD614A;" type="submit" class="btn btn-success" >
+              <button id="checkout-btn" style="background-color:#DD614A" type="submit" class="btn btn-success" >
                 Checkout
               </button>
             </form>
