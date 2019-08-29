@@ -217,14 +217,14 @@ const logoutUser = () => {
 };
 
 const searchAutoComplete = () => {
-  const restaurants = $("#search-restaurant-text")
+  const restaurantsData = $("#search-restaurant-text")
     .data("id")
     .split(",");
 
   $("#search-restaurant-text").autocomplete({
     source: function( request, response ) {
             var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
-            response( $.grep( restaurants, function( item ){
+            response( $.grep( restaurantsData, function( item ){
                 return matcher.test( item );
             }) );
         }
@@ -246,7 +246,6 @@ const mainProgram = () => {
 
 // main
 $(document).ready(function() {
-  mainProgram();
 
   //AJAX method to update the page with the time of the order.
   $(".restaurant-confirm").on("click", function(event) {
@@ -279,9 +278,6 @@ $(document).ready(function() {
       .animate({ opacity: 1 }, 600);
     // $(`#${y}`).css("visibility", "visible");
   });
-});
-
-$(document).ready(() => {
   $(".img-wrapper").hover(function() {
     $(this)
       .find(".arrow-right")
@@ -305,4 +301,9 @@ $(document).ready(() => {
     $("#landing-page-title").fadeOut(700);
     console.log("fire");
   });
+
+  mainProgram();
+
 });
+
+

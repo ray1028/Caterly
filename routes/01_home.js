@@ -38,7 +38,7 @@ module.exports = db => {
       res.render("home", {
         user: userRes.rows[0].first_name,
         categories: categoriesRes.rows,
-        restaurants: restaurantNameArr
+        restaurantsData: restaurantNameArr
       });
     } catch (err) {
       res.status(500).json({ error: err.message });
