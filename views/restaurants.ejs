@@ -10,7 +10,7 @@
     />
 
     <!-- Meta Information -->
-    <title>mcdonalds</title>
+    <title>Caterly - Menu</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
@@ -45,6 +45,7 @@
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css?family=Single+Day&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic&display=swap" rel="stylesheet">
 
         <!-- helper function -->
         <script type="text/javascript" src="/scripts/data-helper.js"></script>
@@ -58,20 +59,27 @@
     </nav>
 
     <div class="restaurant-container">
-      <div class="restaurant-menu">
-        <header class="restaurant-banner" style="background-image: url(<%=restaurant.image_url%>)">
-          <h1 class="restaurant-banner-title"><%=restaurant.name%></h1>
-        </header>
-        <br>
-        <%for(let item of items){ %>
-        <article class="menu-item">
-            <div class="menu-item-1" data-id="<%=item.id%>"><%=item.name%></div>
-            <div class="menu-item-2" data-resto-id="<%=restaurant.id%>">$<%=(item.price / 1000).toFixed(2)%></div>
-            <div class="menu-item-3"><%=item.description%></div>
-            <button class="menu-item-addcart btn btn-primary" style="background-color:#DD614A">add to cart</button>
-        </article>
-        <hr>
-          <% }%>
+      <div id="menu-container">
+
+        <div class="restaurant-menu">
+          <header class="restaurant-banner" style="background-image: url(<%=restaurant.image_url%>)">
+            <h1 class="restaurant-banner-title">
+              <%=restaurant.name%>
+            </h1>
+          </header>
+          <br>
+
+          <%for(let item of items){ %>
+          <article class="menu-item">
+              <div class="menu-item-1" data-id="<%=item.id%>"><%=item.name%></div>
+              <div class="menu-item-2" data-resto-id="<%=restaurant.id%>">$<%=(item.price / 1000).toFixed(2)%></div>
+              <div class="menu-item-3"><%=item.description%></div>
+              <button class="menu-item-addcart btn btn-primary" style="background-color:#DD614A">add to cart</button>
+          </article>
+          <hr>
+            <% }%>
+
+        </div>
       </div>
       <div class="restaurant-checkout">
         <div class="restaurant-checkout-main">

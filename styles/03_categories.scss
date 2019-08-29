@@ -1,11 +1,39 @@
+html {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px transparent;
+    // border-radius: 5px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    // background: transparent;
+    background: 	#E8E8E8;
+    height: 10px;
+    width: 1px;
+
+    // border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+  }
+}
+
 nav {
   grid-column: 1 / span 2;
 }
 
 body {
   background-color: #fff;
+  background-image: linear-gradient(#fff, #F0F0F0);
   display: grid;
-  grid-template-rows: 5vh 95vh;
+  grid-template-rows: 7.5vh 92.5vh;
   grid-template-columns: 600px auto;
   font-family: 'Didact Gothic', sans-serif;
   // font-size:42px;
@@ -13,7 +41,7 @@ body {
 
 #categories-head {
   width: 100%;
-  margin-top: 3.5em;
+  margin-top: 1.5em;
   margin-bottom: 3.5em;
   margin-right: 1.5em;
   border-bottom: 1em #DD614A solid;
@@ -29,6 +57,8 @@ body {
   grid-row: 2 / span 1;
   grid-column: 1 / span 1;
   flex-wrap: wrap;
+  overflow: scroll;
+
   // justify-content: center;
 }
 

@@ -3,12 +3,17 @@
   <link rel="stylesheet" href="../../styles/header.css" type="text/css" />
 
   <nav class="header-nav navbar navbar-light">
+    <%if (!user) { %>
+    <a href="" id="logo">
+      <img src="https://i.imgur.com/noBTXCe.png">
+    </a>
+    <% } else { %>
     <a href="/home" id="logo">
       <img src="https://i.imgur.com/noBTXCe.png">
-      <!-- <img src="./img/logo2.png"> -->
-      <!-- <img src="./img/logo2.png"> -->
     </a>
-    <%if (user) {%>
+    <% } %>
+
+    <%if (user) { %>
       <form action="/myorders" method="GET">
         <label class="other" for="username"><%=user%></label>
         <button type="submit" class="other">My Orders</button>
