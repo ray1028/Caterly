@@ -11,9 +11,8 @@
 body {
   background-color: #EEE;
   display: grid;
-  grid-template-rows: 5vh 90vh 110vh;
+  grid-template-rows: 7.5vh 88vh 110vh;
   font-family: 'Didact Gothic', sans-serif;
-
   nav {
     @include gridspan(1, span 1, 1, span 1);
     #logo {
