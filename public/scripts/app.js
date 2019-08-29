@@ -58,7 +58,10 @@ const clickToAdd = () => {
 };
 
 const cartAdd = () => {
+
   currentVal = $("#cart-quantity-box").val();
+  currentVal = currentVal || 1;
+
   $(".plus-btn").click(function() {
     ++currentVal;
     $("#cart-quantity-box").val(currentVal);
@@ -75,6 +78,8 @@ const cartAdd = () => {
       quantity: currentVal,
       price: currentPrice
     };
+
+    console.log(orderObj);
   });
 };
 
@@ -98,8 +103,7 @@ const cartMinus = () => {
 
 const clearCartByClosingModal = () =>
   $("#myModal").on("hidden.bs.modal", function() {
-    currentVal = 0;
-    currentPrice = 0;
+    currentVal = 1;
     orderObj = {};
     $("#cart-quantity-box").val(0);
     $("#cart-total").html("$" + 0.0);
@@ -114,6 +118,7 @@ const calculateTotal = dataObj => {
 };
 
 const addItemToCart = () => {
+
   $("#addtocart").submit(e => {
     e.preventDefault();
   });
@@ -202,6 +207,7 @@ const confirmCart = () => {
       data: { items: localStorage.getItem("cart") },
       success: function(data) {
         clearCartFunction();
+        window.location.href = 'http://localhost:8080/';
       },
       error: function(jqXHR, textStatus, err) {
         console.log("text status " + textStatus + ", err " + err);
@@ -247,6 +253,28 @@ const mainProgram = () => {
 // main
 $(document).ready(function() {
 
+  $(".view-order").on("click", function(event) {
+    let name = $(this).data("name");
+    let date = $(this).data("date");
+    let total = $(this).data("total");
+    let pickup = $(this).data("pickup");
+    $.ajax({
+      method: "GET",
+      data: { name: name, date: date, total: total, pickup: pickup },
+      success: function(res) {
+        
+
+        
+      }
+    });
+  });
+
+  //Sets data for the ajax method inside .restaurant-confirm on click
+  $(".enter-timelink").on("click", function(event) {
+    currentlySelectedTime = $(this).data("time");
+    currentlySelectedValue = $(this);
+  });
+
   //AJAX method to update the page with the time of the order.
   $(".restaurant-confirm").on("click", function(event) {
     event.preventDefault;
@@ -254,9 +282,9 @@ $(document).ready(function() {
     $.ajax({
       method: "POST",
       //POST URL IS THE CURRENT LOCATION OR http://localhost:8080/home/restaurants/:Id
-      data: { time: $("#time").val() },
+      data: { time: $("#time").val(), currentTime: currentlySelectedTime },
       success: function() {
-        $(".estimated-time").text(`Order will be ready in ${time.value}`);
+        currentlySelectedValue.text(`Order Updated!`).addClass("removeClick");
       },
       error: function() {
         alert("An AJAX error has occured");
@@ -264,9 +292,6 @@ $(document).ready(function() {
     });
   });
 
-  // alert((new Date($(".date-value").html())));
-
-  // $(".date-value").html($(this)(new Date($(".date-value").html())));
   $("#categories-container-main a").on("click", e => {
     e.preventDefault();
     let x = $(this.activeElement)[0];

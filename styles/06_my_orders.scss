@@ -3,13 +3,23 @@ nav {
 }
 
 body {
-  background-color: #EEE;
+  background-color: #eee;
   display: grid;
   grid-template-rows: 7.5vh 92.5vh;
   grid-template-columns: 1;
   // grid-template-columns: 600px auto;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   // font-size:42px;
+}
+
+th,
+tr {
+  text-align: center;
+}
+
+.th-inner-table {
+  display: flex;
+  justify-content: center;
 }
 
 content {
@@ -26,6 +36,7 @@ content {
   align-items: center;
   width: 80%;
   min-width: 500px;
+  margin-top: 50px;
   // justify-content: center;
   // border: 4px solid blue;
 
@@ -34,4 +45,9 @@ content {
     width: 80%;
     text-align: center;
   }
+}
+
+.table .thead-dark th {
+  background-color: #dd614a;
+  border-color: #dd614a;
 }

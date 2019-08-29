@@ -6,7 +6,7 @@ const client = require("twilio")(accountSid, authToken);
 const strftime = require("strftime");
 
 const formatDate = function(epoch) {
-  return strftime("%b %D %T", new Date(parseInt(epoch)));
+  return strftime("%b %D %I:%M%p", new Date(parseInt(epoch)));
 };
 
 module.exports = db => {
@@ -45,22 +45,14 @@ module.exports = db => {
     }
   });
 
-  //Search route that displays the first restaurant LIKE the query
-  router.post("/", (req, res) => {
-    const queryRestaurantID = `
-    SELECT id FROM restaurants WHERE lower(name) LIKE lower($1) LIMIT 1`;
+  //   console.log(req.body, "hi");
 
-    const restaurantName = [`%${req.body.search}%`];
+  //   db.query(queryStrHeader, values).then(data => {
+  //     templateVars.user = `${data.rows[0].name}`;
 
-    db.query(queryRestaurantID, restaurantName).then(data => {
-      if (data.rowCount === 0) {
-        res.send("error");
-        console.log("DNE");
-      } else {
-        res.redirect(`/restaurants/${data.rows[0].id}`);
-      }
-    });
-  });
+  //     res.render("restaurant_home_orders", templateVars);
+  //   });
+  // });
 
   //The get route for the login of the restaurant, this page will show all of the current and old orders
   router.get("/restaurants/:id", (req, res) => {
@@ -71,6 +63,8 @@ module.exports = db => {
       WHERE id = $1
     `;
     const values = [req.session.user_id];
+
+    console.log(req.body);
 
     db.query(queryStrHeader, values).then(data => {
       templateVars.user = `${data.rows[0].name}`;
@@ -94,25 +88,26 @@ module.exports = db => {
     });
   });
 
+  // POST ROUTE TO SEE ORDER
+  // router.post("/restaurants/:id/1", (req, res) => {});
+
   //POST route to update the confirm time and send back a text message to the client
   router.post("/restaurants/:id", (req, res) => {
-    // let updateQuery = `UPDATE orders SET pickup_time = $1 WHERE restaurants.id = $2;`;
     let updateQueryValue = [Date.now() + req.body.time * 60000, req.params.id];
 
-    let updateQuery = ` UPDATE orders SET pickup_time = $1 FROM restaurants WHERE restaurants.id = restaurant_id AND restaurants.id = $2 AND pickup_time = 0;`;
+    let updateQuery = ` UPDATE orders SET pickup_time = $1 FROM restaurants WHERE restaurants.id = restaurant_id AND restaurants.id = $2 AND pickup_time = 0 AND created_at = ${req.body.currentTime};`;
 
     let phoneQuery = `SELECT customers.phone FROM customers JOIN orders ON customers.id = customer_id
-    JOIN restaurants ON restaurants.id = restaurant_id WHERE restaurants.id = $1 AND pickup_time = 0;`;
+    JOIN restaurants ON restaurants.id = restaurant_id WHERE restaurants.id = $1 AND pickup_time = 0 AND created_at = ${req.body.currentTime};`;
 
-    console.log(req.params.id, "id", req.body.time, "body");
+    console.log(req.body);
 
     db.query(phoneQuery, [req.params.id]).then(data => {
-      sendMSG(textMSG(req.body.time), data.rows[0].phone);
-
-      console.log(data.rows);
+      // sendMSG(textMSG(req.body.time), data.rows[0].phone);
 
       db.query(updateQuery, updateQueryValue);
     });
+    // .catch(err => console.log(err));
 
     res.redirect(`/home/restaurants/${req.params.id}`);
   });
@@ -127,6 +122,52 @@ module.exports = db => {
       .create({ body: content, from: "+16476948610", to: phone })
       .then(message => console.log(message.sid));
   };
+
+  router.get("/", async (req, res) => {
+    // if user not logged in and access home page. Redirect to login page
+    // if (!req.session.user_id) {
+    //   res.redirect("/login");
+    // }
+    let queryStrCustomer = "SELECT * FROM customers WHERE id = $1";
+    let queryStrCategories =
+      "SELECT categories.name as name, categories.thumbnail_image as thumbnail_image, count(restaurants) as count FROM categories JOIN restaurants ON categories.id = category_id GROUP BY categories.name, categories.thumbnail_image";
+
+    // SELECT categories.name as name, categories.thumbnail_image as thumbnail_image, count(restaurants) FROM categories JOIN restaurants ON categories.id = category_id
+    // GROUP BY categories.name, categories.thumbnail_image;
+
+    try {
+      let values = [req.session.user_id];
+      const userRes = await db.query(queryStrCustomer, values);
+      const categoriesRes = await db.query(queryStrCategories);
+
+      if (userRes.rowCount !== 1) throw new Error("User is not found");
+      if (categoriesRes.rowCount < 1) throw new Error("Categories not found");
+
+      res.render("home", {
+        user: userRes.rows[0].first_name,
+        categories: categoriesRes.rows
+      });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  //Search route that displays the first restaurant LIKE the query
+  router.post("/", (req, res) => {
+    const queryRestaurantID = `
+    SELECT id FROM restaurants WHERE lower(name) LIKE lower($1) LIMIT 1`;
+
+    const restaurantName = [`%${req.body.search}%`];
+
+    db.query(queryRestaurantID, restaurantName).then(data => {
+      if (data.rowCount === 0) {
+        res.send("error");
+        console.log("DNE");
+      } else {
+        res.redirect(`/restaurants/${data.rows[0].id}`);
+      }
+    });
+  });
 
   return router;
 };
