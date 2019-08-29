@@ -39,8 +39,10 @@ const clickToAdd = () => {
         .html()
     );
     $("#cart-quantity-box").val(1);
-    currentPrice = $(this).children((".menu-item-2")).html();
-    currentPrice = (Number(currentPrice.slice(1))).toFixed(2);
+    currentPrice = $(this)
+      .children(".menu-item-2")
+      .html();
+    currentPrice = Number(currentPrice.slice(1)).toFixed(2);
     $("#cart-total").html("$" + currentPrice);
 
     // initializing object for the first time when a user click on
@@ -175,21 +177,21 @@ const addItemToCart = () => {
 };
 
 const clearCartFunction = () => {
-  if(localStorage.getItem('cart') && localStorage.getItem('cart').length > 0){
-    $('#restaurant-checkout-items').empty();
-    $(".restaurant-checkout-cart-subtotal-box").html('0.00');
-    $(".restaurant-checkout-cart-tax-box").html('0.00');
-    $(".restaurant-checkout-cart-total-box").html('0.00');
-    localStorage.removeItem('cart');
+  if (localStorage.getItem("cart") && localStorage.getItem("cart").length > 0) {
+    $("#restaurant-checkout-items").empty();
+    $(".restaurant-checkout-cart-subtotal-box").html("0.00");
+    $(".restaurant-checkout-cart-tax-box").html("0.00");
+    $(".restaurant-checkout-cart-total-box").html("0.00");
+    localStorage.removeItem("cart");
   }
   return;
-}
+};
 
 const clearCart = () => {
-  $('#empty-cart-btn').on('click', function(){
+  $("#empty-cart-btn").on("click", function() {
     clearCartFunction();
-  })
-}
+  });
+};
 
 const confirmCart = () => {
   $("#checkout-btn").click(function(e) {
@@ -208,6 +210,27 @@ const confirmCart = () => {
   });
 };
 
+const logoutUser = () => {
+  $("button.other").click("on", function() {
+    clearCartFunction();
+  });
+};
+
+const searchAutoComplete = () => {
+  const restaurants = $("#search-restaurant-text")
+    .data("id")
+    .split(",");
+
+  $("#search-restaurant-text").autocomplete({
+    source: function( request, response ) {
+            var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+            response( $.grep( restaurants, function( item ){
+                return matcher.test( item );
+            }) );
+        }
+  });
+};
+
 // main driver function
 const mainProgram = () => {
   clickToAdd();
@@ -217,6 +240,8 @@ const mainProgram = () => {
   addItemToCart();
   confirmCart();
   clearCart();
+  logoutUser();
+  searchAutoComplete();
 };
 
 // main
@@ -249,7 +274,9 @@ $(document).ready(function() {
     let y = $(x).attr("data-id");
 
     $(".side-content-container").css("visibility", "hidden");
-    $(`#${y}`).css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 600);
+    $(`#${y}`)
+      .css({ opacity: 0, visibility: "visible" })
+      .animate({ opacity: 1 }, 600);
     // $(`#${y}`).css("visibility", "visible");
   });
 });
@@ -276,6 +303,6 @@ $(document).ready(() => {
   $("#landing-page-title").click(function() {
     $(".register").css("transform", "translate(-1px, 0)");
     $("#landing-page-title").fadeOut(700);
-    console.log('fire');
+    console.log("fire");
   });
 });

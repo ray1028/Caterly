@@ -21,20 +21,60 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/01_home_layout.css" type="text/css"/>
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" ">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Didact+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
 
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <!-- JQuery UI -->
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
 
   <body>
       <nav>
         <% include partials/_header %>
       </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- <h1 class="title">Discover And Get Great Food</h1> -->
 
     <section id="search-page">
@@ -51,6 +91,8 @@
               type="text"
               class="search-text form-control"
               name="search"
+              id="search-restaurant-text"
+              data-id="<%=restaurants%>"
               placeholder="Search Restaurants"
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
@@ -67,7 +109,7 @@
           </div>
         </form>
         <img src="img/arrowdownthin.svg" width='60px' height='60px'class="button-down">
-<!-- 
+<!--
         <button type="submit" class="categories-button btn btn-outline-dark">
           Give me a suggestion!
         </button> -->
@@ -90,10 +132,10 @@
          <div>
             <div class="img-wrapper">
               <a href="/categories/<%= category.name%>">
-                <img class="category-image" src= "<%= category.thumbnail_image%>">  
+                <img class="category-image" src= "<%= category.thumbnail_image%>">
                 <div id="text">
                   <%= category.name%>
-                </div>     
+                </div>
                 <!-- <i class="fa fa-arrow-right" style="font-size: 30px"></i> -->
                 <div class="arrow-right" style="font-size: 45px; padding: .5em;">→</div>
               </a>
@@ -102,7 +144,7 @@
           </div>
           </form>
         </div>
-        
+
         <% } %>
       </div>
     </section>
