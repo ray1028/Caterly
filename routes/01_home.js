@@ -25,7 +25,7 @@ module.exports = db => {
       let values = [req.session.user_id];
       const userRes = await db.query(queryStrCustomer, values);
       const categoriesRes = await db.query(queryStrCategories);
-      const restaurantRes = await db.query('select name from restaurants');
+      const restaurantRes = await db.query("select name from restaurants");
 
       if (userRes.rowCount !== 1) throw new Error("User is not found");
       if (categoriesRes.rowCount < 1) throw new Error("Categories not found");
@@ -33,7 +33,9 @@ module.exports = db => {
 
       // array holds restaurant autocomplete search list
       const restaurantNameArr = [];
-      restaurantRes.rows.forEach(restaurant => restaurantNameArr.push(restaurant.name))
+      restaurantRes.rows.forEach(restaurant =>
+        restaurantNameArr.push(restaurant.name)
+      );
 
       res.render("home", {
         user: userRes.rows[0].first_name,
@@ -69,10 +71,14 @@ module.exports = db => {
     db.query(queryStrHeader, values).then(data => {
       templateVars.user = `${data.rows[0].name}`;
 
-      const queryOrders = `SELECT restaurant_id, pickup_time , restaurants.name as name, sum(order_total) as order_total, customers.first_name as customers_name, created_at FROM restaurants JOIN orders on restaurants.id = restaurant_id
-      JOIN customers on customers.id = customer_id WHERE
+      const queryOrders = `SELECT restaurant_id, pickup_time , restaurants.name as name, sum(order_total) as order_total, customers.first_name as customers_name, created_at 
+      FROM restaurants 
+      JOIN orders ON restaurants.id = restaurant_id
+      JOIN customers ON customers.id = customer_id 
+      WHERE
       restaurant_id = $1 GROUP BY created_at, orders.restaurant_id, orders.pickup_time, restaurants.name, customers.first_name ORDER BY created_at DESC;
   `;
+
       const queryOrdersValue = [req.params.id];
 
       db.query(queryOrders, queryOrdersValue).then(data => {
@@ -93,6 +99,8 @@ module.exports = db => {
 
   //POST route to update the confirm time and send back a text message to the client
   router.post("/restaurants/:id", (req, res) => {
+    let templateVars = {};
+
     let updateQueryValue = [Date.now() + req.body.time * 60000, req.params.id];
 
     let updateQuery = ` UPDATE orders SET pickup_time = $1 FROM restaurants WHERE restaurants.id = restaurant_id AND restaurants.id = $2 AND pickup_time = 0 AND created_at = ${req.body.currentTime};`;
@@ -100,7 +108,29 @@ module.exports = db => {
     let phoneQuery = `SELECT customers.phone FROM customers JOIN orders ON customers.id = customer_id
     JOIN restaurants ON restaurants.id = restaurant_id WHERE restaurants.id = $1 AND pickup_time = 0 AND created_at = ${req.body.currentTime};`;
 
-    console.log(req.body);
+    let created_at_date = parseInt(req.body.date);
+    let orderTotal = parseInt(req.body.total);
+    let customername = req.body.name;
+
+    let ordersQueryValue = [customername];
+
+    let ordersQuery = `SELECT quantity, items.name FROM items 
+    JOIN orders_items ON items.id=orders_items.item_id
+    JOIN orders ON orders.id = orders_items.item_id
+    JOIN customers on customers.id = orders.customer_id
+    WHERE customers.first_name = $1 and created_at = $2 ;
+    `;
+
+    // iterate through rows
+    // put that into a json object
+    // wrap the whole json object into an Array
+    // jsonify the whole thing
+    // jsonify
+
+    db.query(ordersQuery, ordersQueryValue).then(data => {
+      console.log(data.rows, "this is data", req.body.date);
+      console.log(typeof req.body.date);
+    });
 
     db.query(phoneQuery, [req.params.id]).then(data => {
       // sendMSG(textMSG(req.body.time), data.rows[0].phone);
