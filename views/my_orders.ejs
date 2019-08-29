@@ -46,9 +46,9 @@
           <h2>My Orders</h2>
         </header>
 
-        <table class="my-orders table">
+        <table class="my-orders table table-bordered" >
           <thead class="thead-dark">
-            <tr>
+            <tr id="table-head">
               <th>Restaurant Name</th>
               <th>Ordered at</th>
               <th>Order</th>
@@ -62,24 +62,22 @@
               <th><%= order.name %></th>
               <th class="date-value"><%= formatDate(order.created_at) %></th>
               <th>
-                  <table>
-                      <tr>
-                        <td>
-                          First row of Inner Table
-                        </td>
-                        <td>
-                          quantity
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Second row of Inner Table
-                        </td>
-                        <td>
-                          quantity
-                        </td>
-                      </tr>
-                    </table>
+                  <div id="ex2" class="modal">
+                      <div class="modal-flex"></div>
+                    </div>
+    
+                    <p>
+    
+                      <a data-name="<%= order.customers_name %>"
+                        data-date="<%= order.created_at %>"
+                        data-total= "<%= order.order_total %>"
+                        data-pickup= "<%= order.pickup_time %>"
+                        
+                        class="view-order" href="#ex2" rel="modal:open"
+                        >View Order</a
+                      >
+                    </p>
+    
               </th>
 
               <th>$ <%= (order.order_total/1000).toFixed(2) %></th>
