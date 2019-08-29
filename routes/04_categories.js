@@ -19,13 +19,14 @@ module.exports = db => {
           FROM restaurants
           JOIN categories
           ON category_id = categories.id
-          JOIN ratings
+          FULL OUTER JOIN ratings
           ON restaurant_id = restaurants.id
           WHERE categories.name = '${req.params.id}'
           GROUP BY restaurants.name, categories.name, restaurants.id
           ORDER BY restaurant_id;`
         )
           .then(data => {
+            console.log(data);
             if (data.rowCount === 0) {
               res.send("error");
             } else {

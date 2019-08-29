@@ -79,7 +79,7 @@ create table ratings
   id serial primary key not null,
   customer_id integer references customers(id) on delete cascade,
   restaurant_id integer references restaurants(id) on delete cascade,
-  rating smallint not null default 0
+  rating smallint
 );
 
 

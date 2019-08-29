@@ -21,14 +21,14 @@ INSERT INTO restaurants
     (name, location, address, phone, email, password, category_id, image_url, description)
 VALUES
     ('Aji Sai', '123,123', '123 Bay', '+16478785740', 'ajisai@test.com', '123', '1', 'https://i.imgur.com/of8nmqm.jpg', 'Aji Sai has been offering fine Japanese dining in Ontario for more than 20  years. We offer the freshest food at a reasonable price.'),
-    ('Juicy Dumpling', '111,111', '123 Main', '6478888888', '123@test.com', '123', '1', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'Juicy Dumpling is a takeout joint that is revolutionizing the art of quick, cheap, and delicious soup dumplings.'),
-    ('Spring Sushi', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '1', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'At Spring Sushi, we thoroughly prepare basic but essential ingredient to provide you with the true Japanese taste.'),
-    ('Dumpling House', '111,111', '123 Main', '6478888888', '123@test.com', '123', '1', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'placeholder'),
-    ('Wakame', '111,111', '123 Main', '6478888888', '123@test.com', '123', '1', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'placeholder'),
-    ('Mucho Burrito', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '2', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'placeholder'),
-    ('Big Fat Burrito', '111,111', '123 Main', '6478888888', '123@test.com', '123', '2', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'placeholder'),
-    ('Chipotle', '111,111', '123 Main', '6478888888', '123@test.com', '123', '2', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'placeholder'),
-    ('Taco Bell', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '2', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'placeholder'),
+    ('Juicy Dumpling', '111,111', '123 Main', '6478888888', '123@test.com', '123', '1', 'https://s3.amazonaws.com/btoimage/prism-thumbnails/uploads/2018/10/08/20181008-JuicyDumplings10.jpg-resize-_opacity_100-frame_bg_color_FFF-h_2500-gravity_center-q_70-preserve_ratio_true-w_1400_.webp', 'Juicy Dumpling is a takeout joint that is revolutionizing the art of quick, cheap, and delicious soup dumplings.'),
+    ('Spring Sushi', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '1', 'https://i.pinimg.com/originals/f6/78/65/f678659cc5fbbe13cc9591f47cf60014.webp', 'At Spring Sushi, we thoroughly prepare basic but essential ingredient to provide you with the true Japanese taste.'),
+    ('Dumpling House', '111,111', '123 Main', '6478888888', '123@test.com', '123', '1', 'https://i.pinimg.com/originals/c9/6e/0f/c96e0f8abb4ba379e0732eb210a7c1bb.webp', 'placeholder'),
+    ('Ajisen Ramen', '111,111', '123 Main', '6478888888', '123@test.com', '123', '1', 'https://s3.amazonaws.com/btoimage/prism-thumbnails/listings/adc0-20100427-ajisen-tendrous.jpg-resize_then_crop-_frame_bg_color_FFF-h_1365-gravity_center-q_70-preserve_ratio_true-w_2048_.webp', 'placeholder'),
+    ('Mucho Burrito', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '2', 'https://static.wixstatic.com/media/bbd9fd_1d872b966cf744f5b92601638c7d48f3~mv2_d_2000_1500_s_2.jpg/v1/fill/w_1960,h_1376,al_c,q_90,usm_0.66_1.00_0.01/bbd9fd_1d872b966cf744f5b92601638c7d48f3~mv2_d_2000_1500_s_2.webp', 'placeholder'),
+    ('Wilbur Mexicana', '111,111', '123 Main', '6478888888', '123@test.com', '123', '2', 'https://aleimerrill.com/wp-content/uploads/2019/08/amie-watson-2hBUvhe81mU-unsplash-1920x1080.jpg.webp', 'placeholder'),
+    ('Chipotle', '111,111', '123 Main', '6478888888', '123@test.com', '123', '2', 'https://i.pinimg.com/originals/c4/aa/31/c4aa31fe28398ca1fbee43a352c5a448.webp', 'placeholder'),
+    ('Taco Bell', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '2', 'https://i.vimeocdn.com/video/611547026.webp?mw=2000&mh=1124&q=70', 'placeholder'),
     ('McDonalds', '145,145', '123 Lighthouse', '6478988888', 'abc@test.com', '123', '3', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'placeholder'),
     ('Dennys', '145,145', '123 Lighthouse', '6478988888', 'abc@test.com', '123', '3', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'placeholder'),
     ('Montanas', '145,145', '123 Lighthouse', '6478988888', 'abc@test.com', '123', '3', 'https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 'placeholder'),
@@ -79,7 +79,8 @@ VALUES
     ('Rice', 200, 'Just Roce', 'https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 13),
     ('Chilli', 288, 'Fresh Chili', 'https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 14),
     ('Hot Sauce', 339, 'Chilli Sauce', 'https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 15),
-    ('Hot Sauce', 339, 'Chilli Sauce', 'https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 16);
+    ('Hot Sauce', 339, 'Chilli Sauce', 'https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 16),
+    ('Hot Sauce', 339, 'Chilli Sauce', 'https://images.pexels.com/photos/2133989/pexels-photo-2133989.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', 17);
 INSERT INTO orders_items
     (order_id, item_id, quantity)
 VALUES
@@ -109,4 +110,22 @@ VALUES
     (5, 3, 2),
     (1, 4, 3),
     (2, 2, 4),
-    (2, 4, 4);
+    (2, 4, 4),
+    (1, 6, 4),
+    (2, 7, 5),
+    (2, 8, 3),
+    (3, 9, 4),
+    (3, 10, 5),
+    (4, 11, 3),
+    (5, 12, 2),
+    (1, 13, 3),
+    (2, 14, 4),
+    (2, 15, 4),
+    (2, 16, 4),
+    (2, 17, 4);
+    -- (2, 18, 4),
+    -- (2, 19, 4),
+    -- (2, 20, 4),
+    -- (2, 21, 4),
+    -- (2, 22, 4),
+    -- (2, 23, 4);
