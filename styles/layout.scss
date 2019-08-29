@@ -16,6 +16,9 @@ body {
 
   nav {
     @include gridspan(1, span 1, 1, span 1);
+    #logo {
+      visibility: hidden;
+    }
   }
 
   #landing-page-top {
@@ -31,13 +34,29 @@ body {
     #landing-page-title {
       @include gridspan(2, span 1, 2, span 1);
       font-size: 3em;
+      height: 5.5em;
       // display: flex;
       // justify-self: flex-end;
+      -moz-animation: bounce 2s infinite;
+      -webkit-animation: bounce 2s infinite;
+      animation: bounce 2s infinite;
+      cursor: pointer;
     }
 
-    #landing-page-title:hover {
-      transform: scale(1.05);
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-30px);
+      }
+      60% {
+        transform: translateY(-15px);
+      }
     }
+    // #landing-page-title:hover {
+    //   transform: scale(1.4);
+    // }
 
     aside {
       background-color: #fff;

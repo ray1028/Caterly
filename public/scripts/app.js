@@ -263,6 +263,7 @@ $(document).ready(() => {
   $("#landing-page-title").click(function() {
     $(".register").css("transform", "translate(-1px, 0)");
     $("#landing-page-title").fadeOut(700);
+    $("#logo").css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 700);
     console.log('fire');
   });
 });
