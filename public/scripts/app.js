@@ -109,8 +109,8 @@ const clearCartByClosingModal = () =>
 const calculateTotal = dataObj => {
   let total = 0;
   dataObj.forEach(item => {
-    total+= item.quantity * Number(item.price);
-  })
+    total += item.quantity * Number(item.price);
+  });
   return total;
 };
 
@@ -174,14 +174,13 @@ const addItemToCart = () => {
     $(".restaurant-checkout-cart-total-box").html(totAfterTax);
 
     $("#myModal").modal("hide");
-
   });
 };
 
 const confirmCart = () => {
   $("#checkout-btn").click(function(e) {
     e.preventDefault();
-    alert('im in here');
+    alert("im in here");
     $.ajax({
       type: "POST",
       url: "/checkout",
@@ -217,10 +216,10 @@ $(document).ready(function() {
 
     $.ajax({
       method: "POST",
-      url: "/home/restaurants/1",
+      //POST URL IS THE CURRENT LOCATION OR http://localhost:8080/home/restaurants/:Id
       data: { time: $("#time").val() },
       success: function() {
-        $(".estimated-time").text(time.value);
+        $(".estimated-time").text(`Order will be ready in ${time.value}`);
       },
       error: function() {
         alert("An AJAX error has occured");
@@ -249,7 +248,7 @@ $(document).ready(() => {
       .css("visibility", "visible");
     // const x = $(this).find(".fa-arrow-right");
     // console.log(x);
-    console.log('fire');
+    console.log("fire");
   });
   $(".img-wrapper").mouseleave(function() {
     $(this)
