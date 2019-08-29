@@ -73,9 +73,6 @@ const cartAdd = () => {
       quantity: currentVal,
       price: currentPrice
     };
-
-    console.log(orderObj);
-
   });
 };
 
@@ -177,17 +174,32 @@ const addItemToCart = () => {
   });
 };
 
+const clearCartFunction = () => {
+  if(localStorage.getItem('cart') && localStorage.getItem('cart').length > 0){
+    $('#restaurant-checkout-items').empty();
+    $(".restaurant-checkout-cart-subtotal-box").html('0.00');
+    $(".restaurant-checkout-cart-tax-box").html('0.00');
+    $(".restaurant-checkout-cart-total-box").html('0.00');
+    localStorage.removeItem('cart');
+  }
+  return;
+}
+
+const clearCart = () => {
+  $('#empty-cart-btn').on('click', function(){
+    clearCartFunction();
+  })
+}
+
 const confirmCart = () => {
   $("#checkout-btn").click(function(e) {
     e.preventDefault();
-    alert("im in here");
     $.ajax({
       type: "POST",
       url: "/checkout",
       data: { items: localStorage.getItem("cart") },
       success: function(data) {
-        console.log("successfully posted data");
-        localStorage.removeItem("cart");
+        clearCartFunction();
       },
       error: function(jqXHR, textStatus, err) {
         console.log("text status " + textStatus + ", err " + err);
@@ -204,6 +216,7 @@ const mainProgram = () => {
   clearCartByClosingModal();
   addItemToCart();
   confirmCart();
+  clearCart();
 };
 
 // main

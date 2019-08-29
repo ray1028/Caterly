@@ -5,13 +5,17 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require("twilio")(accountSid, authToken);
 
 const sendMSG = function(phone) {
-  client.messages
+  return client.messages
     .create({
       body: "Your order has been received",
       from: "+16476948610",
       to: phone
     })
-    .then(message => console.log(message.sid));
+    .then(message => {
+      console.log(message.sid)
+      return message.sid;
+    })
+    .catch(err => console.log('Something went wrong on sending message - '));
 };
 
 module.exports = db => {
@@ -56,8 +60,10 @@ module.exports = db => {
                     .then(restaurant => {
                       console.log("success");
                       console.log(restaurant.rows[0].phone);
-                      res.redirect(301,'/home');
-                      sendMSG(restaurant.rows[0].phone);
+                      sendMSG(restaurant.rows[0].phone)
+                        .then(() => res.redirect(302,'/home'))
+                        .catch(err => console.log('Somethign went wrong when redirecting back to home page - ') , err);
+
                     });
                 }
               });

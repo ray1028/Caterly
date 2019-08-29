@@ -94,11 +94,20 @@
               <div class="restaurant-checkout-cart-tax"><p>Tax</p><p class="restaurant-checkout-cart-tax-box"></p></div>
               <div class="restaurant-checkout-cart-total"><p>Total</p><p class="restaurant-checkout-cart-total-box"></p></div>
             </div>
-            <form id="checkout" action="/checkout" method="POST">
-              <button id="checkout-btn" style="background-color:#DD614A" type="submit" class="btn btn-success" >
-                Checkout
-              </button>
-            </form>
+
+            <div class="restaurant-checkout-btn-conatiner">
+              <div>
+                <form id="checkout" action="/checkout" method="POST">
+                  <button id="checkout-btn" style="background-color:#DD614A" type="submit" class="btn btn-success" >
+                    Checkout
+                  </button>
+                </form>
+             </div>
+             <div>
+               <button id="empty-cart-btn" class="btn btn-warning ">Clear Cart</button>
+             </div>
+
+            </div>
 
           </div>
         </div>
