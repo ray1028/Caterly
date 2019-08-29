@@ -28,6 +28,7 @@ html {
 body {
   display: grid;
   grid-template-rows: 5vh 95%;
+  font-family: 'Didact Gothic', sans-serif;
   // grid-template-columns: 950px auto;
 }
 
@@ -46,9 +47,12 @@ body {
     display: flex;
     justify-content: center;
     color:white;
+    text-shadow: 1px 1px black;
+    font-size: 2em;
     height: 300px;
     align-items: center;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Didact Gothic', sans-serif;
+    // font-family: 'Roboto', sans-serif;
 
     img{
       padding: 20px;
@@ -58,7 +62,6 @@ body {
   }
 
   #menu-container {
-    border: green solid 1px;
     display: flex;
     justify-content: center;
   }
@@ -82,21 +85,18 @@ body {
   }
 
     article.menu-item:hover{
-      color:orange;
+      color:#DD614A;
       cursor: pointer;
-      // transform:rotateX(150deg);
-      background-color:#DD614A;
       text-align: center;
       .menu-item-addcart{
-        // transform: rotateX(-150deg);
         display:block;
         margin-right: 350px;
         margin-bottom:200px;
         color:white;
         font-weight: bold;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Didact Gothic', sans-serif;
         border:solid 1px sienna;
-        height:60%;
+        height: 60%;
       }
 
       div.menu-item*{
@@ -121,6 +121,9 @@ body {
       height: 70px;
       padding-left: 10px;
       transition: .8s all ease;
+      font-size: 1.3em;
+      width: 41.5em;
+      margin-left: 1.5em;
 
       .menu-item-addcart{
         display:none;
@@ -133,7 +136,9 @@ body {
         justify-content: flex-start;
         width: 50%;
         flex-grow: 0.5;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Didact Gothic', sans-serif;
+
+        // font-family: 'Roboto', sans-serif;
         font-weight: bold;
 
       }
@@ -147,7 +152,9 @@ body {
       }
     }
     .menu-item-3{
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Didact Gothic', sans-serif;
+
+      // font-family: 'Roboto', sans-serif;
     }
   }
 
@@ -161,12 +168,16 @@ body {
     // height: 80%;
   }
 
+  #checkout-banner{
+    background: #DD614A;
+    min-height: 15px;
+  }
+
   .restaurant-checkout{
     flex:0.4;
     height: 100%;
     grid-row: 1 / span 1;
     grid-column: 2 / span 1;
-    border: blue 1px solid;
     // width: 100vw;
 
     .restaurant-checkout-main{
@@ -179,6 +190,7 @@ body {
       width: 30em;
 
       .checkout-list{
+        font-size: 1.2em;
         margin-bottom: 10px;
       }
 
@@ -199,22 +211,31 @@ body {
         width: 25em;
         padding-left: 10px;
         padding-right: 10px;
-        border: 3px solid red;
+        // border: 3px solid red;
         overflow: scroll;
+        background: white;
+        filter: drop-shadow(2px 4px 6px gray);
 
         .restaurant-checkout-title{
           padding-top: 10px;
           text-align: center;
-          font-family: 'Roboto', sans-serif;
+          font-family: 'Didact Gothic', sans-serif;
+
+          // font-family: 'Roboto', sans-serif;
           letter-spacing: 0.3px;
+          h4 {
+            font-size: 1.9rem;
+          }
         }
         // #restaurant-checkout-items {
         //   overflow: scroll;
         // }
         .restaurant-checkout-cart{
           width: 100%;
-          font-size: 0.8rem;
-          font-family: 'Open Sans Condensed', sans-serif;
+          font-size: 1.15em;
+          font-family: 'Didact Gothic', sans-serif;
+
+          // font-family: 'Open Sans Condensed', sans-serif;
           font-weight: bold;
 
           .restaurant-checkout-cart-subtotal{
@@ -233,6 +254,30 @@ body {
             flex-flow: row nowrap;
             justify-content: space-between;
           }
+        }
+        .restaurant-checkout-btn-conatiner {
+          display: flex;
+          div {
+            margin-right: 1em;
+
+          }
+        }
+        #checkout-btn, #empty-cart-btn{
+          color: white;
+          background: #DD614A;
+          border: none;
+          outline: none;
+
+        }
+        #checkout-btn:focus {
+          border: none;
+          outline: none;
+          box-shadow: 2px 2px transparent;
+        }
+        #empty-cart-btn:focus {
+          border: none;
+          outline: none;
+          box-shadow: 2px 2px transparent;
         }
         // .restaurant-checkout-btn-conatiner{
         //   display: flex;

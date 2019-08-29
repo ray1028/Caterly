@@ -74,7 +74,7 @@
               <div class="menu-item-1" data-id="<%=item.id%>"><%=item.name%></div>
               <div class="menu-item-2" data-resto-id="<%=restaurant.id%>">$<%=(item.price / 1000).toFixed(2)%></div>
               <div class="menu-item-3"><%=item.description%></div>
-              <button class="menu-item-addcart btn btn-primary" style="background-color:#DD614A">add to cart</button>
+              <!-- <button class="menu-item-addcart btn btn-primary" style="background-color:#DD614A">add to cart</button> -->
           </article>
           <hr>
             <% }%>
@@ -84,10 +84,12 @@
       <div class="restaurant-checkout">
         <div class="restaurant-checkout-main">
           <div class="restaurant-checkout-main-wrapper">
+            <div id="checkout-banner">
+              <br>
+            </div>
             <header>
                 <div class="restaurant-checkout-title">
                   <h4>Your Order Summary</h4>
-                  <p>Do you want some S.curvy?</p>
                 </div>
             </header>
             <br>
