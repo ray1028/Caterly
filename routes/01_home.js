@@ -18,7 +18,6 @@ module.exports = db => {
     let queryStrCustomer = "SELECT * FROM customers WHERE id = $1";
     let queryStrCategories =
       "SELECT categories.name as name, categories.thumbnail_image as thumbnail_image, count(restaurants) as count FROM categories JOIN restaurants ON categories.id = category_id GROUP BY categories.name, categories.thumbnail_image";
-
     // SELECT categories.name as name, categories.thumbnail_image as thumbnail_image, count(restaurants) FROM categories JOIN restaurants ON categories.id = category_id
     // GROUP BY categories.name, categories.thumbnail_image;
 
@@ -26,13 +25,20 @@ module.exports = db => {
       let values = [req.session.user_id];
       const userRes = await db.query(queryStrCustomer, values);
       const categoriesRes = await db.query(queryStrCategories);
+      const restaurantRes = await db.query('select name from restaurants');
 
       if (userRes.rowCount !== 1) throw new Error("User is not found");
       if (categoriesRes.rowCount < 1) throw new Error("Categories not found");
+      if (restaurantRes.rowCount < 1) throw new Error("Restaurant not found");
+
+      // array holds restaurant autocomplete search list
+      const restaurantNameArr = [];
+      restaurantRes.rows.forEach(restaurant => restaurantNameArr.push(restaurant.name))
 
       res.render("home", {
         user: userRes.rows[0].first_name,
-        categories: categoriesRes.rows
+        categories: categoriesRes.rows,
+        restaurants: restaurantNameArr
       });
     } catch (err) {
       res.status(500).json({ error: err.message });

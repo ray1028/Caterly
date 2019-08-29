@@ -40,7 +40,6 @@ module.exports = db => {
                 }
               })
               .catch(err => console.log(`Error occurs finding items - ${err}`));
-            // res.render("restaurants", templateVars);
           }
         })
         .catch(err => console.log(`Error - ${err}`));
