@@ -58,7 +58,6 @@ const clickToAdd = () => {
 };
 
 const cartAdd = () => {
-
   currentVal = $("#cart-quantity-box").val();
   currentVal = currentVal || 1;
 
@@ -118,7 +117,6 @@ const calculateTotal = dataObj => {
 };
 
 const addItemToCart = () => {
-
   $("#addtocart").submit(e => {
     e.preventDefault();
   });
@@ -207,7 +205,7 @@ const confirmCart = () => {
       data: { items: localStorage.getItem("cart") },
       success: function(data) {
         clearCartFunction();
-        window.location.href = 'http://localhost:8080/';
+        window.location.href = "http://localhost:8080/";
       },
       error: function(jqXHR, textStatus, err) {
         console.log("text status " + textStatus + ", err " + err);
@@ -228,12 +226,17 @@ const searchAutoComplete = () => {
     .split(",");
 
   $("#search-restaurant-text").autocomplete({
-    source: function( request, response ) {
-            var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
-            response( $.grep( restaurantsData, function( item ){
-                return matcher.test( item );
-            }) );
-        }
+    source: function(request, response) {
+      var matcher = new RegExp(
+        "^" + $.ui.autocomplete.escapeRegex(request.term),
+        "i"
+      );
+      response(
+        $.grep(restaurantsData, function(item) {
+          return matcher.test(item);
+        })
+      );
+    }
   });
 };
 
@@ -252,19 +255,18 @@ const mainProgram = () => {
 
 // main
 $(document).ready(function() {
-
   $(".view-order").on("click", function(event) {
     let name = $(this).data("name");
     let date = $(this).data("date");
     let total = $(this).data("total");
     let pickup = $(this).data("pickup");
+    // let customersid = $(this).data("customerid");
     $.ajax({
-      method: "GET",
-      data: { name: name, date: date, total: total, pickup: pickup },
+      method: "POST",
+      URL: "/home/restaurants/1",
+      data: { name: name, date: date, total: total, pickup: pickup},
       success: function(res) {
-        
-
-        
+        console.log("success");
       }
     });
   });
@@ -324,12 +326,11 @@ $(document).ready(function() {
   $("#landing-page-title").click(function() {
     $(".register").css("transform", "translate(-1px, 0)");
     $("#landing-page-title").fadeOut(700);
-    $("#logo").css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 700);
-    console.log('fire');
+    $("#logo")
+      .css({ opacity: 0, visibility: "visible" })
+      .animate({ opacity: 1 }, 700);
+    console.log("fire");
   });
 
   mainProgram();
-
 });
-
-
