@@ -6,10 +6,96 @@ const client = require("twilio")(accountSid, authToken);
 const strftime = require("strftime");
 
 const formatDate = function(epoch) {
-  return strftime("%b %D %T", new Date(parseInt(epoch)));
+  return strftime("%b %D %I:%M%p", new Date(parseInt(epoch)));
 };
 
 module.exports = db => {
+  // router.get("/restaurants/1/orders/1", (req, res) => {
+  //   let templateVars = {};
+  //   const queryStrHeader = `
+  //   SELECT name FROM restaurants
+  //     WHERE id = $1
+  //   `;
+  //   const values = [req.session.user_id];
+
+  //   console.log(req.body, "hi");
+
+  //   db.query(queryStrHeader, values).then(data => {
+  //     templateVars.user = `${data.rows[0].name}`;
+
+  //     res.render("restaurant_home_orders", templateVars);
+  //   });
+  // });
+
+  //The get route for the login of the restaurant, this page will show all of the current and old orders
+  router.get("/restaurants/:id", (req, res) => {
+    let templateVars = {};
+
+    const queryStrHeader = `
+    SELECT name FROM restaurants
+      WHERE id = $1
+    `;
+    const values = [req.session.user_id];
+
+    console.log(req.body);
+
+    db.query(queryStrHeader, values).then(data => {
+      templateVars.user = `${data.rows[0].name}`;
+
+      const queryOrders = `SELECT restaurant_id, pickup_time , restaurants.name as name, sum(order_total) as order_total, customers.first_name as customers_name, created_at FROM restaurants JOIN orders on restaurants.id = restaurant_id
+      JOIN customers on customers.id = customer_id WHERE
+      restaurant_id = $1 GROUP BY created_at, orders.restaurant_id, orders.pickup_time, restaurants.name, customers.first_name ORDER BY created_at DESC;
+  `;
+      const queryOrdersValue = [req.params.id];
+
+      db.query(queryOrders, queryOrdersValue).then(data => {
+        if (data.rowCount === 0) {
+          res.send("error");
+          console.log("DNE");
+        } else {
+          templateVars.orders = data.rows;
+          templateVars.formatDate = formatDate;
+          res.render(`restaurants_home`, templateVars);
+        }
+      });
+    });
+  });
+
+  // POST ROUTE TO SEE ORDER
+  // router.post("/restaurants/:id/1", (req, res) => {});
+
+  //POST route to update the confirm time and send back a text message to the client
+  router.post("/restaurants/:id", (req, res) => {
+    let updateQueryValue = [Date.now() + req.body.time * 60000, req.params.id];
+
+    let updateQuery = ` UPDATE orders SET pickup_time = $1 FROM restaurants WHERE restaurants.id = restaurant_id AND restaurants.id = $2 AND pickup_time = 0 AND created_at = ${req.body.currentTime};`;
+
+    let phoneQuery = `SELECT customers.phone FROM customers JOIN orders ON customers.id = customer_id
+    JOIN restaurants ON restaurants.id = restaurant_id WHERE restaurants.id = $1 AND pickup_time = 0 AND created_at = ${req.body.currentTime};`;
+
+    console.log(req.body);
+
+    db.query(phoneQuery, [req.params.id]).then(data => {
+      // sendMSG(textMSG(req.body.time), data.rows[0].phone);
+
+      db.query(updateQuery, updateQueryValue);
+    });
+    // .catch(err => console.log(err));
+
+    res.redirect(`/home/restaurants/${req.params.id}`);
+  });
+
+  //Helper functions
+  const textMSG = function(time) {
+    return `You will recieve your order in ${time} minutes`;
+  };
+
+  const sendMSG = function(content, phone) {
+    client.messages
+      .create({ body: content, from: "+16476948610", to: phone })
+      .then(message => console.log(message.sid));
+  };
+
   router.get("/", async (req, res) => {
     // if user not logged in and access home page. Redirect to login page
     // if (!req.session.user_id) {
@@ -55,72 +141,6 @@ module.exports = db => {
       }
     });
   });
-
-  //The get route for the login of the restaurant, this page will show all of the current and old orders
-  router.get("/restaurants/:id", (req, res) => {
-    let templateVars = {};
-
-    const queryStrHeader = `
-    SELECT name FROM restaurants
-      WHERE id = $1
-    `;
-    const values = [req.session.user_id];
-
-    db.query(queryStrHeader, values).then(data => {
-      templateVars.user = `${data.rows[0].name}`;
-
-      const queryOrders = `SELECT restaurant_id, pickup_time , restaurants.name as name, sum(order_total) as order_total, customers.first_name as customers_name, created_at FROM restaurants JOIN orders on restaurants.id = restaurant_id
-      JOIN customers on customers.id = customer_id WHERE
-      restaurant_id = $1 GROUP BY created_at, orders.restaurant_id, orders.pickup_time, restaurants.name, customers.first_name ORDER BY created_at DESC;
-  `;
-      const queryOrdersValue = [req.params.id];
-
-      db.query(queryOrders, queryOrdersValue).then(data => {
-        if (data.rowCount === 0) {
-          res.send("error");
-          console.log("DNE");
-        } else {
-          templateVars.orders = data.rows;
-          templateVars.formatDate = formatDate;
-          res.render(`restaurants_home`, templateVars);
-        }
-      });
-    });
-  });
-
-  //POST route to update the confirm time and send back a text message to the client
-  router.post("/restaurants/:id", (req, res) => {
-    // let updateQuery = `UPDATE orders SET pickup_time = $1 WHERE restaurants.id = $2;`;
-    let updateQueryValue = [Date.now() + req.body.time * 60000, req.params.id];
-
-    let updateQuery = ` UPDATE orders SET pickup_time = $1 FROM restaurants WHERE restaurants.id = restaurant_id AND restaurants.id = $2 AND pickup_time = 0;`;
-
-    let phoneQuery = `SELECT customers.phone FROM customers JOIN orders ON customers.id = customer_id
-    JOIN restaurants ON restaurants.id = restaurant_id WHERE restaurants.id = $1 AND pickup_time = 0;`;
-
-    console.log(req.params.id, "id", req.body.time, "body");
-
-    db.query(phoneQuery, [req.params.id]).then(data => {
-      sendMSG(textMSG(req.body.time), data.rows[0].phone);
-
-      console.log(data.rows);
-
-      db.query(updateQuery, updateQueryValue);
-    });
-
-    res.redirect(`/home/restaurants/${req.params.id}`);
-  });
-
-  //Helper functions
-  const textMSG = function(time) {
-    return `You will recieve your order in ${time} minutes`;
-  };
-
-  const sendMSG = function(content, phone) {
-    client.messages
-      .create({ body: content, from: "+16476948610", to: phone })
-      .then(message => console.log(message.sid));
-  };
 
   return router;
 };

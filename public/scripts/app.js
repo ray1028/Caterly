@@ -39,8 +39,10 @@ const clickToAdd = () => {
         .html()
     );
     $("#cart-quantity-box").val(1);
-    currentPrice = $(this).children((".menu-item-2")).html();
-    currentPrice = (Number(currentPrice.slice(1))).toFixed(2);
+    currentPrice = $(this)
+      .children(".menu-item-2")
+      .html();
+    currentPrice = Number(currentPrice.slice(1)).toFixed(2);
     $("#cart-total").html("$" + currentPrice);
 
     // initializing object for the first time when a user click on
@@ -75,7 +77,6 @@ const cartAdd = () => {
     };
 
     console.log(orderObj);
-
   });
 };
 
@@ -210,6 +211,28 @@ const mainProgram = () => {
 $(document).ready(function() {
   mainProgram();
 
+  $(".view-order").on("click", function(event) {
+    let name = $(this).data("name");
+    let date = $(this).data("date");
+    let total = $(this).data("total");
+    let pickup = $(this).data("pickup");
+    $.ajax({
+      method: "GET",
+      data: { name: name, date: date, total: total, pickup: pickup },
+      success: function(res) {
+        
+
+        
+      }
+    });
+  });
+
+  //Sets data for the ajax method inside .restaurant-confirm on click
+  $(".enter-timelink").on("click", function(event) {
+    currentlySelectedTime = $(this).data("time");
+    currentlySelectedValue = $(this);
+  });
+
   //AJAX method to update the page with the time of the order.
   $(".restaurant-confirm").on("click", function(event) {
     event.preventDefault;
@@ -217,9 +240,9 @@ $(document).ready(function() {
     $.ajax({
       method: "POST",
       //POST URL IS THE CURRENT LOCATION OR http://localhost:8080/home/restaurants/:Id
-      data: { time: $("#time").val() },
+      data: { time: $("#time").val(), currentTime: currentlySelectedTime },
       success: function() {
-        $(".estimated-time").text(`Order will be ready in ${time.value}`);
+        currentlySelectedValue.text(`Order Updated!`).addClass("removeClick");
       },
       error: function() {
         alert("An AJAX error has occured");
@@ -227,16 +250,15 @@ $(document).ready(function() {
     });
   });
 
-  // alert((new Date($(".date-value").html())));
-
-  // $(".date-value").html($(this)(new Date($(".date-value").html())));
   $("#categories-container-main a").on("click", e => {
     e.preventDefault();
     let x = $(this.activeElement)[0];
     let y = $(x).attr("data-id");
 
     $(".side-content-container").css("visibility", "hidden");
-    $(`#${y}`).css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 600);
+    $(`#${y}`)
+      .css({ opacity: 0, visibility: "visible" })
+      .animate({ opacity: 1 }, 600);
     // $(`#${y}`).css("visibility", "visible");
   });
 });
@@ -263,6 +285,6 @@ $(document).ready(() => {
   $("#landing-page-title").click(function() {
     $(".register").css("transform", "translate(-1px, 0)");
     $("#landing-page-title").fadeOut(700);
-    console.log('fire');
+    console.log("fire");
   });
 });

@@ -9,3 +9,8 @@ a.close-modal {
 .modal-flex {
   display: flex;
 }
+
+.removeClick {
+  pointer-events: none;
+  color: black;
+}

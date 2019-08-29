@@ -3,13 +3,23 @@ nav {
 }
 
 body {
-  background-color: #EEE;
+  background-color: #eee;
   display: grid;
   grid-template-rows: 5vh 95vh;
   grid-template-columns: 1;
   // grid-template-columns: 600px auto;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   // font-size:42px;
+}
+
+th,
+tr {
+  text-align: center;
+}
+
+.th-inner-table {
+  display: flex;
+  justify-content: center;
 }
 
 content {
@@ -26,12 +36,18 @@ content {
   align-items: center;
   width: 80%;
   min-width: 500px;
+  margin-top: 50px;
   // justify-content: center;
-  // border: 4px solid blue; 
-  
+  // border: 4px solid blue;
+
   header {
     height: 100px;
     width: 80%;
     text-align: center;
   }
+}
+
+.table .thead-dark th {
+  background-color: #dd614a;
+  border-color: #dd614a;
 }
