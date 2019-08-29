@@ -23,7 +23,8 @@ module.exports = db => {
 
       const myOrdersQuery = `
       SELECT customer_id, restaurant_id, created_at, pickup_time, sum(order_total) as order_total, restaurants.name as name FROM orders JOIN restaurants ON 
-      restaurants.id = restaurant_id JOIN customers ON customer_id = customers.id WHERE customers.id = $1 GROUP BY restaurants.name, created_at, customer_id, orders.restaurant_id, orders.pickup_time;
+      restaurants.id = restaurant_id JOIN customers ON customer_id = customers.id WHERE customers.id = $1 GROUP BY restaurants.name, created_at, customer_id, orders.restaurant_id, orders.pickup_time
+      ORDER BY created_at DESC;
  `;
 
       db.query(myOrdersQuery, values).then(data2 => {

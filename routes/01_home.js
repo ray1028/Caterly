@@ -58,8 +58,6 @@ module.exports = db => {
 
   //The get route for the login of the restaurant, this page will show all of the current and old orders
   router.get("/restaurants/:id", (req, res) => {
-    let orders = [];
-    let promqueries = [];
     let templateVars = {};
 
     const queryStrHeader = `
@@ -71,58 +69,43 @@ module.exports = db => {
     db.query(queryStrHeader, values).then(data => {
       templateVars.user = `${data.rows[0].name}`;
 
-      const queryOrders = `SELECT restaurant_id, pickup_time , restaurants.name as name, order_total , customers.first_name as customers_name, orders.id as orderid, created_at FROM restaurants JOIN orders on restaurants.id = restaurant_id
-    JOIN customers on customers.id = customer_id WHERE
-    restaurant_id = $1`;
-      const queryOrdersValue = [`${req.params.id}`];
+      const queryOrders = `SELECT restaurant_id, pickup_time , restaurants.name as name, sum(order_total) as order_total, customers.first_name as customers_name, created_at FROM restaurants JOIN orders on restaurants.id = restaurant_id
+      JOIN customers on customers.id = customer_id WHERE
+      restaurant_id = $1 GROUP BY created_at, orders.restaurant_id, orders.pickup_time, restaurants.name, customers.first_name ORDER BY created_at DESC;
+  `;
+      const queryOrdersValue = [req.params.id];
 
       db.query(queryOrders, queryOrdersValue).then(data => {
         if (data.rowCount === 0) {
           res.send("error");
           console.log("DNE");
+        } else {
+          templateVars.orders = data.rows;
+          templateVars.formatDate = formatDate;
+          res.render(`restaurants_home`, templateVars);
         }
-
-        orders = data.rows;
-        const queries = orders.map(order => {
-          const newQuery = ` SELECT * FROM orders_items WHERE order_id = ${order.orderid} `;
-          return db.query(newQuery);
-        });
-
-        Promise.all(queries).then(values => {
-          values.forEach(value => {
-            orders.forEach(order => {
-              console.log(value, order);
-            });
-            templateVars.orders = orders;
-            templateVars.formatDate = formatDate;
-            res.render(`restaurants_home`, templateVars);
-          });
-        });
       });
     });
   });
-  // .then(res => {
-  //   orders.forEach(order => {
-  //     // if(order.orderid === )
-  //     console.log(promqueries, "hi");
-  //     // console.log(order.orderid, "end of this order");
-  //   });
-
-  //       const templateVars = { orders: orders, formatDate: formatDate };
-  //       res.render(`restaurants_home`, templateVars);
-  //     });
-  // });
 
   //POST route to update the confirm time and send back a text message to the client
   router.post("/restaurants/:id", (req, res) => {
-    let updateQuery = `UPDATE orders SET pickup_time = $1 WHERE orders.id = $2;`;
+    // let updateQuery = `UPDATE orders SET pickup_time = $1 WHERE restaurants.id = $2;`;
     let updateQueryValue = [Date.now() + req.body.time * 60000, req.params.id];
 
-    db.query(updateQuery, updateQueryValue);
-    let phoneQuery = `SELECT phone FROM customers JOIN orders ON customers.id = customer_id WHERE orders.id = $1;`;
+    let updateQuery = ` UPDATE orders SET pickup_time = $1 FROM restaurants WHERE restaurants.id = restaurant_id AND restaurants.id = $2 AND pickup_time = 0;`;
+
+    let phoneQuery = `SELECT customers.phone FROM customers JOIN orders ON customers.id = customer_id
+    JOIN restaurants ON restaurants.id = restaurant_id WHERE restaurants.id = $1 AND pickup_time = 0;`;
+
+    console.log(req.params.id, "id", req.body.time, "body");
 
     db.query(phoneQuery, [req.params.id]).then(data => {
       sendMSG(textMSG(req.body.time), data.rows[0].phone);
+
+      console.log(data.rows);
+
+      db.query(updateQuery, updateQueryValue);
     });
 
     res.redirect(`/home/restaurants/${req.params.id}`);
@@ -141,3 +124,7 @@ module.exports = db => {
 
   return router;
 };
+
+// SELECT * FROM orders JOIN orders_items ON customer_id = orders.id
+// JOIN items ON items.id = item_id WHERE customer_id = 1
+// GROUP BY created_at, pickup_time, orders.id, orders_items.id, items.id;
