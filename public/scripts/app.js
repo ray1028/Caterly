@@ -78,6 +78,8 @@ const cartAdd = () => {
       quantity: currentVal,
       price: currentPrice
     };
+
+    console.log(orderObj);
   });
 };
 
@@ -251,6 +253,28 @@ const mainProgram = () => {
 // main
 $(document).ready(function() {
 
+  $(".view-order").on("click", function(event) {
+    let name = $(this).data("name");
+    let date = $(this).data("date");
+    let total = $(this).data("total");
+    let pickup = $(this).data("pickup");
+    $.ajax({
+      method: "GET",
+      data: { name: name, date: date, total: total, pickup: pickup },
+      success: function(res) {
+        
+
+        
+      }
+    });
+  });
+
+  //Sets data for the ajax method inside .restaurant-confirm on click
+  $(".enter-timelink").on("click", function(event) {
+    currentlySelectedTime = $(this).data("time");
+    currentlySelectedValue = $(this);
+  });
+
   //AJAX method to update the page with the time of the order.
   $(".restaurant-confirm").on("click", function(event) {
     event.preventDefault;
@@ -258,9 +282,9 @@ $(document).ready(function() {
     $.ajax({
       method: "POST",
       //POST URL IS THE CURRENT LOCATION OR http://localhost:8080/home/restaurants/:Id
-      data: { time: $("#time").val() },
+      data: { time: $("#time").val(), currentTime: currentlySelectedTime },
       success: function() {
-        $(".estimated-time").text(`Order will be ready in ${time.value}`);
+        currentlySelectedValue.text(`Order Updated!`).addClass("removeClick");
       },
       error: function() {
         alert("An AJAX error has occured");
@@ -268,9 +292,6 @@ $(document).ready(function() {
     });
   });
 
-  // alert((new Date($(".date-value").html())));
-
-  // $(".date-value").html($(this)(new Date($(".date-value").html())));
   $("#categories-container-main a").on("click", e => {
     e.preventDefault();
     let x = $(this.activeElement)[0];

@@ -3,7 +3,7 @@ const router = express.Router();
 const strftime = require("strftime");
 
 const formatDate = function(epoch) {
-  return strftime("%b %D %T", new Date(parseInt(epoch)));
+  return strftime("%b %D %I:%M%p", new Date(parseInt(epoch)));
 };
 
 module.exports = db => {
