@@ -58,7 +58,10 @@ const clickToAdd = () => {
 };
 
 const cartAdd = () => {
+
   currentVal = $("#cart-quantity-box").val();
+  currentVal = currentVal || 1;
+
   $(".plus-btn").click(function() {
     ++currentVal;
     $("#cart-quantity-box").val(currentVal);
@@ -98,8 +101,7 @@ const cartMinus = () => {
 
 const clearCartByClosingModal = () =>
   $("#myModal").on("hidden.bs.modal", function() {
-    currentVal = 0;
-    currentPrice = 0;
+    currentVal = 1;
     orderObj = {};
     $("#cart-quantity-box").val(0);
     $("#cart-total").html("$" + 0.0);
@@ -114,6 +116,7 @@ const calculateTotal = dataObj => {
 };
 
 const addItemToCart = () => {
+
   $("#addtocart").submit(e => {
     e.preventDefault();
   });
@@ -202,6 +205,7 @@ const confirmCart = () => {
       data: { items: localStorage.getItem("cart") },
       success: function(data) {
         clearCartFunction();
+        window.location.href = 'http://localhost:8080/';
       },
       error: function(jqXHR, textStatus, err) {
         console.log("text status " + textStatus + ", err " + err);
