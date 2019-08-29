@@ -30,8 +30,11 @@ nav {
 }
 
 body {
-  background-color: #fff;
-  background-image: linear-gradient(#fff, #F0F0F0);
+  // background-color: #fff
+  // background-image: url("../../img/categories-ff-web.jpg");
+  // background-size: cover;
+  // background-image: url("https://i.imgur.com/DI2bkYZ.jpg");
+  // background-image: linear-gradient(#fff, #F0F0F0);
   display: grid;
   grid-template-rows: 7.5vh 92.5vh;
   grid-template-columns: 600px auto;
@@ -39,6 +42,13 @@ body {
   // font-size:42px;
 }
 
+// #corner-picture {
+//   color: black;
+//   background-image: linear-gradient(#fff, black);
+// }
+#corner-picture {
+  width: 300px;
+}
 #categories-head {
   width: 100%;
   margin-top: 1.5em;
@@ -96,6 +106,35 @@ body {
   }
 }
 
+#page {
+  grid-row: 2 / span 1;
+  grid-column: 2 / span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5em;
+  color: #DD614A;
+  h1 {
+    -moz-animation: bounce 2s infinite;
+    -webkit-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+
+
 #categories-container-main a:hover {
   transform: scale(1.05);
   filter: drop-shadow(2px 4px 6px #DD614A);
@@ -108,6 +147,7 @@ body {
   grid-column: 2 / span 1;
   width: 80%;
   min-width: 700px;
+  margin-left: 10em;
   // grid-template-columns: ;
   // grid-template-rows: ;
 

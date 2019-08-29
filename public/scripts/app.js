@@ -262,9 +262,9 @@ $(document).ready(function() {
       method: "GET",
       data: { name: name, date: date, total: total, pickup: pickup },
       success: function(res) {
-        
 
-        
+
+
       }
     });
   });
@@ -297,6 +297,8 @@ $(document).ready(function() {
     let x = $(this.activeElement)[0];
     let y = $(x).attr("data-id");
 
+    $("#page").css("visibility","hidden");
+
     $(".side-content-container").css("visibility", "hidden");
     $(`#${y}`)
       .css({ opacity: 0, visibility: "visible" })
@@ -327,6 +329,7 @@ $(document).ready(function() {
     $("#logo").css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 700);
     console.log('fire');
   });
+
 
   mainProgram();
 
