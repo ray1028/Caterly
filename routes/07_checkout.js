@@ -29,7 +29,6 @@ module.exports = db => {
         .query(
           "insert into orders (customer_id, restaurant_id, created_at, pickup_time, order_total) values ($1, $2, $3, $4, $5) returning *",
           [
-
             req.session.user_id,
             item.restoId,
             dm,

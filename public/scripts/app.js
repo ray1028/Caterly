@@ -39,7 +39,7 @@ const clickToAdd = () => {
         .html()
     );
     $("#cart-quantity-box").val(1);
-    currentPrice = $(".menu-item-2").html();
+    currentPrice = $(this).children((".menu-item-2")).html();
     currentPrice = (Number(currentPrice.slice(1))).toFixed(2);
     $("#cart-total").html("$" + currentPrice);
 
