@@ -27,7 +27,10 @@
   }
 
 body {
-  display: flex;
+  // display: flex;
+  display: grid;
+  grid-template-rows: 7.5vh 88.5vh auto;
+
   flex-direction: column;
   margin: 0;
   padding: 0;
@@ -39,8 +42,8 @@ body {
 
 
   nav {
-    position: fixed;
-    top:0;
+    position: absolute;
+    // top:0;
     z-index: 1;
     width: 100%;
   }
@@ -48,6 +51,7 @@ body {
 
 
 #search-page {
+  grid-row: 1 / span 2;
   position: relative;
   justify-content: center;
   display: flex;
@@ -100,6 +104,8 @@ body {
 #categories-page {
   background-color: #fff;
   background-image: linear-gradient(#fff, #F0F0F0);
+  grid-row: 3 / span 1;
+  // grid-column:
   // background: #fff;
   // height: 100vh;
   display: flex;
@@ -139,6 +145,7 @@ body {
 // }
 
 .img-wrapper {
+  filter: drop-shadow(8px 9px 9px #A5A5A5);
   margin-top: 5em;
   // margin-right: 1.5em;
   // margin-left: 1.5em;

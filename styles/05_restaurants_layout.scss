@@ -351,6 +351,7 @@ body {
 
 .minus-btn, .plus-btn {
   border: none;
+  outline: none;
   background: transparent;
 }
 
@@ -359,6 +360,10 @@ body {
   font-size: 1.25em;
 }
 
+#add-item{
+  border: none;
+  outline: none;
+}
 // #myModal {
 //   padding-right: 5px;
 //   display: flex;
