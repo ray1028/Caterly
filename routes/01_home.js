@@ -66,15 +66,13 @@ module.exports = db => {
     `;
     const values = [req.session.user_id];
 
-    console.log(req.body);
-
     db.query(queryStrHeader, values).then(data => {
       templateVars.user = `${data.rows[0].name}`;
 
-      const queryOrders = `SELECT restaurant_id, pickup_time , restaurants.name as name, sum(order_total) as order_total, customers.first_name as customers_name, created_at 
-      FROM restaurants 
+      const queryOrders = `SELECT restaurant_id, pickup_time , restaurants.name as name, sum(order_total) as order_total, customers.first_name as customers_name, created_at
+      FROM restaurants
       JOIN orders ON restaurants.id = restaurant_id
-      JOIN customers ON customers.id = customer_id 
+      JOIN customers ON customers.id = customer_id
       WHERE
       restaurant_id = $1 GROUP BY created_at, orders.restaurant_id, orders.pickup_time, restaurants.name, customers.first_name ORDER BY created_at DESC;
   `;
@@ -108,38 +106,40 @@ module.exports = db => {
     let phoneQuery = `SELECT customers.phone FROM customers JOIN orders ON customers.id = customer_id
     JOIN restaurants ON restaurants.id = restaurant_id WHERE restaurants.id = $1 AND pickup_time = 0 AND created_at = ${req.body.currentTime};`;
 
-    let created_at_date = parseInt(req.body.date);
-    let orderTotal = parseInt(req.body.total);
-    let customername = req.body.name;
+    let created_at_date = parseInt(req.body.resData.date);
+    // let orderTotal = parseInt(req.body.resData.total);
+    let cusName = req.body.resData.name;
 
-    let ordersQueryValue = [customername];
+    let ordersQueryValue = [cusName, created_at_date];
+    let ordersQuery = `select oi.quantity, i.name from items i
+    join orders_items oi on i.id = oi.item_id
+    join orders o on oi.order_id = o.id
+    join customers c on o.customer_id = c.id
+    where c.first_name = $1 and o.created_at = $2`;
 
-    let ordersQuery = `SELECT quantity, items.name FROM items 
-    JOIN orders_items ON items.id=orders_items.item_id
-    JOIN orders ON orders.id = orders_items.item_id
-    JOIN customers on customers.id = orders.customer_id
-    WHERE customers.first_name = $1 and created_at = $2 ;
-    `;
+    let objArr = [];
 
-    // iterate through rows
-    // put that into a json object
-    // wrap the whole json object into an Array
-    // jsonify the whole thing
-    // jsonify
-
-    db.query(ordersQuery, ordersQueryValue).then(data => {
-      console.log(data.rows, "this is data", req.body.date);
-      console.log(typeof req.body.date);
+    db.query(ordersQuery, ordersQueryValue).then(resData => {
+      // console.log("@@@@@@@",resdata.rows);
+      if (resData.rowCount < 1) {
+        throw new Error("Error on fetching data");
+      } else {
+        console.log('im in here now');
+        for (let item of resData.rows) {
+          objArr.push(item);
+        }
+        res.send(JSON.stringify(objArr));
+      }
     });
 
-    db.query(phoneQuery, [req.params.id]).then(data => {
-      // sendMSG(textMSG(req.body.time), data.rows[0].phone);
+    // db.query(phoneQuery, [req.params.id]).then(data => {
+    //   // sendMSG(textMSG(req.body.time), data.rows[0].phone);
 
-      db.query(updateQuery, updateQueryValue);
-    });
-    // .catch(err => console.log(err));
+    //   db.query(updateQuery, updateQueryValue);
+    // });
+    // // .catch(err => console.log(err));
 
-    res.redirect(`/home/restaurants/${req.params.id}`);
+    // res.redirect(`/home/restaurants/${req.params.id}`);
   });
 
   //Helper functions

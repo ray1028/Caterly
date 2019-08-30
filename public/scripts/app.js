@@ -264,15 +264,11 @@ $(document).ready(function() {
     $.ajax({
       method: "POST",
       URL: "/home/restaurants/1",
-      data: { name: name, date: date, total: total, pickup: pickup},
+      data: { resData:
+          {name, date, total, pickup}
+          },
       success: function(res) {
-<<<<<<< HEAD
-
-
-
-=======
-        console.log("success");
->>>>>>> loginfix2
+        console.log(res);
       }
     });
   });
