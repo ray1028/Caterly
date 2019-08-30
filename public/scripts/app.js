@@ -297,7 +297,7 @@ $(document).ready(function() {
     $.ajax({
       method: "POST",
       URL: `/home/restaurants/${URL[5]}`,
-      data: { name: name, date: date, total: total, pickup: pickup },
+      data: { name: name, date: date, total: total, pickup: pickup, key: "orderinfo" },
       success: function(res) {
         let resObj = JSON.parse(res);
         $(".order-information").empty();
@@ -335,7 +335,7 @@ $(document).ready(function() {
     $.ajax({
       method: "POST",
       //POST URL IS THE CURRENT LOCATION OR http://localhost:8080/home/restaurants/:Id
-      data: { time: $("#times").val(), currentTime: currentlySelectedTime },
+      data: { time: $("#times").val(), currentTime: currentlySelectedTime, key:"update" },
       success: function() {
         currentlySelectedValue.text(`Order Updated!`).addClass("removeClick");
       },

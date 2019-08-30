@@ -84,7 +84,7 @@ module.exports = db => {
   //POST route to update the confirm time and send back a text message to the client
   router.post("/restaurants/:id", (req, res) => {
     console.log(req.body);
-    if (req.body.time) {
+    if (req.body.key === "update") {
       let updateQueryValue = [
         Date.now() + req.body.time * 60000,
         req.params.id
@@ -101,7 +101,7 @@ module.exports = db => {
         db.query(updateQuery, updateQueryValue);
       });
       res.redirect(`/home/restaurants/${req.params.id}`);
-    } else {
+    } else if (req.body.key === "orderinfo") {
       let created_at_date = parseInt(req.body.date);
       let cusName = req.body.name;
 
