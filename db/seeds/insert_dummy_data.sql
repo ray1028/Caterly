@@ -24,7 +24,7 @@ VALUES
     ('Juicy Dumpling', '111,111', '280 Spadina Ave.', '6478888888', '123@test.com', '123', '1', 'https://s3.amazonaws.com/btoimage/prism-thumbnails/uploads/2018/10/08/20181008-JuicyDumplings10.jpg-resize-_opacity_100-frame_bg_color_FFF-h_2500-gravity_center-q_70-preserve_ratio_true-w_1400_.webp', 'Juicy Dumpling is a takeout joint that is revolutionizing the art of quick, cheap, and delicious soup dumplings.'),
     ('Spring Sushi', '123,123', '10 Dundas St E.', '6474446584', '1234@test.com', '123', '1', 'https://i.pinimg.com/originals/f6/78/65/f678659cc5fbbe13cc9591f47cf60014.webp', 'At Spring Sushi, we thoroughly prepare basic but essential ingredient to provide you with the true Japanese taste.'),
     ('Dumpling House', '111,111', '619 Gerrard St E.', '6478888888', '123@test.com', '123', '1', 'https://i.pinimg.com/originals/c9/6e/0f/c96e0f8abb4ba379e0732eb210a7c1bb.webp', 'At Dumpling House we offer fresh handmade dumplings that come in a variety of flavours. All the fillings are freshly made with secret recipes that provide an authentic northern Chinese taste.'),
-    ('Ajisen Ramen', '111,111', '332 Spadina Ave.', '6478888888', '123@test.com', '123', '1', 'https://s3.amazonaws.com/btoimage/prism-thumbnails/listings/adc0-20100427-ajisen-tendrous.jpg-resize_then_crop-_frame_bg_color_FFF-h_1365-gravity_center-q_70-preserve_ratio_true-w_2048_.webp', 'Ajisen Ramen features more than 40 kinds of ramen on their menu. The ramen is made in-house every day. “We serve a unique broth known as “The King of White Broth,” a pork based soup of quality ingredients”.'),
+    ('Ajisen Ramen', '111,111', '332 Spadina Ave.', '1647878574.', 'ajisen@test.com', '123', '1', 'https://s3.amazonaws.com/btoimage/prism-thumbnails/listings/adc0-20100427-ajisen-tendrous.jpg-resize_then_crop-_frame_bg_color_FFF-h_1365-gravity_center-q_70-preserve_ratio_true-w_2048_.webp', 'Ajisen Ramen features more than 40 kinds of ramen on their menu. The ramen is made in-house every day. “We serve a unique broth known as “The King of White Broth,” a pork based soup of quality ingredients”.'),
     ('Mucho Burrito', '123,123', '123 Bay', '6474446584', '1234@test.com', '123', '2', 'https://static.wixstatic.com/media/bbd9fd_1d872b966cf744f5b92601638c7d48f3~mv2_d_2000_1500_s_2.jpg/v1/fill/w_1960,h_1376,al_c,q_90,usm_0.66_1.00_0.01/bbd9fd_1d872b966cf744f5b92601638c7d48f3~mv2_d_2000_1500_s_2.webp', 'placeholder'),
     ('Wilbur Mexicana', '111,111', '123 Main', '6478888888', '123@test.com', '123', '2', 'https://aleimerrill.com/wp-content/uploads/2019/08/amie-watson-2hBUvhe81mU-unsplash-1920x1080.jpg.webp', 'placeholder'),
     ('Chipotle', '111,111', '123 Main', '6478888888', '123@test.com', '123', '2', 'https://i.pinimg.com/originals/c4/aa/31/c4aa31fe28398ca1fbee43a352c5a448.webp', 'placeholder'),
@@ -50,7 +50,7 @@ VALUES
     (3, 1, 1566669936508, 1566669936504, 150000),
     (4, 1, 1566669936509, 1566669936504, 20000),
     (5, 1, 1566669936501, 1566669936504, 30000),
-    (2, 2, 1566669736502, 1566669736504, 6000);
+    (2, 5, 1566669736502, 1566669736504, 6000);
 
 INSERT INTO items
     (name, price, description, thumb_nail_url, restaurant_id )

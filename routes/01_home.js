@@ -111,8 +111,9 @@ module.exports = db => {
       let ordersQuery = `select oi.quantity, i.name from items i
    join orders_items oi on i.id = oi.item_id
    join orders o on oi.order_id = o.id
+   JOIN restaurants r on r.id = o.restaurant_id
    join customers c on o.customer_id = c.id
-   where c.first_name = $1 and o.created_at = $2`;
+   where c.first_name = $1 and o.created_at = $2 and r.id = ${req.params.id} `;
       let ordersQueryValue = [cusName, created_at_date];
 
       db.query(ordersQuery, ordersQueryValue)
