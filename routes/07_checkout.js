@@ -7,7 +7,7 @@ const client = require("twilio")(accountSid, authToken);
 const sendMSG = function(phone) {
   return client.messages
     .create({
-      body: "Your order has been received",
+      body: "You have recieved a new order!",
       from: "+16476948610",
       to: phone
     })

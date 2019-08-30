@@ -89,8 +89,8 @@ module.exports = db => {
   //POST route to update the confirm time and send back a text message to the client
   router.post("/restaurants/:id", (req, res) => {
     console.log(req.body);
-
     if (!req.body.time) {
+      console.log(req.body, "hihi");
       let created_at_date = parseInt(req.body.date);
       let cusName = req.body.name;
 
@@ -101,13 +101,6 @@ module.exports = db => {
    where c.first_name = $1 and o.created_at = $2`;
       let ordersQueryValue = [cusName, created_at_date];
 
-      // iterate through rows
-      // put that into a json object
-      // wrap the whole json object into an Array
-      // jsonify the whole thing
-      // jsonify
-
-      console.log(req.body.name);
       db.query(ordersQuery, ordersQueryValue)
         .then(data => {
           let result = [];
@@ -118,6 +111,7 @@ module.exports = db => {
         })
         .catch(err => console.log(err));
     } else {
+
       let updateQueryValue = [
         Date.now() + req.body.time * 60000,
         req.params.id
@@ -129,7 +123,7 @@ module.exports = db => {
     JOIN restaurants ON restaurants.id = restaurant_id WHERE restaurants.id = $1 AND pickup_time = 0 AND created_at = ${req.body.currentTime};`;
 
       db.query(phoneQuery, [req.params.id]).then(data => {
-        // sendMSG(textMSG(req.body.time), data.rows[0].phone);
+        sendMSG(textMSG(req.body.time), data.rows[0].phone);
 
         db.query(updateQuery, updateQueryValue);
       });

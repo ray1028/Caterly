@@ -77,8 +77,6 @@ const cartAdd = () => {
       quantity: currentVal,
       price: currentPrice
     };
-
-    console.log(orderObj);
   });
 };
 
@@ -262,8 +260,6 @@ $(document).ready(function() {
     let pickup = $(this).data("pickup");
     let URL = window.location.href.split("/");
 
-
-
     $.ajax({
       method: "POST",
       URL: `/home/restaurants/${URL[5]}`,
@@ -301,12 +297,11 @@ $(document).ready(function() {
 
   //AJAX method to update the page with the time of the order.
   $(".restaurant-confirm").on("click", function(event) {
-    event.preventDefault;
-
+    event.preventDefault();
     $.ajax({
       method: "POST",
       //POST URL IS THE CURRENT LOCATION OR http://localhost:8080/home/restaurants/:Id
-      data: { time: $("#time").val(), currentTime: currentlySelectedTime },
+      data: { time: $("#times").val(), currentTime: currentlySelectedTime },
       success: function() {
         currentlySelectedValue.text(`Order Updated!`).addClass("removeClick");
       },
@@ -334,7 +329,6 @@ $(document).ready(function() {
       .find(".arrow-right")
       .css("visibility", "visible");
     // const x = $(this).find(".fa-arrow-right");
-
   });
   $(".img-wrapper").mouseleave(function() {
     $(this)
@@ -352,7 +346,6 @@ $(document).ready(function() {
     $("#logo")
       .css({ opacity: 0, visibility: "visible" })
       .animate({ opacity: 1 }, 700);
-    console.log("fire");
   });
 
   $(".search-text").focus(() => {
