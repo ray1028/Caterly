@@ -227,12 +227,18 @@ body {
 .search-text {
   border: none;
   outline: none;
+  box-shadow: none;
 }
 .search-text:focus {
   // border:  3px #DD614A;
-  filter: drop-shadow(1px 1px 1px #DD614A);
+  // filter: drop-shadow(1px 1px 1px #DD614A);
+  box-shadow: none;
   // outline: none;
   // box-shadow: 2px 2px #DD614A;
+}
+
+.wowee {
+  filter: drop-shadow(3px 1px 3px #DD614A);
 }
 
 // }

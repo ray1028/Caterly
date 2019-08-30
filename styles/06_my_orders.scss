@@ -8,8 +8,9 @@ body {
   grid-template-rows: 7.5vh 92.5vh;
   grid-template-columns: 1;
   // grid-template-columns: 600px auto;
-  font-family: "Roboto", sans-serif;
+  // font-family: "Roboto", sans-serif;
   // font-size:42px;
+  font-family: 'Didact Gothic', sans-serif;
 }
 
 th,
@@ -30,8 +31,37 @@ content {
   // border: red solid 3px;
 }
 
+.my-orders {
+  margin-top: 3em;
+
+  // tbody {
+  //   tr th {
+  //     vertical-align: middle;
+  //     // display: flex;
+  //     // justify-content: center;
+  //     // height: 100%;
+  //     // height: 65px;
+  //     // align-items: center
+  //   }
+  // }
+  // tbody {
+  //   tr th p {
+  //     vertical-align: middle;
+  //   }
+  // }
+}
+
+#table-head {
+  th {
+    font-size: 1.25em;
+  }
+}
+
+
+
 #myorder-container {
   display: flex;
+  margin-top: 50px;
   flex-direction: column;
   align-items: center;
   width: 80%;
@@ -44,6 +74,9 @@ content {
     height: 100px;
     width: 80%;
     text-align: center;
+    h2 {
+      font-size: 3.5em;
+    }
   }
 }
 

@@ -10,7 +10,7 @@
     />
 
     <!-- Meta Information -->
-    <title>Home Page</title>
+    <title>Caterly - My Orders</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
@@ -31,6 +31,7 @@
       href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic&display=swap" rel="stylesheet">
 
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -65,19 +66,19 @@
                   <div id="ex2" class="modal">
                       <div class="modal-flex"></div>
                     </div>
-    
+
                     <p>
-    
+
                       <a data-name="<%= order.customers_name %>"
                         data-date="<%= order.created_at %>"
                         data-total= "<%= order.order_total %>"
                         data-pickup= "<%= order.pickup_time %>"
-                        
+
                         class="view-order" href="#ex2" rel="modal:open"
                         >View Order</a
                       >
                     </p>
-    
+
               </th>
 
               <th>$ <%= (order.order_total/1000).toFixed(2) %></th>

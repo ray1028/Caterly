@@ -355,5 +355,13 @@ $(document).ready(function() {
     console.log("fire");
   });
 
+  $(".search-text").focus(() => {
+    $(".wowee").css("filter", "drop-shadow(6px 1px 6px #DD614A)");
+  });
+
+  $(".search-text").blur(() => {
+    $(".wowee").css("filter", "none");
+  });
+
   mainProgram();
 });

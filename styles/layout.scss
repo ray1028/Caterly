@@ -54,6 +54,7 @@ body {
       @include gridspan(2, span 1, 2, span 1);
       font-size: 3em;
       height: 5.5em;
+      margin-top: 4em;
       // display: flex;
       // justify-self: flex-end;
       -moz-animation: bounce 2s infinite;
@@ -164,11 +165,18 @@ body {
       font-size: 1.4em;
       background-color: #fff;
       border-radius: 25px;
-      filter: drop-shadow(8px 9px 9px #8c8c8c);
+      width: 90%;
+      align-self: center;
+      justify-self: center;
 
+      filter: drop-shadow(8px 9px 9px #8c8c8c);
+      header h3 {
+        font-size: 2.2rem
+      }
       div {
         min-height: 15em;
       }
+
     }
 
 
