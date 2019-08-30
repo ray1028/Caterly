@@ -30,11 +30,42 @@ module.exports = db => {
       db.query(myOrdersQuery, values).then(data2 => {
         templateVars.orders = data2.rows;
 
-        console.log(data2);
-
         res.render("my_orders", templateVars);
       });
     });
+  });
+
+  router.post("/", (req, res) => {
+    let created_at_date = parseInt(req.body.date);
+    let resName = req.body.name;
+    let pickup = parseInt(req.body.pickup);
+
+    let ordersQuery = `
+    SELECT oi quantity, i.name FROM items i
+    JOIN orders_items oi on i.id = oi.item_id
+    JOIN orders o  on oi.order_id = o.id
+    JOIN restaurants r ON o.restaurant_id = r.id
+    WHERE r.name = $1 AND o.created_at = $2 AND o.pickup_time = $3
+    `;
+
+    let ordersQueryValue = [resName, created_at_date, pickup];
+
+    db.query(ordersQuery, ordersQueryValue)
+      .then(data => {
+
+        let result = [];
+        for (let item in data.rows) {
+
+          let quantity = data.rows[item]["quantity"].split(",");
+
+          data.rows[item]["quantity"] = (data.rows[item]["quantity"].split(","),
+          quantity[quantity.length - 1]).slice(0, -1);
+
+          result.push(data.rows[item]);
+        }
+        res.send(JSON.stringify(result));
+      })
+      .catch(err => console.log(err));
   });
 
   return router;

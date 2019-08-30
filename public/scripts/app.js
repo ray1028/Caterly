@@ -253,6 +253,40 @@ const mainProgram = () => {
 
 // main
 $(document).ready(function() {
+  $(".view-myorder").on("click", function() {
+    let name = $(this).data("name");
+    let date = $(this).data("date");
+    let pickup = $(this).data("pickup");
+
+    $.ajax({
+      method: "POST",
+      data: { name: name, date: date, pickup: pickup },
+      success: function(res) {
+        let resObj = JSON.parse(res);
+        $(".order-information").empty();
+        $(".order-information").append(`
+        <thead class="thead-dark">
+        <tr id="table-head">
+          <th>Item Name</th>
+          <th>Item Quantity</th>
+        </tr>
+      </thead>
+        `);
+        for (let item of resObj) {
+          $(".order-information").append(
+            `
+               <tr>
+                <td>${item.name}</td>
+               <td>${item.quantity}</td>
+                </tr>
+`
+          );
+        }
+      }
+    });
+  });
+
+  //ON CLICK FUNCTION FOR RESTAURANTS HOME MYORDER
   $(".view-order").on("click", function() {
     let name = $(this).data("name");
     let date = $(this).data("date");

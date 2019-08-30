@@ -32,6 +32,8 @@
       rel="stylesheet"
     />
     <link href="https://fonts.googleapis.com/css?family=Didact+Gothic&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -63,22 +65,31 @@
               <th><%= order.name %></th>
               <th class="date-value"><%= formatDate(order.created_at) %></th>
               <th>
-                  <div id="ex2" class="modal">
-                      <div class="modal-flex"></div>
+                  <div id="ex3" class="modal">
+                      <div class="modal-flex">
+                        <table class="my-orders table table-bordered order-information">
+                          <thead class="thead-dark">
+                            <tr id="table-head">
+                              <th>Item Name</th>
+                              <th>Item Quantity</th>
+                            </tr>
+                          </thead>
+                        </table>
+                      </div>
                     </div>
-
+    
                     <p>
-
-                      <a data-name="<%= order.customers_name %>"
+                      <a
+                        data-name="<%= order.name %>"
                         data-date="<%= order.created_at %>"
-                        data-total= "<%= order.order_total %>"
-                        data-pickup= "<%= order.pickup_time %>"
-
-                        class="view-order" href="#ex2" rel="modal:open"
+                        data-total="<%= order.order_total %>"
+                        data-pickup="<%= order.pickup_time %>"
+                        class="view-myorder"
+                        href="#ex3"
+                        rel="modal:open"
                         >View Order</a
                       >
                     </p>
-
               </th>
 
               <th>$ <%= (order.order_total/1000).toFixed(2) %></th>
