@@ -84,3 +84,15 @@ content {
   background-color: #dd614a;
   border-color: #dd614a;
 }
+
+.modal {
+  height: auto;
+}
+
+a.close-modal {
+  display: none !important;
+}
+
+.modal-flex {
+  display: flex;
+}
