@@ -5,8 +5,11 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require("twilio")(accountSid, authToken);
 const strftime = require("strftime");
 
+let strftimeEST = strftime.timezone("-0400");
+
 const formatDate = function(epoch) {
-  return strftime("%b %D %I:%M%p", new Date(parseInt(epoch)));
+  return strftimeEST("%b %D %I:%M%p", new Date(parseInt(epoch)));
+  // return strftime("%b %D %I:%M%p", new Date(parseInt(epoch)));
 };
 
 module.exports = db => {
