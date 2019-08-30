@@ -253,7 +253,7 @@ const mainProgram = () => {
 
 // main
 $(document).ready(function() {
-  $(".view-order").on("click", function(event) {
+  $(".view-order").on("click", function() {
     let name = $(this).data("name");
     let date = $(this).data("date");
     let total = $(this).data("total");
