@@ -47,15 +47,6 @@ module.exports = db => {
     }
   });
 
-  //   console.log(req.body, "hi");
-
-  //   db.query(queryStrHeader, values).then(data => {
-  //     templateVars.user = `${data.rows[0].name}`;
-
-  //     res.render("restaurant_home_orders", templateVars);
-  //   });
-  // });
-
   //The get route for the login of the restaurant, this page will show all of the current and old orders
   router.get("/restaurants/:id", (req, res) => {
     let templateVars = {};
@@ -65,8 +56,6 @@ module.exports = db => {
       WHERE id = $1
     `;
     const values = [req.session.user_id];
-
-    console.log(req.body);
 
     db.query(queryStrHeader, values).then(data => {
       templateVars.user = `${data.rows[0].name}`;
@@ -99,47 +88,53 @@ module.exports = db => {
 
   //POST route to update the confirm time and send back a text message to the client
   router.post("/restaurants/:id", (req, res) => {
-    let templateVars = {};
+    console.log(req.body);
 
-    let updateQueryValue = [Date.now() + req.body.time * 60000, req.params.id];
+    if (!req.body.time) {
+      let created_at_date = parseInt(req.body.date);
+      let cusName = req.body.name;
 
-    let updateQuery = ` UPDATE orders SET pickup_time = $1 FROM restaurants WHERE restaurants.id = restaurant_id AND restaurants.id = $2 AND pickup_time = 0 AND created_at = ${req.body.currentTime};`;
+      let ordersQuery = `select oi.quantity, i.name from items i
+   join orders_items oi on i.id = oi.item_id
+   join orders o on oi.order_id = o.id
+   join customers c on o.customer_id = c.id
+   where c.first_name = $1 and o.created_at = $2`;
+      let ordersQueryValue = [cusName, created_at_date];
 
-    let phoneQuery = `SELECT customers.phone FROM customers JOIN orders ON customers.id = customer_id
+      // iterate through rows
+      // put that into a json object
+      // wrap the whole json object into an Array
+      // jsonify the whole thing
+      // jsonify
+
+      console.log(req.body.name);
+      db.query(ordersQuery, ordersQueryValue)
+        .then(data => {
+          let result = [];
+          for (let item in data.rows) {
+            result.push(data.rows[item]);
+          }
+          res.send(JSON.stringify(result));
+        })
+        .catch(err => console.log(err));
+    } else {
+      let updateQueryValue = [
+        Date.now() + req.body.time * 60000,
+        req.params.id
+      ];
+
+      let updateQuery = ` UPDATE orders SET pickup_time = $1 FROM restaurants WHERE restaurants.id = restaurant_id AND restaurants.id = $2 AND pickup_time = 0 AND created_at = ${req.body.currentTime};`;
+
+      let phoneQuery = `SELECT customers.phone FROM customers JOIN orders ON customers.id = customer_id
     JOIN restaurants ON restaurants.id = restaurant_id WHERE restaurants.id = $1 AND pickup_time = 0 AND created_at = ${req.body.currentTime};`;
 
-    let created_at_date = parseInt(req.body.date);
-    let orderTotal = parseInt(req.body.total);
-    let customername = req.body.name;
+      db.query(phoneQuery, [req.params.id]).then(data => {
+        // sendMSG(textMSG(req.body.time), data.rows[0].phone);
 
-    let ordersQueryValue = [customername];
-
-    let ordersQuery = `SELECT quantity, items.name FROM items 
-    JOIN orders_items ON items.id=orders_items.item_id
-    JOIN orders ON orders.id = orders_items.item_id
-    JOIN customers on customers.id = orders.customer_id
-    WHERE customers.first_name = $1 and created_at = $2 ;
-    `;
-
-    // iterate through rows
-    // put that into a json object
-    // wrap the whole json object into an Array
-    // jsonify the whole thing
-    // jsonify
-
-    db.query(ordersQuery, ordersQueryValue).then(data => {
-      console.log(data.rows, "this is data", req.body.date);
-      console.log(typeof req.body.date);
-    });
-
-    db.query(phoneQuery, [req.params.id]).then(data => {
-      // sendMSG(textMSG(req.body.time), data.rows[0].phone);
-
-      db.query(updateQuery, updateQueryValue);
-    });
-    // .catch(err => console.log(err));
-
-    res.redirect(`/home/restaurants/${req.params.id}`);
+        db.query(updateQuery, updateQueryValue);
+      });
+      res.redirect(`/home/restaurants/${req.params.id}`);
+    }
   });
 
   //Helper functions

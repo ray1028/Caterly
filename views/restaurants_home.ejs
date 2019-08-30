@@ -58,7 +58,7 @@
           <h2>My Orders</h2>
         </header>
 
-        <table class="my-orders table table-bordered" >
+        <table class="my-orders table table-bordered">
           <thead class="thead-dark">
             <tr id="table-head">
               <th>Customer Name</th>
@@ -75,18 +75,28 @@
               <th class="date-value"><%= formatDate(order.created_at) %></th>
               <th>
                 <div id="ex2" class="modal">
-                  <div class="modal-flex"></div>
+                  <div class="modal-flex">
+                    <table class="my-orders table table-bordered order-information">
+                      <thead class="thead-dark">
+                        <tr id="table-head">
+                          <th>Item Name</th>
+                          <th>Item Quantity</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
                 </div>
 
                 <p>
-
-                  <a data-name="<%= order.customers_name %>"
+                  <a
+                    data-name="<%= order.customers_name %>"
                     data-date="<%= order.created_at %>"
-                    data-total= "<%= order.order_total %>"
-                    data-pickup= "<%= order.pickup_time %>"
-                    data-customersid= "<%= order.customerid %>"
-                    
-                    class="view-order" href="#ex2" rel="modal:open"
+                    data-total="<%= order.order_total %>"
+                    data-pickup="<%= order.pickup_time %>"
+                    data-customersid="<%= order.customerid %>"
+                    class="view-order"
+                    href="#ex2"
+                    rel="modal:open"
                     >View Order</a
                   >
                 </p>
@@ -102,7 +112,6 @@
                       >View Order</button>
                     </form>
                   </p> -->
-
               </th>
 
               <th class="order_total">

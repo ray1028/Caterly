@@ -260,19 +260,35 @@ $(document).ready(function() {
     let date = $(this).data("date");
     let total = $(this).data("total");
     let pickup = $(this).data("pickup");
-    // let customersid = $(this).data("customerid");
+    let URL = window.location.href.split("/");
+
+
+
     $.ajax({
       method: "POST",
-      URL: "/home/restaurants/1",
-      data: { name: name, date: date, total: total, pickup: pickup},
+      URL: `/home/restaurants/${URL[5]}`,
+      data: { name: name, date: date, total: total, pickup: pickup },
       success: function(res) {
-<<<<<<< HEAD
-
-
-
-=======
-        console.log("success");
->>>>>>> loginfix2
+        let resObj = JSON.parse(res);
+        $(".order-information").empty();
+        $(".order-information").append(`
+        <thead class="thead-dark">
+        <tr id="table-head">
+          <th>Item Name</th>
+          <th>Item Quantity</th>
+        </tr>
+      </thead>
+        `);
+        for (let item of resObj) {
+          $(".order-information").append(
+            `
+               <tr>
+                <td>${item.name}</td>
+               <td>${item.quantity}</td>
+                </tr>
+`
+          );
+        }
       }
     });
   });
@@ -305,7 +321,7 @@ $(document).ready(function() {
     let x = $(this.activeElement)[0];
     let y = $(x).attr("data-id");
 
-    $("#page").css("visibility","hidden");
+    $("#page").css("visibility", "hidden");
 
     $(".side-content-container").css("visibility", "hidden");
     $(`#${y}`)
@@ -318,8 +334,7 @@ $(document).ready(function() {
       .find(".arrow-right")
       .css("visibility", "visible");
     // const x = $(this).find(".fa-arrow-right");
-    // console.log(x);
-    console.log("fire");
+
   });
   $(".img-wrapper").mouseleave(function() {
     $(this)
@@ -339,7 +354,6 @@ $(document).ready(function() {
       .animate({ opacity: 1 }, 700);
     console.log("fire");
   });
-
 
   mainProgram();
 });
