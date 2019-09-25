@@ -9,15 +9,11 @@ let strftimeEST = strftime.timezone("-0400");
 
 const formatDate = function(epoch) {
   return strftimeEST("%b %D %I:%M%p", new Date(parseInt(epoch)));
-  // return strftime("%b %D %I:%M%p", new Date(parseInt(epoch)));
 };
 
 module.exports = db => {
   router.get("/", async (req, res) => {
-    // if user not logged in and access home page. Redirect to login page
-    // if (!req.session.user_id) {
-    //   res.redirect("/login");
-    // }
+
     let queryStrCustomer = "SELECT * FROM customers WHERE id = $1";
     let queryStrCategories =
       "SELECT categories.name as name, categories.thumbnail_image as thumbnail_image, count(restaurants) as count FROM categories JOIN restaurants ON categories.id = category_id GROUP BY categories.name, categories.thumbnail_image";

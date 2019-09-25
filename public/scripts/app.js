@@ -203,7 +203,7 @@ const confirmCart = () => {
       data: { items: localStorage.getItem("cart") },
       success: function(data) {
         clearCartFunction();
-        window.location.href = "http://localhost:8080/";
+        window.location.href = "http://cater-ly.herokuapp.com/";
       },
       error: function(jqXHR, textStatus, err) {
         console.log("text status " + textStatus + ", err " + err);
