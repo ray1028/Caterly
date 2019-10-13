@@ -7,7 +7,7 @@ const strftime = require("strftime");
 
 let strftimeEST = strftime.timezone("-0400");
 
-const formatDate = function(epoch) {
+const formatDate = function(epoch) {  
   return strftimeEST("%b %D %I:%M%p", new Date(parseInt(epoch)));
 };
 
